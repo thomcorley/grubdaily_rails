@@ -1,0 +1,57 @@
+<%= form_with(model: recipe, local: true) do |form| %>
+  <% if recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+      <% recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :recipe_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :summary %>
+    <%= form.text_area :summary, id: :recipe_summary %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total_time %>
+    <%= form.text_field :total_time, id: :recipe_total_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :introduction %>
+    <%= form.text_area :introduction, id: :recipe_introduction %>
+  </div>
+
+  <div class="field">
+    <%= form.label :serves %>
+    <%= form.number_field :serves, id: :recipe_serves %>
+  </div>
+
+  <div class="field">
+    <%= form.label :makes %>
+    <%= form.number_field :makes, id: :recipe_makes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :makes_unit %>
+    <%= form.text_field :makes_unit, id: :recipe_makes_unit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :recipe_type, id: :recipe_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
