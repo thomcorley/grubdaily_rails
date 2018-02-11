@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :ingredient_entries
   resources :ingredient_sets
   resources :recipes
+  resources :full_recipes
 
   root :to => 'index#index'
 end

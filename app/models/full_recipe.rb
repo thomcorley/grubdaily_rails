@@ -1,0 +1,2 @@
+class FullRecipe < ApplicationRecord
+end
