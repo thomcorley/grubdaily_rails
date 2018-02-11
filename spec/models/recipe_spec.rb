@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Recipe, type: :model do
   context "Recipe creation" do
     setup do
-      @recipe = FactoryBot.create :recipe
+      @recipe = FactoryBot.build :recipe
     end
 
     it "should be valid" do
