@@ -1,4 +1,5 @@
 class FullRecipesController < ApplicationController
+
   before_action :set_full_recipe, only: [:show, :edit, :update, :destroy]
 
   # GET /full_recipes
@@ -25,6 +26,7 @@ class FullRecipesController < ApplicationController
   # POST /full_recipes.json
   def create
     @full_recipe = FullRecipe.new(full_recipe_params)
+    FullRecipeFormatter.new(@full_recipe).save_recipe
 
     respond_to do |format|
       if @full_recipe.save
@@ -69,6 +71,6 @@ class FullRecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def full_recipe_params
-      params.fetch(:full_recipe, {})
+      params.require(:full_recipe).permit(:content)
     end
 end
