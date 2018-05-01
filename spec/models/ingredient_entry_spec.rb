@@ -8,7 +8,6 @@ RSpec.describe IngredientEntry, type: :model do
 
     it "should have a lower case modifier" do
       m = @ingredient_entry.modifier
-      puts m
       expect(m.downcase).to eq m
     end
   end

@@ -41,6 +41,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_bot_rails'
   gem 'selenium-webdriver'
+  gem 'pry', '~> 0.9.9'
+  gem 'pry-nav'
 end
 
 group :development do
@@ -50,7 +52,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pry'
   gem 'spring-commands-rspec'
 end
 

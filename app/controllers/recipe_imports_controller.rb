@@ -6,7 +6,10 @@ class RecipeImportsController < ApplicationController
   end
 
   def create
-    # TODO: add logic for parsing the YAML of recipe content and saving it to the database
+    content = params[:content]
+
+    parser = RecipeImportParser.new(content)
+    parser.save_recipe
   end
-  
+
 end
