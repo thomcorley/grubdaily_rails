@@ -11,10 +11,16 @@ Rails.application.routes.draw do
 
   get 'ingredient/delete'
 
+  get 'recipe_imports/new' => 'recipe_imports#new'
+
+  post 'recipe_imports/create' => 'recipe_imports#create'
+
+  get 'recipe_imports/show' => 'recipe_imports#show'  
+
   resources :ingredient_entries
   resources :ingredient_sets
   resources :recipes
-  resources :full_recipes
+  resources :recipe_imports
 
   root :to => 'index#index'
 end

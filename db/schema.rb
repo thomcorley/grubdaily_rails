@@ -10,16 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180211213043) do
+ActiveRecord::Schema.define(version: 20180210220543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "full_recipes", force: :cascade do |t|
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "ingredient_entries", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -28,10 +22,8 @@ ActiveRecord::Schema.define(version: 20180211213043) do
     t.string "unit"
     t.string "size"
     t.string "modifier"
-    t.bigint "ingredient_set_id"
     t.bigint "ingredient_id"
     t.index ["ingredient_id"], name: "index_ingredient_entries_on_ingredient_id"
-    t.index ["ingredient_set_id"], name: "index_ingredient_entries_on_ingredient_set_id"
   end
 
   create_table "ingredient_sets", force: :cascade do |t|
@@ -67,7 +59,7 @@ ActiveRecord::Schema.define(version: 20180211213043) do
     t.integer "serves"
     t.integer "makes"
     t.string "makes_unit"
-    t.string "recipe_type"
+    t.string "recipe_typeunits
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -83,7 +75,6 @@ ActiveRecord::Schema.define(version: 20180211213043) do
     t.index ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id"
   end
 
-  add_foreign_key "ingredient_entries", "ingredient_sets"
   add_foreign_key "ingredient_entries", "ingredients"
   add_foreign_key "ingredients", "ingredient_entries"
   add_foreign_key "method_steps", "recipes"
