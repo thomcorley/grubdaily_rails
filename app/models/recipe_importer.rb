@@ -39,4 +39,33 @@ class RecipeImporter
 	def ingredient_sets
 		[content_hash[:first_ingredient_set], content_hash[:second_ingredient_set], content_hash[:third_ingredient_set]]
 	end
+
+	def save_recipe
+		params = attributes.slice(:title, :total_time, :serves, :makes, :category, :tags, :summary, :introduction)
+		recipe = Recipe.create(params)
+		recipe.id
+	end
+
+	def save_ingredients(recipe_id)
+		processor = IngredientProcessor.new(ingredient_sets)
+		
+		# Need to add recipe_id to the params below
+		processor.params_for_ingredient_sets.each do |ingredient_set_params|
+			ingredient_set = IngredientSet.create(params)
+
+			# Need to add ingredient_set_id to the params below
+			processor.params_for_ingredient_entries(ingredient_set.id).each do |ingredient_entry_params|
+				ingredient_entry = IngredientEntry.create(ingredient_entry_params)
+				ingredient = Ingredient.create(processor.params_for_ingredient(ingredient_entry.id))
+			end
+		end		
+	end
+
+	def save_method_steps(recipe_id)
+		processor = MethodProcessor.new(recipe_id)
+		# Need to add recipe_id to the params below
+		processor.params_for_method_steps.each do |params|
+			MethodStep.create(params)
+		end
+	end
 end
