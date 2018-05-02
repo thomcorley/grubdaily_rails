@@ -4,10 +4,8 @@ class RecipeImporter
 
 	require "yaml"
 
-	@@attrs =  :content, :title, :total_time, :serves, :makes, :type, :category, :tags, :summary,
+	attr_accessor  :content, :title, :total_time, :serves, :makes, :type, :category, :tags, :summary,
 						 :introduction, :ingredient_sets, :method_steps
-
-	attr_accessor(*@@attrs)
 
 
 	def initialize(content)
@@ -41,6 +39,4 @@ class RecipeImporter
 	def ingredient_sets
 		[content_hash[:first_ingredient_set], content_hash[:second_ingredient_set], content_hash[:third_ingredient_set]]
 	end
-
-
 end
