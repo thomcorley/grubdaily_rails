@@ -4,7 +4,7 @@ class RecipeImporter
 
 	require "yaml"
 
-	attr_accessor  :content, :title, :total_time, :serves, :makes, :type, :category, :tags, :summary,
+	attr_accessor  :content, :title, :total_time, :serves, :makes, :recipe_type, :category, :tags, :summary,
 						 :introduction, :ingredient_sets, :method_steps
 
 
@@ -22,7 +22,7 @@ class RecipeImporter
 			total_time: content_hash[:total_time],
 			serves: content_hash[:serves],
 			makes: content_hash[:makes],
-			type: content_hash[:type],
+			recipe_type: content_hash[:type],
 			category: content_hash[:category],
 			tags: content_hash[:tags],
 			summary: content_hash[:summary],
@@ -41,8 +41,9 @@ class RecipeImporter
 	end
 
 	def save_recipe
-		params = attributes.slice(:title, :total_time, :serves, :makes, :category, :tags, :summary, :introduction)
-		recipe = Recipe.create(params)
+		params = attributes.slice(:title, :total_time, :serves, :makes, :category, :recipe_type, :summary, :introduction)
+		# binding.pry
+		recipe = Recipe.create!(params)
 		recipe.id
 	end
 
@@ -67,5 +68,9 @@ class RecipeImporter
 		processor.params_for_method_steps.each do |params|
 			MethodStep.create(params)
 		end
+	end
+
+	def save_tags(recipe_id)
+
 	end
 end
