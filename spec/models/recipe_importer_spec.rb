@@ -66,4 +66,18 @@ RSpec.describe RecipeImporter, type: :model do
       expect(Recipe.last).to be_valid
     end
   end
+
+  context "#save_ingredients" do 
+    it "should save 1 ingredient set" do 
+
+    end
+
+    it "should save 12 ingredient entries" do
+
+    end
+
+    it "should save 6 method steps" do 
+
+    end    
+  end
 end

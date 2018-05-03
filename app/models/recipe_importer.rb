@@ -12,6 +12,10 @@ class RecipeImporter
 		@content = content
 	end
 
+	def populate_fields
+		self.assign_attributes(attributes)
+	end
+
 	def content_hash
 		YAML.load(@content).deep_symbolize_keys
 	end
@@ -32,29 +36,22 @@ class RecipeImporter
 		}
 	end
 
-	def populate_fields
-		self.assign_attributes(attributes)
-	end
-
 	def ingredient_sets
 		[content_hash[:first_ingredient_set], content_hash[:second_ingredient_set], content_hash[:third_ingredient_set]]
 	end
 
 	def save_recipe
 		params = attributes.slice(:title, :total_time, :serves, :makes, :category, :recipe_type, :summary, :introduction)
-		# binding.pry
 		recipe = Recipe.create!(params)
 		recipe.id
 	end
 
 	def save_ingredients(recipe_id)
-		processor = IngredientProcessor.new(ingredient_sets)
+		processor = IngredientsProcessor.new(ingredient_sets)
 		
-		# Need to add recipe_id to the params below
-		processor.params_for_ingredient_sets.each do |ingredient_set_params|
+		processor.params_for_ingredient_sets(recipe_id).each do |ingredient_set_params|
 			ingredient_set = IngredientSet.create(params)
 
-			# Need to add ingredient_set_id to the params below
 			processor.params_for_ingredient_entries(ingredient_set.id).each do |ingredient_entry_params|
 				ingredient_entry = IngredientEntry.create(ingredient_entry_params)
 				ingredient = Ingredient.create(processor.params_for_ingredient(ingredient_entry.id))
@@ -63,9 +60,9 @@ class RecipeImporter
 	end
 
 	def save_method_steps(recipe_id)
-		processor = MethodProcessor.new(recipe_id)
+		processor = MethodStepsProcessor.new(recipe_id)
 		# Need to add recipe_id to the params below
-		processor.params_for_method_steps.each do |params|
+		processor.params_for_method_steps(recipe_id).each do |params|
 			MethodStep.create(params)
 		end
 	end
