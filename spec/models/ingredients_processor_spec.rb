@@ -19,18 +19,4 @@ RSpec.describe RecipeImporter, type: :model do
       expect(keys).to eq [:title, :position, :recipe_id]
     end
   end
-
-  context "#parse_ingredient_entry" do
-
-    context "parsing '1 carrot'" do
-      it "should have a quantity of 1" do
-        expect(@processor.quantity("1 carrot")).to eq 1
-      end
-
-      it "should have a quantity of 1" do
-        expect(@processor.quantity("1 carrot")).to eq 1
-      end
-
-    end
-  end
 end

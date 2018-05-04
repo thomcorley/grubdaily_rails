@@ -61,7 +61,6 @@ class RecipeImporter
 
 	def save_method_steps(recipe_id)
 		processor = MethodStepsProcessor.new(recipe_id)
-		# Need to add recipe_id to the params below
 		processor.params_for_method_steps(recipe_id).each do |params|
 			MethodStep.create(params)
 		end

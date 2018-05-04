@@ -31,7 +31,7 @@ class IngredientsProcessor
 		set_id = ingredient_set_id
 
 		ingredient_entry_strings.each do |string|
-			array_of_params << parse_ingredient_entry(string)
+			array_of_params << IngredientEntryProcessor.new(string, set_id).parse
 		end
 		array_of_params
 	end
@@ -54,28 +54,5 @@ class IngredientsProcessor
 	# belonging to an ingredient set
 	def ingredient_entry_strings(ingredient_set)
 		ingredient_set.first[1]
-	end
-
-	def parse_ingredient_entry(string)
-		m = modifier(string)
-		q = quantity(string)
-	end
-
-	# This is an array of the components of the entry string
-	# split on spaces, minus the modifier
-	def entry_array(ingredient_entry_string)
-		ingredient_entry_string.split(",").first.split
-	end
-
-	def modifier(ingredient_entry_string)
-		array = ingredient_entry_string.split(",")
-		array.count > 1 ? array.last.strip : nil		
-	end
-
-	def quantity(ingredient_entry_string)
-		array = entry_array(ingredient_entry_string)
-		quantity_and_unit = array.select{ |i| i =~ /[0-9]+/ }
-
-		quantity_and_unit.first.match(/[0-9]+/)[0].to_f
 	end
 end
