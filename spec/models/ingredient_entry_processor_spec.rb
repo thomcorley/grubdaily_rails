@@ -54,7 +54,7 @@ RSpec.describe IngredientEntryProcessor, type: :model do
     end
   end
 
-  context "parsing '25 large tomatoes, peeled and chopped'", :focus do
+  context "parsing '25 large tomatoes, peeled and chopped'" do
     setup do
       @processor = IngredientEntryProcessor.new("25 large tomatoes, peeled and chopped", 1)
     end

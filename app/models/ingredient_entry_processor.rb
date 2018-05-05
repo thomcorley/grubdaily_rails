@@ -1,6 +1,7 @@
 class IngredientEntryProcessor
 
 	SIZES = %(small medium large generous)
+	UNIT_REGEX = /[0-9]+([a-z]+)\s/
 
 	def initialize(ingredient_entry_string, ingredient_set_id)
 		@ingredient_entry_string = ingredient_entry_string
@@ -37,13 +38,21 @@ class IngredientEntryProcessor
 	end
 
 	def unit
-		spaced_unit = Units::SPACED.select{ |i| @ingredient_entry_string.match(i)&[0] }
-		unit = nil if spaced_unit == []
-
-		unless unit	
-			matcher = @ingredient_entry_string.match(/[0-9]+([a-z]+)\s/)
-			matcher ? matcher[1] : nil
+		# If there's a spaced unit (singular or plural) that 
+		# matches in the entry string, this is the unit.
+		u = nil
+		
+		Units::SPACED.each do |i|
+			u = @ingredient_entry_string.match(i)[0] if @ingredient_entry_string.match?(i)
 		end
+		
+		return u if u
+		
+		# Or, the unit might be suffixed to a number.
+		# Match this and use a group to separate the unit from the numerical part.
+		# Otherwise, there's no unit so just return nil
+		matcher = @ingredient_entry_string.match(UNIT_REGEX)
+		matcher ? u = matcher[1] : u = nil
 	end
 
 	def size
@@ -54,7 +63,11 @@ class IngredientEntryProcessor
 
 	end
 
-	def pluralized_unit(unit_string)
-		
+	def singularize(unit_string)
+		if unit_string =~ /clove/
+			return "clove"
+		else
+			unit_string.singularize		
+		end
 	end
 end
