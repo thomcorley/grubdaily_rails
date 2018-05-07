@@ -40,6 +40,11 @@ class RecipeImporter
 		[content_hash[:first_ingredient_set], content_hash[:second_ingredient_set], content_hash[:third_ingredient_set]]
 	end
 
+	# This should be an array of method steps
+	def method_steps
+		content_hash[:method_steps]
+	end
+
 	def save_recipe
 		params = attributes.slice(:title, :total_time, :serves, :makes, :category, :recipe_type, :summary, :introduction)
 		recipe = Recipe.create!(params)
@@ -49,20 +54,19 @@ class RecipeImporter
 	def save_ingredients(recipe_id)
 		processor = IngredientsProcessor.new(ingredient_sets)
 		
-		processor.params_for_ingredient_sets(recipe_id).each do |ingredient_set_params|
-			ingredient_set = IngredientSet.create(params)
+		processor.params_for_ingredient_sets(recipe_id).each_with_index do |ingredient_set_params, i|
+			ingredient_set = IngredientSet.create!(ingredient_set_params)
 
-			processor.params_for_ingredient_entries(ingredient_set.id).each do |ingredient_entry_params|
-				ingredient_entry = IngredientEntry.create(ingredient_entry_params)
+			processor.params_for_ingredient_entries(ingredient_set.id, i).each do |ingredient_entry_params|
+				ingredient_entry = IngredientEntry.create!(ingredient_entry_params)
 				ingredient = Ingredient.create(processor.params_for_ingredient(ingredient_entry.id))
 			end
 		end		
 	end
 
 	def save_method_steps(recipe_id)
-		processor = MethodStepsProcessor.new(recipe_id)
-		processor.params_for_method_steps(recipe_id).each do |params|
-			MethodStep.create(params)
+		method_steps.each_with_index do |m, i|
+			MethodStep.create!(position: i + 1, description: m, recipe_id: recipe_id)
 		end
 	end
 

@@ -8,8 +8,8 @@ class RecipeImportsController < ApplicationController
   def create
     content = params[:content]
 
-    parser = RecipeImportParser.new(content)
-    parser.save_recipe
+    importer = RecipeImporter.new(content)
+    importer.save_recipe
   end
 
 end

@@ -16,12 +16,12 @@ class IngredientEntryProcessor
 	end
 
 	# Returns a hash of params to create an IngredientEntry
-	def parse(ingredient_entry_string)
+	def parse
 		{
-			quantity: quantity(ingredient_entry_string), 
-			unit: unit(ingredient_entry_string),
-			size: size(ingredient_entry_string),
-			modifier: modifier(ingredient_entry_string),
+			quantity: get_quantity, 
+			unit: get_unit,
+			size: get_size,
+			modifier: get_modifier,
 			ingredient_set_id: @ingredient_set_id
 		}
 	end
@@ -44,13 +44,16 @@ class IngredientEntryProcessor
 	end
 
 	def get_quantity
-		array = entry_array
-		return 1 if array.first == "a"
+		return 1 if entry_array.first == "a"
 		return nil if special_exception
 
-		quantity_and_unit = array.select{ |i| i =~ /[0-9]+/ }
+		quantity_and_unit = entry_array.select{ |i| i =~ /[0-9]+/ }
 
-		quantity_and_unit.first.match(/[0-9]+/)[0].to_i
+		if quantity_and_unit.any?
+			quantity_and_unit.first.match(/[0-9]+/)[0].to_i 
+		else
+			nil
+		end
 	end
 
 	def get_unit
@@ -87,7 +90,6 @@ class IngredientEntryProcessor
 			end
 		end
 
-		# entry_string_minus_unit = entry_array.reject{|i| i == unit || i == unit&.pluralize}.join(" ")
 		SIZES.each do |s|
 			matcher = entry_string_minus_unit.match(s)
 			size = matcher[0] if matcher
