@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get 'recipe_imports/show' => 'recipe_imports#show'  
 
+  get 'generate_jekyll_post' => 'jekyll_posts#generate'
   resources :ingredient_entries
   resources :ingredient_sets
   resources :recipes

@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @recipe.title %>
-</p>
+<h1><%= @recipe.title %></h1>
 
 <p>
   <strong>Summary:</strong>
@@ -16,8 +13,10 @@
 </p>
 
 <p>
-  <strong>Introduction:</strong>
-  <%= @recipe.introduction %>
+  <strong>Introduction:</strong><br>
+  <% @introduction_paragraphs.each do |p| %>
+    <p><%= p %></p>
+  <% end %>
 </p>
 
 <p>
@@ -40,5 +39,35 @@
   <%= @recipe.recipe_type %>
 </p>
 
+<p>
+  <strong>Tags:</strong> <% @tags.each do |t| %><%= "#{t.upcase} " %><% end %>
+</p>
+
+<br><br>
+
+<p>
+  <strong>Ingredients:</strong>
+  <% @ingredient_sets.each do |s| %>
+    <% if s.title? %>
+      <p><em><%= s.title %>:</em></p><br>
+    <% end %>
+    <% s.ingredient_entries.each do |e| %>
+      <p><%= e.original_string %></p>
+    <% end %>
+  <% end %>
+</p>
+
+<br><br>
+
+<p>
+  <strong>Method:</strong><br>
+  <% @method_steps.each do |m| %>
+    <p><%= m.position %>. <%= m.description %></p>
+  <% end %>
+</p>
+
+
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<%= link_to 'Back', recipes_path %> |
+<%= link_to 'Generate Jekyll Post', "/generate_jekyll_post?recipe_id=#{@recipe.id}" %>
+

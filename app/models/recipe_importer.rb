@@ -30,7 +30,7 @@ class RecipeImporter
 			category: content_hash[:category],
 			tags: content_hash[:tags],
 			summary: content_hash[:summary],
-			introduction: content_hash[:introduction],
+			introduction: content_hash[:introduction].join("\n"),
 			ingredient_sets: ingredient_sets,
 			method_steps: content_hash[:method_steps],
 		}
@@ -71,6 +71,10 @@ class RecipeImporter
 	end
 
 	def save_tags(recipe_id)
+		tags_array = content_hash[:tags].split(", ")
 
+		tags_array.each do |t|
+			Tag.create!(name: t, taggable_type: "Recipe", taggable_id: recipe_id)
+		end
 	end
 end

@@ -22,6 +22,7 @@ class IngredientEntryProcessor
 			unit: get_unit,
 			size: get_size,
 			modifier: get_modifier,
+			original_string: @ingredient_entry_string,
 			ingredient_set_id: @ingredient_set_id
 		}
 	end

@@ -10,6 +10,10 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    @ingredient_sets = @recipe.ingredient_sets
+    @introduction_paragraphs = @recipe.introduction.split("\n")
+    @tags = @recipe.tags.map(&:name)
+    @method_steps = @recipe.method_steps
   end
 
   # GET /recipes/new

@@ -80,7 +80,7 @@ RSpec.describe RecipeImporter, type: :model do
     it "should save 12 ingredient entries" do
       before = IngredientEntry.count
       @importer.save_ingredients(@recipe.id)
-      after = IngredientEntry.all.reload.count
+      after = IngredientEntry.count
 
       expect(after - before).to eq 12
     end
@@ -90,9 +90,19 @@ RSpec.describe RecipeImporter, type: :model do
     it "should save 6 method steps" do 
       before = MethodStep.count
       @importer.save_method_steps(@recipe.id)
-      after = MethodStep.all.reload.count
+      after = MethodStep.count
 
       expect(after - before).to eq 6
+    end    
+  end
+
+  context "#save_tags" do 
+    it "should save 4 tags" do 
+      before = Tag.count
+      @importer.save_tags(@recipe.id)
+      after = Tag.count
+
+    expect(after - before).to eq 4
     end    
   end
 end

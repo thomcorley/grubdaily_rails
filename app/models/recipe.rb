@@ -1,13 +1,14 @@
 class Recipe < ApplicationRecord
   # This is the ISO 8601 standardised time format
   TIME_FORMAT_REGEX = /P(\d{1,2}D)?(T\d{1,2}(H|M))?(\d{1,2}(H|M))?/
+  CONNECTIVES = %w(and with of au a la)
 
   has_many :ingredient_sets
   has_many :method_steps
   has_many :tags, as: :taggable
 
   validates :title, presence: true
-  validates :title, length: { maximum: 30 }
+  validates :title, length: { maximum: 50 }
   validates :summary, length: { maximum: 150 }
   validates :introduction, presence: true
   validates :total_time, format: { :with => TIME_FORMAT_REGEX,
@@ -17,6 +18,36 @@ class Recipe < ApplicationRecord
   validate :numericality_of_serves_or_makes
   validates :makes_unit, length: { maximum: 20 }
   validates :makes_unit, numericality: false
+
+  # TODO: remove connectives from this!!
+  def permalink
+    stripped_title = title.split.reject{ |i| CONNECTIVES.include? i }.join(" ")
+    "/#{stripped_title.downcase.split.join("-")}"
+  end
+
+  def image_url
+    "https://s3.eu-west-2.amazonaws.com/grubdaily#{permalink}.jpg"
+  end
+
+  def rating_value
+    [4, 4.5, 5].sample
+  end
+
+  def rating_count
+    rand(20..98)
+  end
+
+  def all_ingredient_entries
+    ingredient_sets.flat_map(&:ingredient_entries)
+  end
+
+  def serves_or_makes
+    serves ? serves : makes + makes_unit
+  end
+
+  def introduction_paragraphs
+    introduction.split("\n")
+  end
 
   private
   # Extra model validations

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180502151014) do
+ActiveRecord::Schema.define(version: 20180508025908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20180502151014) do
     t.string "size"
     t.string "modifier"
     t.integer "ingredient_set_id"
+    t.string "original_string"
     t.index ["ingredient_set_id"], name: "index_ingredient_entries_on_ingredient_set_id"
   end
 

@@ -9,7 +9,12 @@ class RecipeImportsController < ApplicationController
     content = params[:content]
 
     importer = RecipeImporter.new(content)
-    importer.save_recipe
-  end
+    recipe_id = importer.save_recipe
 
+    importer.save_ingredients(recipe_id)
+    importer.save_method_steps(recipe_id)
+    importer.save_tags(recipe_id)
+
+    redirect_to recipe_path(recipe_id)
+  end
 end
