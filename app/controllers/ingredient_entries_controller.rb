@@ -19,6 +19,9 @@ class IngredientEntriesController < ApplicationController
 
   # GET /ingredient_entries/1/edit
   def edit
+    @ingredient_entry = IngredientEntry.find(params[:id])
+    @recipe = @ingredient_entry.ingredient_set.recipe
+    @ingredient = @ingredient_entry.ingredient
   end
 
   # POST /ingredient_entries

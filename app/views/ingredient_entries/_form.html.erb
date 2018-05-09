@@ -11,6 +11,33 @@
     </div>
   <% end %>
 
+  <h4>Ingredient: <%= @ingredient.name %></h4>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.text_field :quantity, id: :recipe_quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit %>
+    <%= form.text_field :unit, id: :recipe_unit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :size %>
+    <%= form.text_field :size, id: :recipe_size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :modifier %>
+    <%= form.text_field :modifier, id: :modifier %>
+  </div>
+
+  <div class="field">
+    <%= form.label :original_string %>
+    <%= form.text_field :original_string, id: :original_string %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

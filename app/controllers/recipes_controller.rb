@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
   def show
     @ingredient_sets = @recipe.ingredient_sets
     @introduction_paragraphs = @recipe.introduction.split("\n")
-    @tags = @recipe.tags.map(&:name)
+    @tags = @recipe.tags
     @method_steps = @recipe.method_steps
   end
 

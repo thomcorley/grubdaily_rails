@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'tags/edit'
+
   get 'ingredient/index'
 
   get 'ingredient/create'
@@ -18,10 +20,12 @@ Rails.application.routes.draw do
   get 'recipe_imports/show' => 'recipe_imports#show'  
 
   get 'generate_jekyll_post' => 'jekyll_posts#generate'
+
   resources :ingredient_entries
   resources :ingredient_sets
   resources :recipes
   resources :recipe_imports
+  resources :tags
 
   root :to => 'recipe_imports#new'
 end

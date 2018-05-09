@@ -34,7 +34,10 @@ class IngredientsProcessor
 	end
 
 	def params_for_ingredient(ingredient_entry_id)
-
+		ingredient_entry = IngredientEntry.find(ingredient_entry_id)
+		ingredient_set_id = ingredient_entry.ingredient_set_id
+		ingredient_name = IngredientEntryProcessor.new(ingredient_entry.original_string, ingredient_set_id).get_ingredient
+		{name: ingredient_name, ingredient_entry_id: ingredient_entry_id}
 	end
 
 	# PRIVATE METHODS?
