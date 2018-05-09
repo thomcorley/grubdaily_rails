@@ -27,15 +27,10 @@ class IngredientEntryProcessor
 		}
 	end
 
-	# This is an array of the components of the entry string
-	# split on spaces, minus the modifier
-	def entry_array
-		a = @ingredient_entry_string.split(",").first.split
-		a.delete("of")
-		return a
-	end
 
 	def get_modifier
+		# Handles the case where there's brackets instead of
+		# a comma. Assumes there isn't both a comma and brackets.
 		if @ingredient_entry_string.match(/(\(.+\))/)
 			return @ingredient_entry_string.match(/(\(.+\))/)[1]
 		end
@@ -79,17 +74,7 @@ class IngredientEntryProcessor
 	def get_size
 		return nil if special_exception
 		size = nil
-		unit = get_unit
-		entry_string_minus_unit = @ingredient_entry_string
-
-		if unit
-			# Delete the unit from the entry string, plural or singular
-			if @ingredient_entry_string.match?(unit + " ") 
-				entry_string_minus_unit = @ingredient_entry_string.sub(unit, "")
-			else
-				entry_string_minus_unit = @ingredient_entry_string.sub(unit.pluralize, "")
-			end
-		end
+		entry_string_minus_unit = remove_unit_from(@ingredient_entry_string)
 
 		SIZES.each do |s|
 			matcher = entry_string_minus_unit.match(s)
@@ -104,24 +89,40 @@ class IngredientEntryProcessor
 			string = string.sub(get_quantity.to_s, "")
 			string = string.sub("a ", "")
 		end
+
 		string = string.sub(get_size, "") if get_size
 
-		if get_unit
-			# TODO! refactor this into a private method
-
-			# ...Delete the unit from the string, plural or singular
-			if string.match?(get_unit + " ") 
-				string = string.sub(get_unit, "")
-			else
-				string = string.sub(get_unit.pluralize, "")
-			end
-		end
+		string = remove_unit_from(string)
 
 		# TODO: change this!!!
+		# This handles the case where there's brackets
+		# eg: cavolo nero (black kale)
 		if string =~ /\(/
 			string = string.split("(").first
 		end
 		string.strip.singularize
+	end
+
+	private
+
+	# Take an entry string and remove the unit from it.
+	def remove_unit_from(entry_string)
+		# If there's no unit, just return the unchanged string
+		return entry_string unless get_unit
+		# If there's a singular unit, remove it and return the result
+		if entry_string.match?(get_unit + " ") 
+			entry_string.sub(get_unit, "")
+		else
+			entry_string.sub(get_unit.pluralize, "")
+		end
+	end
+
+	# This is an array of the components of the entry string
+	# split on spaces, minus the modifier
+	def entry_array
+		a = @ingredient_entry_string.split(",").first.split
+		a.delete("of")
+		return a
 	end
 
 	def singularize(unit_string)
