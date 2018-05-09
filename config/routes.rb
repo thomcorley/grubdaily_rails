@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   resources :recipes
   resources :recipe_imports
 
-  root :to => 'index#index'
+  root :to => 'recipe_imports#new'
 end

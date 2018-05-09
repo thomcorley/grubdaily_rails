@@ -84,6 +84,14 @@ RSpec.describe RecipeImporter, type: :model do
 
       expect(after - before).to eq 12
     end
+
+    it "should save 12 ingredients" do
+      before = Ingredient.count
+      @importer.save_ingredients(@recipe.id)
+      after = Ingredient.count
+
+      expect(after - before).to eq 12
+    end
   end
 
   context "#save_method_steps" do 
