@@ -47,8 +47,6 @@
     <strong>Tags:</strong> <% @tags.each do |t| %><a href="<%= edit_tag_path(t) %>"><%= "#{t.name.upcase} " %></a><% end %>
 </p>
 
-<em>(Click on Tags above to edit them individually.)</em>
-
 <br><br>
 
 <p>
@@ -59,7 +57,7 @@
     <% end %>
     <% s.ingredient_entries.each do |e| %>
       <p>
-        <a href="<%= edit_ingredient_entry_path(e) %>"><%= e.original_string %></a>        
+        <a href="<%= edit_ingredient_entry_path(e) %>"><%= e.original_string %></a>
       </p>
     <% end %>
   <% end %>
@@ -70,7 +68,7 @@
 <p>
   <strong>Method:</strong><br>
   <% @method_steps.each do |m| %>
-    <p><%= m.position %>. <%= m.description %></p>
+    <p><%= m.position %>. <%= m.description %><a href="<%= edit_method_step_path(m) %>">   EDIT</a></p>
   <% end %>
 </p>
 

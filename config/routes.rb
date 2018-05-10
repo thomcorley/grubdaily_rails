@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :recipes
   resources :recipe_imports
   resources :tags
-
+  resources :method_steps
+  
   root :to => 'recipe_imports#new'
 end
