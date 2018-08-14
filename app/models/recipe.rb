@@ -42,7 +42,7 @@ class Recipe < ApplicationRecord
   end
 
   def serves_or_makes
-    serves ? serves : makes + makes_unit
+    serves ? serves : "#{makes} #{makes_unit}"
   end
 
   def introduction_paragraphs

@@ -4,7 +4,7 @@ class RecipeImporter
 
 	require "yaml"
 
-	attr_accessor  :content, :title, :total_time, :serves, :makes, :recipe_type, :category, :tags, :summary,
+	attr_accessor  :content, :title, :total_time, :serves, :makes, :makes_unit, :recipe_type, :category, :tags, :summary,
 						 :introduction, :ingredient_sets, :method_steps
 
 
@@ -25,7 +25,8 @@ class RecipeImporter
 			title: content_hash[:title],
 			total_time: content_hash[:total_time],
 			serves: content_hash[:serves],
-			makes: content_hash[:makes],
+			makes: makes_quantity,
+			makes_unit: makes_unit,
 			recipe_type: content_hash[:type],
 			category: content_hash[:category],
 			tags: content_hash[:tags],
@@ -46,7 +47,7 @@ class RecipeImporter
 	end
 
 	def save_recipe
-		params = attributes.slice(:title, :total_time, :serves, :makes, :category, :recipe_type, :summary, :introduction)
+		params = attributes.slice(:title, :total_time, :serves, :makes, :makes_unit, :category, :recipe_type, :summary, :introduction)
 		recipe = Recipe.create!(params)
 		recipe.id
 	end
@@ -76,5 +77,15 @@ class RecipeImporter
 		tags_array.each do |t|
 			Tag.create!(name: t, taggable_type: "Recipe", taggable_id: recipe_id)
 		end
+	end
+
+	private
+
+	def makes_unit
+		content_hash[:makes]&.split&.last		
+	end
+
+	def makes_quantity
+		content_hash[:makes]&.split&.first
 	end
 end

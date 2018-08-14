@@ -1,8 +1,3 @@
- 
-	This is all the recipe information as required
-	by Jekyll for a post in markdown format, including
-	the Recipe schema for Google search results.
-
 ---<br>
 layout: post<br>
 date: <%= Date.today %><br>
@@ -11,7 +6,7 @@ permalink: <%= @recipe.permalink %><br>
 author: Tom<br>
 category: <%= @category %><br>
 serves: <%= @recipe.serves %><br>
-makes: <%= @recipe.makes %><br>
+makes: <%= @recipe.serves_or_makes %><br>
 tags:<br> 
 
 <% @tags.each do |t| %>
