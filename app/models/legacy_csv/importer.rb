@@ -95,6 +95,7 @@ class LegacyCsv::Importer
       }
 
       ingredient_entry =  IngredientEntry.create!(params)
+      Ingredient.create!(name: i[:ingredient], ingredient_entry_id: ingredient_entry.id)
     end
   end
 
