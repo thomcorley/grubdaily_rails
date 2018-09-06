@@ -75,31 +75,10 @@ class LegacyCsv::Helper
 		}
 	end
 
-	def create_hash_of_times
-		regex = Recipe::TIME_FORMAT_REGEX
-
-		# Need to create a hash of recipe titles and times
-		h = Hash.new
-
-		@recipes.each do |recipe|
-			puts "Please enter time for the following recipe:"
-			puts "#{recipe.title}"
-			time = gets.chomp.prepend("PT").upcase
-			h[recipe.title] = time
-			puts "#{recipe.title}: #{time}"
-		end
-		h
-	end
-
-	def correct_hash
-		hash = hash_of_corrected_times
-		hash.each do |k,v|
-			if v.last.match?(/[0-9]/)
-				puts "Please correct time: '#{v}'"
-				v = gets.chomp
-			end
-		end
-		hash
+	def cleanup!
+		backfill_times
+		cleanup_makes
+		backfill_makes_units
 	end
 
 	def backfill_times
@@ -114,6 +93,27 @@ class LegacyCsv::Helper
 		@recipes.each do |recipe|
 			recipe.update_attribute(:makes, nil) if recipe.serves
 		end
+	end
+
+	def backfill_makes_units
+		hash_of_corrected_makes_units.each do |k,v|
+			recipe = Recipe.find_by(title: k)
+			recipe.makes_unit = v
+			recipe.save!
+		end
+	end
+
+	private
+
+	def correct_hash
+		hash = hash_of_corrected_times
+		hash.each do |k,v|
+			if v.last.match?(/[0-9]/)
+				puts "Please correct time: '#{v}'"
+				v = gets.chomp
+			end
+		end
+		hash
 	end
 
 	def create_hash_of_makes_units
@@ -131,20 +131,20 @@ class LegacyCsv::Helper
 		end
 		h
 	end
+	
+	def create_hash_of_times
+		regex = Recipe::TIME_FORMAT_REGEX
 
-	def backfill_makes_units
-		hash_of_corrected_makes_units.each do |k,v|
-			recipe = Recipe.find_by(title: k)
-			recipe.makes_unit = v
-			recipe.save!
+		# Need to create a hash of recipe titles and times
+		h = Hash.new
+
+		@recipes.each do |recipe|
+			puts "Please enter time for the following recipe:"
+			puts "#{recipe.title}"
+			time = gets.chomp.prepend("PT").upcase
+			h[recipe.title] = time
+			puts "#{recipe.title}: #{time}"
 		end
+		h
 	end
-
-
-
-
-
-
-
-
 end

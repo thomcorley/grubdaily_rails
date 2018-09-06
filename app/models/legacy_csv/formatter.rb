@@ -121,21 +121,21 @@ class LegacyCsv::Formatter
 
         # If it's a single quantity, or a metric unit, singularize the unit
         if i[:quantity].to_i == 1 || is_metric?(i[:unit])
-          sentence += i[:unit].singularize + " of "
+          sentence += i[:unit].singularize
         # If it's not a single quantity AND not a metric unit, pluralize it
       elsif i[:quantity].to_i > 1 && !is_metric?(i[:unit])
-        sentence += i[:unit].pluralize + " of "
+        sentence += i[:unit].pluralize
       end
     elsif i[:unit] && i[:size]
-      sentence += i[:unit] + " of " + i[:size] + " "
+      sentence += i[:unit] + i[:size] + " "
     elsif i[:unit]
-      sentence += i[:unit] + " of "
+      sentence += i[:unit]
     end
 
     sentence += i[:modifier] + " " if i[:modifier]
-    sentence += i[:ingredient] if i[:ingredient]
+    sentence += " " + i[:ingredient] if i[:ingredient]
     sentence += ", " + i[:preparation] if i[:preparation]
 
-    indexed_sentence = [i[:id].to_i, sentence]
+    indexed_sentence = sentence
   end
 end

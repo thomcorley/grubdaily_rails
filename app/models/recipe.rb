@@ -19,7 +19,6 @@ class Recipe < ApplicationRecord
   validates :makes_unit, length: { maximum: 20 }
   validates :makes_unit, numericality: false
 
-  # TODO: remove connectives from this!!
   def permalink
     stripped_title = title.split.reject{ |i| CONNECTIVES.include? i }.join(" ")
     "/#{stripped_title.downcase.split.join("-")}"
@@ -37,7 +36,7 @@ class Recipe < ApplicationRecord
     rand(20..98)
   end
 
-  def all_ingredient_entries
+  def ingredient_entries
     ingredient_sets.flat_map(&:ingredient_entries)
   end
 
