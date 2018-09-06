@@ -19,20 +19,19 @@
   <% end %>
 </p>
 
-<p>
-  <strong>Serves:</strong>
-  <%= @recipe.serves %>
-</p>
+<% if @recipe.serves %>
+  <p>
+    <strong>Serves:</strong>
+    <%= @recipe.serves %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Makes:</strong>
-  <%= @recipe.makes %>
-</p>
-
-<p>
-  <strong>Makes unit:</strong>
-  <%= @recipe.makes_unit %>
-</p>
+<% if @recipe.makes %>
+  <p>
+    <strong>Makes:</strong>
+    <%= @recipe.makes %> <%= @recipe.makes_unit %>
+  </p>
+<% end %>
 
 <p>
   <strong>Type:</strong>
@@ -52,7 +51,7 @@
 <p>
   <strong>Ingredients:</strong>
   <% @ingredient_sets.each do |s| %>
-    <% if s.title? %>
+    <% if s.title? && s.title != "INSERT_TITLE" %>
       <p><em><%= s.title %>:</em></p><br>
     <% end %>
     <% s.ingredient_entries.each do |e| %>
@@ -73,6 +72,8 @@
 </p>
 
 
+<%= link_to 'Previous', "#{@recipe.id - 1}" %> |
+<%= link_to 'Next', "#{@recipe.id + 1}" %> |
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %> |
 <%= link_to 'Generate Jekyll Post', "/generate_jekyll_post?recipe_id=#{@recipe.id}" %>
