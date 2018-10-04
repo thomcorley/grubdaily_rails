@@ -29,7 +29,7 @@ recipe:<br>
 &nbsp&nbsp&nbsp&nbspratingCount: <%= @recipe.rating_count %><br>
 &nbsp&nbsprecipeIngredient:<br>
 
-<% @recipe.all_ingredient_entries.each do |i| %>
+<% @recipe.ingredient_entries.each do |i| %>
  &nbsp&nbsp&nbsp&nbsp- <%= i.original_string %><br>
 <% end %>
 
@@ -46,7 +46,7 @@ recipe:<br>
 <% end %>
 <br>---<br>
 
-<% @recipe.all_ingredient_entries.each do |i| %>
+<% @recipe.ingredient_entries.each do |i| %>
  * <%= i.original_string %><br>
 <% end %>
 <br>
