@@ -36,7 +36,7 @@ recipe:<br>
 &nbsp&nbsprecipeInstructions:<br>
 
 <% @recipe.method_steps.each do |m| %>
- &nbsp&nbsp&nbsp&nbsp- <%= m.description %><br>
+ &nbsp&nbsp&nbsp&nbsp- "<%= m.description %>"<br>
 <% end %>
 ---<br>
 &lt;img src="<%= @recipe.image_url %>" alt="<%= @recipe.title %>"/&gt;<br>
@@ -46,7 +46,7 @@ recipe:<br>
 <% end %>
 <br>---<br>
 
-<% @recipe.ingredient_entries.each do |i| %>
+<% @recipe.ingredient_entries.sort.each do |i| %>
  * <%= i.original_string %><br>
 <% end %>
 <br>
