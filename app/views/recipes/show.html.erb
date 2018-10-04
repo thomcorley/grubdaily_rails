@@ -54,7 +54,7 @@
     <% if s.title? && s.title != "INSERT_TITLE" %>
       <p><em><%= s.title %>:</em></p><br>
     <% end %>
-    <% s.ingredient_entries.each do |e| %>
+    <% s.ingredient_entries.sort.each do |e| %>
       <p>
         <a href="<%= edit_ingredient_entry_path(e) %>"><%= e.original_string %></a>
       </p>
