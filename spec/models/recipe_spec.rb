@@ -6,6 +6,12 @@ RSpec.describe Recipe, type: :model do
       @recipe = FactoryBot.build :recipe
     end
 
+    it "should have a valid image url, if there is an image" do
+      @recipe.title = "Roast Garlic Soup"
+      @recipe.save!
+      expect(@recipe.image_url).to be_present
+    end
+
     it "should be valid" do
       expect(@recipe).to be_valid
     end

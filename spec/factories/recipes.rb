@@ -7,5 +7,6 @@ FactoryBot.define do
     serves 2
     makes nil
     recipe_type "soup"
+    image_url nil
   end
 end

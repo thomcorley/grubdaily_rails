@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508025908) do
+ActiveRecord::Schema.define(version: 20181005024553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20180508025908) do
     t.string "modifier"
     t.integer "ingredient_set_id"
     t.string "original_string"
+    t.string "written_quantity"
+    t.string "written_unit"
     t.index ["ingredient_set_id"], name: "index_ingredient_entries_on_ingredient_set_id"
   end
 
@@ -64,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180508025908) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category"
+    t.string "image_url"
   end
 
   create_table "tags", force: :cascade do |t|

@@ -28,7 +28,7 @@ RSpec.describe LegacyCsv::Importer, type: :model do
   		@importer.import
   		new_ingredient_entry_count = IngredientEntry.count - ingredient_entry_count
 
-  		expect(new_ingredient_entry_count).to eq 573
+  		expect(new_ingredient_entry_count).to eq 572
   	end
 
   	it "imports 152 method steps" do 
