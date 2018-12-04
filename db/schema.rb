@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20181005024553) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string "title", unique: true
+    t.string "title"
     t.text "summary"
     t.string "total_time"
     t.text "introduction"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20181005024553) do
     t.index ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id"
   end
 
-  add_foreign_key "ingredients", "ingredient_entries", on_delete: cascade
-  add_foreign_key "method_steps", "recipes", on_delete: cascade
-  add_foreign_key "tags", "recipes", on_delete: cascade
+  add_foreign_key "ingredients", "ingredient_entries"
+  add_foreign_key "method_steps", "recipes"
+  add_foreign_key "tags", "recipes"
 end
