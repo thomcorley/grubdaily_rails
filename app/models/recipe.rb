@@ -19,6 +19,8 @@ class Recipe < ApplicationRecord
   validate :numericality_of_serves_or_makes
   validates :makes_unit, length: { maximum: 20 }
   validates :makes_unit, numericality: false
+  validates_associated :ingredient_sets
+  validates :tags, length: { minimum: 1 }
 
   before_save :set_image_url
 

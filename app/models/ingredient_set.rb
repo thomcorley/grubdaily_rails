@@ -2,6 +2,7 @@ class IngredientSet < ApplicationRecord
   has_many :ingredient_entries
   belongs_to :recipe
   validate :length_of_title_if_present
+  validates_associated :ingredient_entries
 
   private
   # Extra model validations
