@@ -15,12 +15,11 @@ class Recipe < ApplicationRecord
   validates :total_time, format: { :with => TIME_FORMAT_REGEX,
     :message => "total_time must be in valid ISO 8601 format."
   }
-  validate :presence_of_serves_or_makes
-  validate :numericality_of_serves_or_makes
   validates :makes_unit, length: { maximum: 20 }
   validates :makes_unit, numericality: false
   validates_associated :ingredient_sets
-  validates :tags, length: { minimum: 1 }
+  validate :presence_of_serves_or_makes
+  validate :numericality_of_serves_or_makes  
 
   before_save :set_image_url
 
@@ -30,7 +29,8 @@ class Recipe < ApplicationRecord
 
   # The title of the recipe stripped of all commas, dots, apostrophes and accents
   def url_friendly_title
-    remove_punctuation_from(title_with_no_accents)
+    removed_punctuation = remove_punctuation_from(title_with_no_accents)
+    removed_punctuation.split.reject{ |i| CONNECTIVES.include? i }.join(" ")
   end
 
   def permalink
