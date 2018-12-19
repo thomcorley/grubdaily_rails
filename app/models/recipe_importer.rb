@@ -17,7 +17,11 @@ class RecipeImporter
 	end
 
 	def content_hash
-		YAML.load(@content).deep_symbolize_keys
+		begin
+			YAML.load(@content).deep_symbolize_keys
+		rescue
+			@content.deep_symbolize_keys
+		end
 	end
 
 	def attributes
@@ -47,6 +51,7 @@ class RecipeImporter
 	end
 
 	def save_recipe
+		binding.pry
 		params = attributes.slice(:title, :total_time, :serves, :makes, :makes_unit, :category, :recipe_type, :summary, :introduction)
 		recipe = Recipe.create!(params)
 		recipe.id

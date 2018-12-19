@@ -9,7 +9,6 @@ class LegacyYaml::Importer
 
       yaml = YAML.load_file(YAML_PATH + filename)
       importer = RecipeImporter.new(yaml)
-      binding.pry
       recipe_id = importer.save_recipe
 
       importer.save_ingredients(recipe_id)
