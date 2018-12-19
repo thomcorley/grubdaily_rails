@@ -1,11 +1,15 @@
 class LegacyYaml::Importer
-  YAML_PATH = "lib/yaml_recipes"
+  YAML_PATH = "lib/yaml_recipes/"
 
   def import
-    # TODO: read through the files in the YAML folder and import them
+    filenames = Dir.entries(YAML_PATH)
 
-    yaml_files.each do |yaml|
+    filenames.each do |filename|
+      next unless filename.match?(".yaml")
+
+      yaml = YAML.load_file(YAML_PATH + filename)
       importer = RecipeImporter.new(yaml)
+      binding.pry
       recipe_id = importer.save_recipe
 
       importer.save_ingredients(recipe_id)
