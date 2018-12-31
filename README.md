@@ -1,3 +1,22 @@
 # README
 
-This is the grubdaily rails app; basically a collection of my recipes in a database. See [www.grubdaily.com](www.grubdaily.com) for more info!
+This is the Grubdaily rails app; a collection of my recipes. The recipes can be viewed at [www.grubdaily.com](www.grubdaily.com), which is a static site built with Jekyll. This app is a work-in-progress.
+
+The repository contains all of my old recipes in a mixture of CSV and YAML format, 69 in total. For instructions on how to import these recipes into the database, read on.
+
+## Importing Legacy Recipes
+
+_For the CSV recipes:_
+```
+importer = LegacyCsv::Importer.new
+importer.import
+```
+
+_For the YAML recipes:_
+```
+importer = LegacyYaml::Importer.new
+importer.import
+```
+
+
+

@@ -51,7 +51,6 @@ class RecipeImporter
 	end
 
 	def save_recipe
-		binding.pry
 		params = attributes.slice(:title, :total_time, :serves, :makes, :makes_unit, :category, :recipe_type, :summary, :introduction)
 		recipe = Recipe.create!(params)
 		recipe.id

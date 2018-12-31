@@ -4,14 +4,12 @@ class Recipe < ApplicationRecord
   CONNECTIVES = %w(and with of au a la)
   PUNCTUATION = %w(' " , - )
 
-  has_many :ingredient_sets
-  has_many :method_steps
-  has_many :tags, as: :taggable
+  has_many :ingredient_sets, dependent: :destroy
+  has_many :method_steps, dependent: :destroy
+  has_many :tags, as: :taggable, dependent: :destroy
 
   validates :title, presence: true
   validates :title, length: { maximum: 50 }
-  validates :summary, length: { maximum: 150 }
-  validates :introduction, presence: true
   validates :total_time, format: { :with => TIME_FORMAT_REGEX,
     :message => "total_time must be in valid ISO 8601 format."
   }
@@ -19,7 +17,7 @@ class Recipe < ApplicationRecord
   validates :makes_unit, numericality: false
   validates_associated :ingredient_sets
   validate :presence_of_serves_or_makes
-  validate :numericality_of_serves_or_makes  
+  validate :numericality_of_serves_or_makes
 
   before_save :set_image_url
 

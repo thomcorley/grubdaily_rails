@@ -1,5 +1,5 @@
 class IngredientSet < ApplicationRecord
-  has_many :ingredient_entries
+  has_many :ingredient_entries, dependent: :destroy
   belongs_to :recipe
   validate :length_of_title_if_present
   validates_associated :ingredient_entries
