@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181005024553) do
+ActiveRecord::Schema.define(version: 20190105065603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,8 +79,4 @@ ActiveRecord::Schema.define(version: 20181005024553) do
     t.index ["recipe_id"], name: "index_tags_on_recipe_id"
     t.index ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id"
   end
-
-  add_foreign_key "ingredients", "ingredient_entries"
-  add_foreign_key "method_steps", "recipes"
-  add_foreign_key "tags", "recipes"
 end
