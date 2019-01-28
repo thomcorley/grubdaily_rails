@@ -32,8 +32,7 @@ class Recipe < ApplicationRecord
   end
 
   def permalink
-    url_friendly_title.split.reject{ |i| CONNECTIVES.include? i }.join(" ")
-    "/#{stripped_title.downcase.split.join("-")}"
+    "/#{url_friendly_title.downcase.split.join("-")}"
   end
 
   # This will generate the image in the proper format with dashes.
