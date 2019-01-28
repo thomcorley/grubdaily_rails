@@ -51,6 +51,6 @@ recipe:<br>
 <% end %>
 <br>
 <br>
-<% @recipe.method_steps.each do |m| %>
+<% @recipe.method_steps.order(:position).each do |m| %>
  <%= m.position %>. <%= m.description %><br><br>
 <% end %>
