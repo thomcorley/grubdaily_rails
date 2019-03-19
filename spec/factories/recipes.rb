@@ -8,5 +8,13 @@ FactoryBot.define do
     makes nil
     recipe_type "soup"
     image_url nil
+
+    transient do
+      salty { true }
+
+      after(:create) do |recipe, evaluator|
+        recipe.update_attribute(:title, "Salty " + recipe.title)
+      end
+    end
   end
 end
