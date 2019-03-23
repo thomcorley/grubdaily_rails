@@ -8,16 +8,16 @@ class Recipe < ApplicationRecord
   has_many :method_steps, dependent: :destroy
   has_many :tags, as: :taggable, dependent: :destroy
 
-  validates :title, presence: true
-  validates :title, length: { maximum: 50 }
-  validates :total_time, format: { :with => TIME_FORMAT_REGEX,
-    :message => "total_time must be in valid ISO 8601 format."
-  }
-  validates :makes_unit, length: { maximum: 20 }
-  validates :makes_unit, numericality: false
-  validates_associated :ingredient_sets
-  validate :presence_of_serves_or_makes
-  validate :numericality_of_serves_or_makes
+  # validates :title, presence: true
+  # validates :title, length: { maximum: 50 }
+  # validates :total_time, format: { :with => TIME_FORMAT_REGEX,
+  #   :message => "total_time must be in valid ISO 8601 format."
+  # }
+  # validates :makes_unit, length: { maximum: 20 }
+  # validates :makes_unit, numericality: false
+  # validates_associated :ingredient_sets
+  # validate :presence_of_serves_or_makes
+  # validate :numericality_of_serves_or_makes
 
   before_save :set_image_url
 
