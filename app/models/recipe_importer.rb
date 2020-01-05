@@ -17,11 +17,7 @@ class RecipeImporter
 	end
 
 	def content_hash
-		begin
-			YAML.load(@content).deep_symbolize_keys
-		rescue
-			@content.deep_symbolize_keys
-		end
+		YAML.load(@content).deep_symbolize_keys
 	end
 
 	def attributes
@@ -58,7 +54,7 @@ class RecipeImporter
 
 	def save_ingredients(recipe_id)
 		processor = IngredientsProcessor.new(ingredient_sets)
-		
+
 		processor.params_for_ingredient_sets(recipe_id).each_with_index do |ingredient_set_params, i|
 			ingredient_set = IngredientSet.create!(ingredient_set_params)
 
@@ -66,7 +62,7 @@ class RecipeImporter
 				ingredient_entry = IngredientEntry.create!(ingredient_entry_params)
 				ingredient = Ingredient.create!(processor.params_for_ingredient(ingredient_entry.id))
 			end
-		end		
+		end
 	end
 
 	def save_method_steps(recipe_id)
@@ -86,7 +82,7 @@ class RecipeImporter
 	private
 
 	def makes_unit
-		content_hash[:makes]&.split&.last		
+		content_hash[:makes]&.split&.last
 	end
 
 	def makes_quantity
