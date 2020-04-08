@@ -1,18 +1,20 @@
-class LegacyCsv::Importer
+module LegacyCsv
+  class Importer
 
   CONNECTIVES = ["and", "with", "a", "la", "of", "for", "au", "the", "le"]
 
+  # RecipesWithImages::LIST contains only the recipes with :introduction,
+  # :serves/:makes, ingredients and method_steps
+  def initialize(path: "lib/csv", selected_recipe_ids: RecipesWithImages::LIST, filenames: LegacyCsv::CurrentFilenames::LIST)
+    @path = path
+    @selected_recipe_ids = selected_recipe_ids
+    @filenames = filenames
+  end
+
   def import
-    # TODO: Need to select only the recipes which have ingredients, method, serves or makes,
-    # introduction, and an image. Select the posts which have images in S3 first, then select from that list.
-    formatter = LegacyCsv::Formatter.new("lib/csv")
-
-    # Get a list of info for all the recipes
-    # Select only the ones that have :introduction, :serves/:makes, ingredients and method_steps
-    ids_of_recipes_with_images = LegacyCsv::RecipesWithImages::LIST
+    formatter = LegacyCsv::Formatter.new(@path)
     ids_of_complete_recipes = []
-
-    ids_of_recipes_with_images.each do |id|
+    @selected_recipe_ids.each do |id|
       info = formatter.get_recipe_info(id)
       ingredients = formatter.get_ingredients(id)
       method_steps = formatter.get_method_steps(id.to_i)
@@ -27,13 +29,12 @@ class LegacyCsv::Importer
     end
 
     titles_and_ids = formatter.get_list_of_titles
-    current_filenames = LegacyCsv::CurrentFilenames::LIST
 
     # Convert the array of currently existing filenames to an array of hashes
     # Keys should be :date and :title
     # Match the date with regex and gsub the title to remove dashes and file extension
     array_of_dates_and_titles = []
-    current_filenames.each do |n|
+    @filenames.each do |n|
       hash = {}
       date = /20\d{2}-\d{2}-\d{2}/.match(n).to_s
       title = n.sub(date, "").sub("-", "").gsub("-", " ").gsub(".md", "")
@@ -45,7 +46,6 @@ class LegacyCsv::Importer
     counter = 0
 
     ids_of_complete_recipes.each do |id|
-
       info = formatter.get_recipe_info(id)
       ingredients = formatter.get_ingredients(id)
       method_steps = formatter.get_method_steps(id.to_i)
@@ -54,7 +54,7 @@ class LegacyCsv::Importer
       snake_case_title = convert_title_for_url(info[:title])
       path = generate_path_from_title(snake_case_title)
       image_url = "https://s3.eu-west-2.amazonaws.com/grubdaily/#{snake_case_title}.jpg"
-      
+
       array_of_tags = info[:tags].split
 
       info[:serves] ? recipe_yeild = info[:serves] : recipe_yeild = info[:makes]
@@ -62,9 +62,9 @@ class LegacyCsv::Importer
       review_count = rand(10..50)
 
       recipe_params = {
-        title: info[:title], 
-        summary: "Test Summary", 
-        total_time: nil, 
+        title: info[:title],
+        summary: "Test Summary",
+        total_time: nil,
         introduction: info[:introduction],
         serves: info[:serves],
         makes: info[:makes],
@@ -132,4 +132,5 @@ class LegacyCsv::Importer
     stripped_title = title_array.reject{|i| CONNECTIVES.include?(i)}
     stripped_title.join("_").prepend("/")
   end
+end
 end
