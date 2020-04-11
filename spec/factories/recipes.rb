@@ -1,15 +1,12 @@
 FactoryBot.define do
   factory :recipe, class: Recipe do
-    title "Onion Soup"
-    introduction "an old French classic"
-    total_time "4 hours"
-
-    transient do
-      salty { true }
-
-      after(:create) do |recipe, evaluator|
-        recipe.update_attribute(:title, "Salty " + recipe.title)
-      end
-    end
+    title { "Onion Soup" }
+    introduction { "an old French classic" }
+    summary { "This is a rich and hearty soup from the classic French repertoire. It's one of my favourites." }
+    total_time { "PT6H" }
+    serves { 2 }
+    makes { nil }
+    recipe_type { "soup" }
+    image_url { nil }
   end
 end

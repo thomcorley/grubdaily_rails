@@ -40,7 +40,6 @@ class LegacyCsv::Formatter
     end
 
     recipe_info_hash = recipe_info_array.select{|i| i[:id] == recipe_id}.first
-
     # Select only the parameters we're concerned with for now.
     # This will be :id, :title, :serves, :makes, :introduction, :difficulty, :category and :tags
     # Returns a Hash of the selected params

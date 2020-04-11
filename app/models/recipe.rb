@@ -8,16 +8,16 @@ class Recipe < ApplicationRecord
   has_many :method_steps, dependent: :destroy
   has_many :tags, as: :taggable, dependent: :destroy
 
-  # validates :title, presence: true
-  # validates :title, length: { maximum: 50 }
-  # validates :total_time, format: { :with => TIME_FORMAT_REGEX,
-  #   :message => "total_time must be in valid ISO 8601 format."
-  # }
-  # validates :makes_unit, length: { maximum: 20 }
-  # validates :makes_unit, numericality: false
-  # validates_associated :ingredient_sets
-  # validate :presence_of_serves_or_makes
-  # validate :numericality_of_serves_or_makes
+  validates :title, presence: true
+  validates :title, length: { maximum: 50 }
+  validates :total_time, format: { :with => TIME_FORMAT_REGEX,
+    :message => "total_time must be in valid ISO 8601 format."
+  }
+  validates :makes_unit, length: { maximum: 20 }
+  validates :makes_unit, numericality: false
+  validates_associated :ingredient_sets
+  validate :presence_of_serves_or_makes
+  validate :numericality_of_serves_or_makes
 
   before_save :set_image_url
 
@@ -39,12 +39,12 @@ class Recipe < ApplicationRecord
   # There are a number of older images that are with underscores instead however,
   # which will be handled by the check_photo_exists callback
   def image_url_with_dashes
-    image_title = url_friendly_title.split.join("-").downcase 
+    image_title = url_friendly_title.split.join("-").downcase
     "https://s3.eu-west-2.amazonaws.com/grubdaily/#{image_title}.jpg"
-  end 
+  end
 
   def image_url_with_underscores
-    image_title = url_friendly_title.split.join("_").downcase 
+    image_title = url_friendly_title.split.join("_").downcase
     "https://s3.eu-west-2.amazonaws.com/grubdaily/#{image_title}.jpg"
   end
 
@@ -52,7 +52,7 @@ class Recipe < ApplicationRecord
     with_underscores = request_image(image_url_with_underscores)
     with_dashes = request_image(image_url_with_dashes)
 
-    if with_dashes == 200 
+    if with_dashes == 200
       image_url_with_dashes
     elsif with_underscores == 200
       image_url_with_underscores
