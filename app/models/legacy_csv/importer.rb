@@ -2,10 +2,12 @@ module LegacyCsv
   class Importer
 
   CONNECTIVES = ["and", "with", "a", "la", "of", "for", "au", "the", "le"]
+  RECIPE_IDS = RecipesWithImages::LIST
+  FILENAMES = LegacyCsv::CurrentFilenames::LIST
 
   # RecipesWithImages::LIST contains only the recipes with :introduction,
   # :serves/:makes, ingredients and method_steps
-  def initialize(path: "lib/csv", selected_recipe_ids: RecipesWithImages::LIST, filenames: LegacyCsv::CurrentFilenames::LIST)
+  def initialize(path: "lib/csv", selected_recipe_ids: RECIPE_IDS, filenames: FILENAMES)
     @path = path
     @selected_recipe_ids = selected_recipe_ids
     @filenames = filenames
