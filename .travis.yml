@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+ - 2.7.0
+script:
+  - bundle exec rspec
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database grubdaily_rails_test;' -U postgres
+  - bundle exec rails db:migrate RAILS_ENV=test
