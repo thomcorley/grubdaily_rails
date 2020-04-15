@@ -15,7 +15,7 @@ RSpec.describe LegacyCsv::Importer, type: :model do
   	end
 
   	it "imports the correct number of recipes" do
-      expect{ @importer.import }.to change{ Recipe.count }.by(2)
+      expect{ @importer.import }.to change{ Recipe.count }.by(1)
   	end
 
   	it "imports the correct number of ingredient sets" do
