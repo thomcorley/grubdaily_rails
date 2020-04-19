@@ -11,17 +11,16 @@ class IngredientsProcessor
 		array_of_params = []
 
 		@ingredient_sets.each_with_index do |set, i|
-			if set
-				set.first[0] == :INSERT_TITLE ? title = nil : title = set.first[0]
-				array_of_params << {title: title, position: i + 1, recipe_id: recipe_id}
-			end
+			next unless set
+			set.first[0] == :INSERT_TITLE ? title = nil : title = set.first[0]
+			array_of_params << {title: title, position: i + 1, recipe_id: recipe_id}
 		end
 
 		array_of_params
 	end
 
 	# This method returns an array of hashes, each hash being the
-	# params to create an IngredientEntry 
+	# params to create an IngredientEntry
 	# :quantity, :unit, :size, :modifier, :ingredient_set_id
 	def params_for_ingredient_entries(ingredient_set_id, index_of_ingredient_set)
 		array_of_params = []
@@ -42,7 +41,7 @@ class IngredientsProcessor
 
 	# PRIVATE METHODS?
 
-	# Returns an array of unprocessed ingredient entries 
+	# Returns an array of unprocessed ingredient entries
 	# belonging to an ingredient set
 	def ingredient_entry_strings(index_of_ingredient_set)
 		@ingredient_sets[index_of_ingredient_set].first[1]

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe RecipeImporter, type: :model do
-    let(:content) { File.read("spec/test_data/test_recipe.yaml") }
-		let(:importer) { RecipeImporter.new(content) }
-    let(:recipe) { FactoryBot.create(:recipe) }
+  let(:content) { File.read("spec/test_data/test_recipe.yaml") }
+	let(:importer) { RecipeImporter.new(content) }
+  let(:recipe) { FactoryBot.create(:recipe) }
 
-    before { importer.populate_fields }
+  before { importer.populate_fields }
 
   context "the recipe info" do
     it "should have the correct attributes" do
@@ -48,9 +48,10 @@ RSpec.describe RecipeImporter, type: :model do
 
   context "#save_ingredients" do
     it "should save ingredients" do
-      expect { importer.save_ingredients(recipe.id) }.to change { IngredientSet.count }.by(1)
-                                                       .and change { IngredientEntry.count }.by(2)
-                                                       .and change { Ingredient.count }.by(2)
+      expect { importer.save_ingredients(recipe.id) }
+        .to change { IngredientSet.count }.by(1)
+        .and change { IngredientEntry.count }.by(2)
+        .and change { Ingredient.count }.by(2)
     end
   end
 
