@@ -16,6 +16,7 @@ module LegacyCsv
   def import
     formatter = LegacyCsv::Formatter.new(@path)
     ids_of_complete_recipes = []
+
     @selected_recipe_ids.each do |id|
       info = formatter.get_recipe_info(id)
       ingredients = formatter.get_ingredients(id)
@@ -95,7 +96,6 @@ module LegacyCsv
         original_string: i[:original_string],
         ingredient_set_id: ingredient_set_id
       }
-
       ingredient_entry =  IngredientEntry.create!(params)
       Ingredient.create!(name: i[:ingredient], ingredient_entry_id: ingredient_entry.id)
     end

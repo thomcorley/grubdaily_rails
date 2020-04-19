@@ -5,13 +5,12 @@ RSpec.describe Recipe, type: :model do
     let(:recipe) { FactoryBot.build(:recipe) }
 
     it "should have a valid image url, if there is an image" do
+      fake_response = double("Response", code: 200)
+      allow(HTTParty).to receive(:get).and_return(fake_response)
+
       recipe.title = "Roast Garlic Soup"
       recipe.save!
       expect(recipe.image_url).to be_present
-    end
-
-    it "should be valid" do
-      expect(recipe).to be_valid
     end
 
     it "should have a vaild title" do
