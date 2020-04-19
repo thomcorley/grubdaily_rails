@@ -5,19 +5,16 @@ class RecipeImporter
 	require "yaml"
 
 	attr_accessor  :content, :title, :total_time, :serves, :makes, :makes_unit, :recipe_type, :category, :tags, :summary,
-						 :introduction, :ingredient_sets, :method_steps
+						 :introduction, :ingredient_sets, :method_steps, :content_hash
 
 
 	def initialize(content)
 		@content = content
+		@content_hash = YAML.load(content).deep_symbolize_keys
 	end
 
 	def populate_fields
 		self.assign_attributes(attributes)
-	end
-
-	def content_hash
-		YAML.load(@content).deep_symbolize_keys
 	end
 
 	def attributes
