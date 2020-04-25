@@ -44,7 +44,7 @@ class RecipeImporter
 	end
 
 	def save_recipe
-		params = attributes.slice(:title, :total_time, :serves, :makes, :makes_unit, :category, :recipe_type, :summary, :introduction)
+		params = attributes.slice(:title, :total_time, :serves, :makes, :makes_unit, :category, :recipe_type, :summary, :introduction, :tags)
 		recipe = Recipe.create!(params)
 		recipe.id
 	end
@@ -65,14 +65,6 @@ class RecipeImporter
 	def save_method_steps(recipe_id)
 		method_steps.each_with_index do |m, i|
 			MethodStep.create!(position: i + 1, description: m, recipe_id: recipe_id)
-		end
-	end
-
-	def save_tags(recipe_id)
-		tags_array = content_hash[:tags].split(", ")
-
-		tags_array.each do |t|
-			Tag.create!(name: t, taggable_type: "Recipe", taggable_id: recipe_id)
 		end
 	end
 
