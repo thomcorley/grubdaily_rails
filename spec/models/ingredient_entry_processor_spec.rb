@@ -289,4 +289,28 @@ RSpec.describe IngredientEntryProcessor, type: :model do
       expect(processor.get_ingredient).to eq "sea salt and freshly cracked black pepper"
     end
   end
+
+  context "parsing '1/2 leek'" do
+    let(:processor) { described_class.new("1/2 leek", 1) }
+
+    it "has a quantity of 0.5" do
+      expect(processor.get_quantity).to eq(0.5)
+    end
+
+    it "has a unit of nil" do
+      expect(processor.get_unit).to be_nil
+    end
+
+    it "has a size of nil" do
+      expect(processor.get_size).to be_nil
+    end
+
+    it "has a modifier of nil" do
+      expect(processor.get_modifier).to be_nil
+    end
+
+    it "has an ingredient of 'leek'" do
+      expect(processor.get_ingredient).to eq "leek"
+    end
+  end
 end
