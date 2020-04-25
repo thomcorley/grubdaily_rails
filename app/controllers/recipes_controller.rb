@@ -12,7 +12,6 @@ class RecipesController < ApplicationController
   def show
     @ingredient_sets = @recipe.ingredient_sets
     @introduction_paragraphs = @recipe.introduction.split("\n")
-    @tags = @recipe.tags
     @method_steps = @recipe.method_steps.order(:position)
   end
 
@@ -73,6 +72,6 @@ class RecipesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_params
-      params.require(:recipe).permit(:title, :summary, :total_time, :introduction, :serves, :makes, :makes_unit, :recipe_type)
+      params.require(:recipe).permit(:title, :summary, :total_time, :introduction, :serves, :makes, :makes_unit, :recipe_type, :tags)
     end
 end

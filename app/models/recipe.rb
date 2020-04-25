@@ -6,7 +6,6 @@ class Recipe < ApplicationRecord
 
   has_many :ingredient_sets, dependent: :destroy
   has_many :method_steps, dependent: :destroy
-  has_many :tags, as: :taggable, dependent: :destroy
 
   validates :title, presence: true
   validates :title, length: { maximum: 50 }

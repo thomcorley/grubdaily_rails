@@ -13,7 +13,6 @@ class RecipeImportsController < ApplicationController
 
     importer.save_ingredients(recipe_id)
     importer.save_method_steps(recipe_id)
-    importer.save_tags(recipe_id)
 
     redirect_to recipe_path(recipe_id)
   end

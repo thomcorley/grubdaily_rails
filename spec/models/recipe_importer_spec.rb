@@ -41,8 +41,15 @@ RSpec.describe RecipeImporter, type: :model do
       fake_response = double("Response", code: 200)
       allow(HTTParty).to receive(:get).and_return(fake_response)
 
-      importer.save_recipe
-      expect(Recipe.last).to be_valid
+      id = importer.save_recipe
+      recipe = Recipe.find(id)
+      expect(recipe).to be_valid
+    end
+
+    it "should save tags" do
+      id = importer.save_recipe
+      recipe = Recipe.find(id)
+      expect(recipe.tags).to eq("bacon, comte")
     end
   end
 
@@ -58,12 +65,6 @@ RSpec.describe RecipeImporter, type: :model do
   context "#save_method_steps" do
     it "should save 2 method steps" do
       expect { importer.save_method_steps(recipe.id) }.to change { MethodStep.count }.by(2)
-    end
-  end
-
-  context "#save_tags" do
-    it "should save 2 tags" do
-      expect { importer.save_tags(recipe.id) }.to change { Tag.count }.by(2)
     end
   end
 end

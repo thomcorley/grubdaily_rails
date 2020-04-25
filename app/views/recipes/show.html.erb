@@ -40,13 +40,12 @@
   <%= @recipe.recipe_type %>
 </p>
 
-<em><%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %></em>
-
-<br><br>
-
 <p>
-    <strong>Tags:</strong> <% @tags.each do |t| %><a href="<%= edit_tag_path(t) %>"><%= "#{t.name.upcase} " %></a><% end %>
+    <strong>Tags:</strong>
+    <%= @recipe.tags.to_s  %>
 </p>
+
+<em><%= link_to 'Edit Recipe', edit_recipe_path(@recipe) %></em>
 
 <br><br>
 
