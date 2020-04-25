@@ -1,7 +1,7 @@
-module ApplicationHelper
+module ConsoleHelper
   def process_entry(string)
     processor = IngredientEntryProcessor.new(string, 1)
-    params = processor.params
+    params = processor.parse
     puts params
 
     puts "---------------------------"

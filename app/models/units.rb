@@ -8,6 +8,7 @@ class Units
 		"small pinch", "large pinch", "generous pinch", "small handful", "large handful", "generous handful",
 		"small clove", "large clove", "large glass", "small glass"
 	]
+
 	SPACED = [PLURALISABLE, SPECIAL, %w(litre gram kilogram ounce pound tsp tbsp teaspoon tablespoon)].flatten
 	ALL = [METRIC, IMPERIAL, PLURALISABLE, SPECIAL].flatten.uniq
 end
