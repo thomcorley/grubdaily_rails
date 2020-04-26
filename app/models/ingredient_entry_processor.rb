@@ -18,7 +18,7 @@ class IngredientEntryProcessor
 	# Returns a hash of params to create an IngredientEntry
 	def parse
 		{
-			quantity: get_quantity, 
+			quantity: get_quantity,
 			unit: get_unit,
 			size: get_size,
 			modifier: get_modifier,
@@ -36,34 +36,38 @@ class IngredientEntryProcessor
 		end
 
 		array = @ingredient_entry_string.split(",")
-		array.count > 1 ? array.last.strip : nil		
+		array.count > 1 ? array.last.strip : nil
 	end
 
 	def get_quantity
 		return 1 if entry_array.first == "a"
 		return nil if special_exception
 
-		quantity_and_unit = entry_array.select{ |i| i =~ /[0-9]+/ }
+		# Handles '1g pepper', for example
+		quantity_and_unit = entry_array.select{ |i| i =~ /[0-9]+/ }.first
 
-		if quantity_and_unit.any?
-			quantity_and_unit.first.match(/[0-9]+/)[0].to_i 
+		# Handles '1/2 leek', for example
+		return Rational(quantity_and_unit).to_f if quantity_and_unit =~ /[1-9]\/[1-9]/
+
+		if quantity_and_unit
+			quantity_and_unit.match(/[0-9]+/)[0].to_f
 		else
 			nil
 		end
 	end
 
 	def get_unit
-		return nil if special_exception		
-		# If there's a spaced unit (singular or plural) that 
+		return nil if special_exception
+		# If there's a spaced unit (singular or plural) that
 		# matches in the entry string, this is the unit.
 		unit = nil
-		
+
 		Units::SPACED.each do |i|
 			unit = @ingredient_entry_string.match(i)[0] if @ingredient_entry_string.match?(i)
 		end
-		
+
 		return unit if unit
-		
+
 		# Or, the unit might be suffixed to a number.
 		# Match this and use a group to separate the unit from the numerical part.
 		# Otherwise, there's no unit so just return nil
@@ -85,8 +89,9 @@ class IngredientEntryProcessor
 
 	def get_ingredient
 		string = entry_array.join(" ")
+
 		if get_quantity
-			string = string.sub(get_quantity.to_s, "")
+			string = string.sub(/^[0-9 \/]+/, "")
 			string = string.sub("a ", "")
 		end
 
@@ -110,7 +115,7 @@ class IngredientEntryProcessor
 		# If there's no unit, just return the unchanged string
 		return entry_string unless get_unit
 		# If there's a singular unit, remove it and return the result
-		if entry_string.match?(get_unit + " ") 
+		if entry_string.match?(get_unit + " ")
 			entry_string.sub(get_unit, "")
 		else
 			entry_string.sub(get_unit.pluralize, "")
@@ -129,7 +134,7 @@ class IngredientEntryProcessor
 		if unit_string =~ /clove/
 			return "clove"
 		else
-			unit_string.singularize		
+			unit_string.singularize
 		end
 	end
 
