@@ -59,8 +59,8 @@ RSpec.describe LegacyCsv::Importer, type: :model do
       expect { importer.import }.to change { IngredientSet.count }.by(1)
   	end
 
-  	it "imports the correct number of ingredients" do
-      expect { importer.import }.to change { Ingredient.count }.by(1)
+  	it "imports the correct number of ingredient entries" do
+      expect { importer.import }.to change { IngredientEntry.count }.by(1)
   	end
 
   	it "imports the correct number of method steps" do

@@ -2,14 +2,15 @@
 require "rails_helper"
 
 RSpec.describe "Importing a Recipe from a YAML file" do
-  yaml_content = yaml_content = File.read("spec/test_data/benchmark_test_recipe.yaml")
+  before(:all) do
+    yaml_content = File.read("spec/test_data/benchmark_test_recipe.yaml")
+    importer = RecipeImporter.new(yaml_content)
+    @recipe_id = importer.save_recipe
+    importer.save_ingredients(@recipe_id)
+    importer.save_method_steps(@recipe_id)
+  end
 
-  importer = RecipeImporter.new(yaml_content)
-  recipe_id = importer.save_recipe
-  importer.save_ingredients(recipe_id)
-  importer.save_method_steps(recipe_id)
-
-  let(:recipe) { Recipe.find(recipe_id) }
+  let(:recipe) { Recipe.find(@recipe_id) }
   let(:recipe_attributes) { recipe.attributes.deep_symbolize_keys  }
 
   context "recipe attributes" do
@@ -51,10 +52,6 @@ RSpec.describe "Importing a Recipe from a YAML file" do
           expect(ingredient_entry_attributes[key]).to eq(value)
         end
       end
-
-      it "has the correct ingredient" do
-        expect(ingredient_entry.ingredient.name).to eq(ingredient)
-      end
     end
 
     context "415g warm water" do
@@ -62,11 +59,11 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         quantity: 415,
         unit: "g",
         size: nil,
-        modifier: nil
+        modifier: nil,
+        ingredient: "warm water",
       }
 
       let(:original_string) { "415g warm water" }
-      let(:ingredient) { "warm water" }
 
       it_behaves_like("attributes are correct", expected_attributes)
     end
@@ -76,11 +73,11 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         quantity: 725,
         unit: "pinch",
         size: nil,
-        modifier: nil
+        modifier: nil,
+        ingredient: "plain flour",
       }
 
       let(:original_string) { "725 pinches plain flour" }
-      let(:ingredient) { "plain flour" }
 
       it_behaves_like("attributes are correct", expected_attributes)
     end
@@ -90,11 +87,11 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         quantity: 10,
         unit: nil,
         size: nil,
-        modifier: nil
+        modifier: nil,
+        ingredient: "carrot",
       }
 
       let(:original_string) { "10 carrots" }
-      let(:ingredient) { "carrot" }
 
       it_behaves_like("attributes are correct", expected_attributes)
     end
@@ -104,11 +101,11 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         quantity: 34,
         unit: nil,
         size: "large",
-        modifier: "finely chopped"
+        modifier: "finely chopped",
+        ingredient: "onion",
       }
 
       let(:original_string) { "34 large onions, finely chopped" }
-      let(:ingredient) { "onion" }
 
       it_behaves_like("attributes are correct", expected_attributes)
     end
@@ -119,10 +116,10 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         unit: nil,
         size: nil,
         modifier: nil,
+        ingredient: "leek",
       }
 
       let(:original_string) { "1/2 leek" }
-      let(:ingredient) { "leek" }
 
       it_behaves_like("attributes are correct", expected_attributes)
     end
@@ -133,10 +130,10 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         unit: "handful",
         size: nil,
         modifier: nil,
+        ingredient: "pinenut",
       }
 
       let(:original_string) { "1/2 handful of pinenuts" }
-      let(:ingredient) { "pinenut" }
 
       it_behaves_like("attributes are correct", expected_attributes)
     end
@@ -147,10 +144,10 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         unit: nil,
         size: nil,
         modifier: nil,
+        ingredient: "400g tin tomatoes",
       }
 
       let(:original_string) { "2 x 400g tins tomatoes" }
-      let(:ingredient) { "400g tin tomatoes" }
 
       it_behaves_like("attributes are correct", expected_attributes)
     end
@@ -161,10 +158,10 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         unit: nil,
         size: nil,
         modifier: "cut into 5mm dice",
+        ingredient: "carrot"
       }
 
       let(:original_string) { "10 carrots, cut into 5mm dice" }
-      let(:ingredient) { "carrot" }
 
       it_behaves_like("attributes are correct", expected_attributes)
     end

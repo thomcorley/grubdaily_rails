@@ -7,7 +7,7 @@ class Recipe < ApplicationRecord
   has_many :ingredient_sets, dependent: :destroy
   has_many :method_steps, dependent: :destroy
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
   validates :title, length: { maximum: 50 }
   validates :total_time, format: { :with => TIME_FORMAT_REGEX,
     :message => "total_time must be in valid ISO 8601 format."

@@ -58,7 +58,6 @@ RSpec.describe RecipeImporter, type: :model do
       expect { importer.save_ingredients(recipe.id) }
         .to change { IngredientSet.count }.by(1)
         .and change { IngredientEntry.count }.by(2)
-        .and change { Ingredient.count }.by(2)
     end
   end
 
