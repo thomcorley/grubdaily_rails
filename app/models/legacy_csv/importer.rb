@@ -93,11 +93,11 @@ module LegacyCsv
         unit: i[:unit],
         size: i[:size],
         modifier: i[:modifier],
+        ingredient: i[:ingredient],
         original_string: i[:original_string],
         ingredient_set_id: ingredient_set_id
       }
       ingredient_entry =  IngredientEntry.create!(params)
-      Ingredient.create!(name: i[:ingredient], ingredient_entry_id: ingredient_entry.id)
     end
   end
 

@@ -57,7 +57,6 @@ class RecipeImporter
 
 			processor.params_for_ingredient_entries(ingredient_set.id, i).each do |ingredient_entry_params|
 				ingredient_entry = IngredientEntry.create!(ingredient_entry_params)
-				ingredient = Ingredient.create!(processor.params_for_ingredient(ingredient_entry.id))
 			end
 		end
 	end

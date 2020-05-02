@@ -1,8 +1,5 @@
 class IngredientEntry < ApplicationRecord
   belongs_to :ingredient_set
-  has_one :ingredient, dependent: :destroy
-  validates_associated :ingredient
-  delegate :name, to: :ingredient
+  validates :ingredient, presence: true
+  alias_attribute :name, :ingredient
 end
-
-private
