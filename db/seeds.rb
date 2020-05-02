@@ -25,4 +25,4 @@ class RecipeSeeder
   end
 end
 
-RecipeSeeder.seed
+RecipeSeeder.seed if Rails.env == "development"
