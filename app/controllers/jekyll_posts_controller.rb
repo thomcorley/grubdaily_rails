@@ -2,7 +2,7 @@ class JekyllPostsController < ApplicationController
 
 	def generate
 		@recipe = Recipe.find(params[:recipe_id])
-		@category = @recipe.tags.first.name
-		@tags = @recipe.tags.map(&:name)
+		@category = @recipe.tags.split(",").first.strip
+		@tags = @recipe.tags.split(",")
 	end
 end
