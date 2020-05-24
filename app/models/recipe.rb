@@ -85,7 +85,7 @@ class Recipe < ApplicationRecord
   end
 
   def remove_punctuation_from(string)
-    string = string.gsub(/[\,\.']/, "")
+    string = string.gsub(/[\,\.':]/, "")
   end
 
   def remove_accents_from(string)
