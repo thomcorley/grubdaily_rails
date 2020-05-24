@@ -6,7 +6,6 @@ class HumanReadableEntryGenerator
   IRREGULAR_UNITS_LARGE = IRREGULAR_UNITS_REGULAR.map{ |unit| "large #{unit}"}
   IRREGULAR_UNITS_SMALL = IRREGULAR_UNITS_REGULAR.map{ |unit| "small #{unit}"}
   IRREGULAR_UNITS = IRREGULAR_UNITS_REGULAR + IRREGULAR_UNITS_SMALL + IRREGULAR_UNITS_LARGE
-  # SINGULAR_WITH_UNIT = ["carrot", "salt", "flour", "plain flour", "rye flour", "pasta", "garlic", "basil", "cavolo nero"]
 
   def initialize(ingredient_entry)
     @ingredient_entry = ingredient_entry

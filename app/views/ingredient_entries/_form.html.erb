@@ -11,7 +11,10 @@
     </div>
   <% end %>
 
-  <h4>Ingredient: <%= @ingredient_entry.name %></h4>
+  <div class="field">
+    <%= form.label :ingredient %>
+    <%= form.text_field :ingredient, id: :recipe_ingredient %>
+  </div>
 
   <div class="field">
     <%= form.label :quantity %>
