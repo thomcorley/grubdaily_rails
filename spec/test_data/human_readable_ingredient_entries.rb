@@ -65,6 +65,16 @@ class IngredientEntryTestData
       original_string: "1/2 leek",
       # [:quantity, :unit, :size, :ingredient, :modifier]
       params: [0.5, nil,  nil, "leek", nil],
-    }
+    },
+    {
+      original_string: "250 g cream cheese",
+      # [:quantity, :unit, :size, :ingredient, :modifier]
+      params: [250, "g",  nil, "cream cheese", nil],
+    },
+    {
+      original_string: "2 medium banana shallots, finely chopped",
+      # [:quantity, :unit, :size, :ingredient, :modifier]
+      params: [2, nil,  "medium", "banana shallots", "finely chopped"],
+    },
   ]
 end

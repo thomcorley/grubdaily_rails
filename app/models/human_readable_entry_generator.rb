@@ -6,7 +6,7 @@ class HumanReadableEntryGenerator
   IRREGULAR_UNITS_LARGE = IRREGULAR_UNITS_REGULAR.map{ |unit| "large #{unit}"}
   IRREGULAR_UNITS_SMALL = IRREGULAR_UNITS_REGULAR.map{ |unit| "small #{unit}"}
   IRREGULAR_UNITS = IRREGULAR_UNITS_REGULAR + IRREGULAR_UNITS_SMALL + IRREGULAR_UNITS_LARGE
-  SINGULAR_WITH_UNIT = ["carrot", "salt", "flour", "plain flour", "rye flour", "pasta", "garlic", "basil", "cavolo nero"]
+  # SINGULAR_WITH_UNIT = ["carrot", "salt", "flour", "plain flour", "rye flour", "pasta", "garlic", "basil", "cavolo nero"]
 
   def initialize(ingredient_entry)
     @ingredient_entry = ingredient_entry
@@ -42,9 +42,7 @@ class HumanReadableEntryGenerator
   end
 
   def get_ingredient
-    return " #{ingredient.to_s}" if unit && ingredient_singular_with_unit?
-
-    quantity.to_i > 1 ? " #{ingredient.pluralize.to_s}" : " #{ingredient.to_s}"
+    " #{ingredient.to_s}"
   end
 
   def get_modifier

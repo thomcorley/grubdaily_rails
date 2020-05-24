@@ -116,7 +116,7 @@ class IngredientEntryProcessor
 		if string =~ /\(/
 			string = string.split("(").first
 		end
-		string.strip.singularize
+		string.strip
 	end
 
 	private

@@ -45,8 +45,8 @@ RSpec.describe IngredientEntryProcessor, type: :model do
       expect(processor.get_modifier).to eq "diced"
     end
 
-    it "has an ingredient of carrot" do
-      expect(processor.get_ingredient).to eq "carrot"
+    it "has an ingredient of carrots" do
+      expect(processor.get_ingredient).to eq "carrots"
     end
   end
 
@@ -69,8 +69,8 @@ RSpec.describe IngredientEntryProcessor, type: :model do
       expect(processor.get_modifier).to eq "peeled and chopped"
     end
 
-    it "has an ingredient of tomato" do
-      expect(processor.get_ingredient).to eq "tomato"
+    it "has an ingredient of tomatoes" do
+      expect(processor.get_ingredient).to eq "tomatoes"
     end
   end
 
