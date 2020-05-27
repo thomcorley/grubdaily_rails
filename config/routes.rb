@@ -17,9 +17,11 @@ Rails.application.routes.draw do
 
   post 'recipe_imports/create' => 'recipe_imports#create'
 
-  get 'recipe_imports/show' => 'recipe_imports#show'  
+  get 'recipe_imports/show' => 'recipe_imports#show'
 
   get 'generate_jekyll_post' => 'jekyll_posts#generate'
+
+  get 'touch_ingredient_entry/:id' => 'ingredient_entries#touch'
 
   resources :ingredient_entries
   resources :ingredient_sets
@@ -27,6 +29,6 @@ Rails.application.routes.draw do
   resources :recipe_imports
   resources :tags
   resources :method_steps
-  
+
   root :to => 'recipe_imports#new'
 end

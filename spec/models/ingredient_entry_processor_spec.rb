@@ -313,4 +313,28 @@ RSpec.describe IngredientEntryProcessor, type: :model do
       expect(processor.get_ingredient).to eq "leek"
     end
   end
+
+  context "a handful of red seedless grapes" do
+    let(:processor) { described_class.new("a handful of red seedless grapes", 1) }
+
+    it "has a quantity of 1" do
+      expect(processor.get_quantity).to eq(1)
+    end
+
+    it "has a unit of 'handful'" do
+      expect(processor.get_unit).to eq("handful")
+    end
+
+    it "has a size of nil" do
+      expect(processor.get_size).to be_nil
+    end
+
+    it "has a modifier of nil" do
+      expect(processor.get_modifier).to be_nil
+    end
+
+    it "has an ingredient of 'red seedless grapes'" do
+      expect(processor.get_ingredient).to eq "red seedless grapes"
+    end
+  end
 end
