@@ -39,7 +39,6 @@ class IngredientEntriesController < ApplicationController
     respond_to do |format|
       if @ingredient_entry.update(ingredient_entry_params)
         format.html { redirect_to ingredient_entries_path, notice: 'Ingredient entry was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }
         format.json { render json: @ingredient_entry.errors, status: :unprocessable_entity }

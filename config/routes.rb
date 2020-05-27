@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get 'generate_jekyll_post' => 'jekyll_posts#generate'
 
-  get 'touch_ingredient_entry/:id' => 'ingredient_entries#touch'
+  get 'touch_ingredient_entry/:id', to: 'ingredient_entries#touch', as: 'touch_ingredient_entry'
 
   resources :ingredient_entries
   resources :ingredient_sets

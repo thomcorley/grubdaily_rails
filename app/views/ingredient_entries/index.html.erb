@@ -19,7 +19,7 @@
     <% @ingredient_entries.each do |ingredient_entry| %>
       <tr>
         <td><%= ingredient_entry.original_string %></td>
-        <td><%= link_to "#{ingredient_entry.human_readable_entry}", "touch_ingredient_entry/#{ingredient_entry.id}", title: "click to verify correct" %></td>
+        <td><%= link_to "#{ingredient_entry.human_readable_entry}", touch_ingredient_entry_path(ingredient_entry), title: "click to verify correct" %></td>
         <td><%= link_to 'Edit', edit_ingredient_entry_path(ingredient_entry) %></td>
         <td><%= link_to 'Destroy', ingredient_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
