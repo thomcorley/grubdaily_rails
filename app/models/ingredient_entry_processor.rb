@@ -69,8 +69,6 @@ class IngredientEntryProcessor
 
 		return unit if unit
 
-<<<<<<< HEAD
-=======
 		# The unit should be space separated, so we can grab it
 		# by splitting the string and match using the array of known units
 		array = @ingredient_entry_string.split(" ")
@@ -78,7 +76,6 @@ class IngredientEntryProcessor
 
 		return unit if unit
 
->>>>>>> Add human readable entry generator
 		# Or, the unit might be suffixed to a number.
 		# Match this and use a group to separate the unit from the numerical part.
 		# Otherwise, there's no unit so just return nil
