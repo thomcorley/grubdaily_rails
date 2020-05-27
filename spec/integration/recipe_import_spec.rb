@@ -88,7 +88,7 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         unit: nil,
         size: nil,
         modifier: nil,
-        ingredient: "carrot",
+        ingredient: "carrots",
       }
 
       let(:original_string) { "10 carrots" }
@@ -102,7 +102,7 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         unit: nil,
         size: "large",
         modifier: "finely chopped",
-        ingredient: "onion",
+        ingredient: "onions",
       }
 
       let(:original_string) { "34 large onions, finely chopped" }
@@ -130,7 +130,7 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         unit: "handful",
         size: nil,
         modifier: nil,
-        ingredient: "pinenut",
+        ingredient: "pinenuts",
       }
 
       let(:original_string) { "1/2 handful of pinenuts" }
@@ -158,7 +158,7 @@ RSpec.describe "Importing a Recipe from a YAML file" do
         unit: nil,
         size: nil,
         modifier: "cut into 5mm dice",
-        ingredient: "carrot"
+        ingredient: "carrots"
       }
 
       let(:original_string) { "10 carrots, cut into 5mm dice" }

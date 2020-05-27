@@ -45,8 +45,8 @@ RSpec.describe IngredientEntryProcessor, type: :model do
       expect(processor.get_modifier).to eq "diced"
     end
 
-    it "has an ingredient of carrot" do
-      expect(processor.get_ingredient).to eq "carrot"
+    it "has an ingredient of carrots" do
+      expect(processor.get_ingredient).to eq "carrots"
     end
   end
 
@@ -69,8 +69,8 @@ RSpec.describe IngredientEntryProcessor, type: :model do
       expect(processor.get_modifier).to eq "peeled and chopped"
     end
 
-    it "has an ingredient of tomato" do
-      expect(processor.get_ingredient).to eq "tomato"
+    it "has an ingredient of tomatoes" do
+      expect(processor.get_ingredient).to eq "tomatoes"
     end
   end
 
@@ -122,7 +122,7 @@ RSpec.describe IngredientEntryProcessor, type: :model do
     end
   end
 
-  context "parsing 'a generous pinch of salt'" do
+  context "parsing '1 generous pinch of salt'" do
     let(:processor) { described_class.new("a generous pinch of salt", 1) }
 
     it "has a quantity of 1" do
@@ -218,7 +218,7 @@ RSpec.describe IngredientEntryProcessor, type: :model do
     end
   end
 
-  context "parsing 'a teaspoon of extra virgin olive oil'" do
+  context "parsing '1 teaspoon of extra virgin olive oil'" do
     let(:processor) { described_class.new("a teaspoon of extra virgin olive oil", 1) }
 
     it "has a quantity of 1" do
@@ -242,7 +242,7 @@ RSpec.describe IngredientEntryProcessor, type: :model do
     end
   end
 
-  context "parsing 'a pinch of ground asafoetida'" do
+  context "parsing '1 pinch of ground asafoetida'" do
     let(:processor) { described_class.new("a pinch of ground asafoetida", 1) }
 
     it "has a quantity of 1" do

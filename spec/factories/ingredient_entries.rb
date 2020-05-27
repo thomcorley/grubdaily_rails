@@ -4,6 +4,8 @@ FactoryBot.define do
     unit { "g" }
     size { nil }
     modifier { "finely chopped" }
+    name { "carrot" }
+    original_string { "10 g carrot, finely chopped" }
     ingredient_set
   end
 end

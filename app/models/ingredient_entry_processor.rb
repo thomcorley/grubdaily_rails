@@ -69,6 +69,13 @@ class IngredientEntryProcessor
 
 		return unit if unit
 
+		# The unit should be space separated, so we can grab it
+		# by splitting the string and match using the array of known units
+		array = @ingredient_entry_string.split(" ")
+		unit = array.select{ |i| Units::ALL.include?(i) }.first
+
+		return unit if unit
+
 		# Or, the unit might be suffixed to a number.
 		# Match this and use a group to separate the unit from the numerical part.
 		# Otherwise, there's no unit so just return nil
@@ -93,7 +100,7 @@ class IngredientEntryProcessor
 
 		if get_quantity
 			string = string.sub(/^[0-9 \/]+/, "")
-			string = string.sub("a ", "")
+			string = string.sub(/^a\s/, "")
 		end
 
 		string = string.sub(get_size, "") if get_size
@@ -106,7 +113,7 @@ class IngredientEntryProcessor
 		if string =~ /\(/
 			string = string.split("(").first
 		end
-		string.strip.singularize
+		string.strip
 	end
 
 	private
