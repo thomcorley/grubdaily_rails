@@ -4,12 +4,6 @@ require_relative '../test_data/human_readable_ingredient_entries.rb'
 RSpec.describe HumanReadableEntryGenerator,
 type: :model do
   describe "#generate" do
-    it "generates the correct string" do
-      entry = FactoryBot.build(:ingredient_entry)
-      generator = described_class.new(entry)
-      expect(generator.generate).to eq(entry.original_string)
-    end
-
     context "parsing a variety of ingredient entry data" do
       test_data = IngredientEntryTestData::ENTRIES
 

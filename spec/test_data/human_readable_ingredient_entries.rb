@@ -1,5 +1,4 @@
 class IngredientEntryTestData
-  # [:quantity, :unit, :size, :ingredient, :modifier]
   ENTRIES = [
     {
       original_string: "1 carrot",
@@ -75,6 +74,11 @@ class IngredientEntryTestData
       original_string: "2 medium banana shallots, finely chopped",
       # [:quantity, :unit, :size, :ingredient, :modifier]
       params: [2, nil,  "medium", "banana shallots", "finely chopped"],
+    },
+    {
+      original_string: "1 handful red seedless grapes",
+      # [:quantity, :unit, :size, :ingredient, :modifier]
+      params: [1, "handful",  nil, "red seedless grapes", nil],
     },
   ]
 end
