@@ -85,5 +85,11 @@ class IngredientEntryTestData
       # [:quantity, :unit, :size, :ingredient, :modifier]
       params: [1.0, "",  "", "bay leaf", ""],
     },
+    {
+      original_string: "0.5 lime, juice of",
+      # [:quantity, :unit, :size, :ingredient, :modifier]
+      params: [0.5, "",  "", "lime", "juice of"],
+    },
+
   ]
 end

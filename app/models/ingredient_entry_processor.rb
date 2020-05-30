@@ -6,8 +6,13 @@ class IngredientEntryProcessor
 
 	SPECIAL_ENTRIES = [
 		"vegetable oil, for frying",
+		"vegetable oil, for cooking",
 		"sea salt and freshly cracked black pepper",
-		"sea salt and cracked black pepper"
+		"sea salt and cracked black pepper",
+		"sea salt",
+		"extra virgin olive oil",
+		"olive oil",
+		"rapeseed oil",
 	]
 
 	def initialize(ingredient_entry_string, ingredient_set_id)
