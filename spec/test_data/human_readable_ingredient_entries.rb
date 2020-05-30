@@ -80,5 +80,10 @@ class IngredientEntryTestData
       # [:quantity, :unit, :size, :ingredient, :modifier]
       params: [1, "handful",  nil, "red seedless grapes", nil],
     },
+    {
+      original_string: "1 bay leaf",
+      # [:quantity, :unit, :size, :ingredient, :modifier]
+      params: [1.0, "",  "", "bay leaf", ""],
+    },
   ]
 end
