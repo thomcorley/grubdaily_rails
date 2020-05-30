@@ -30,14 +30,14 @@ class HumanReadableEntryGenerator
   end
 
   def get_unit
-    return "" if unit.nil?
+    return "" if blank?(unit)
     return " #{unit.to_s}" unless unit_is_irregular?
 
     quantity.to_i > 1 ? " #{unit.pluralize.to_s}" : " #{unit.singularize.to_s}"
   end
 
   def get_size
-    size.nil? ? "" : " #{size}"
+    blank?(size) ? "" : " #{size}"
   end
 
   def get_ingredient
@@ -45,7 +45,11 @@ class HumanReadableEntryGenerator
   end
 
   def get_modifier
-    modifier.nil? ? "" : ", #{modifier}"
+    blank?(modifier) ? "" : ", #{modifier}"
+  end
+
+  def blank?(attribute)
+    attribute.nil? || attribute == ""
   end
 
   def set_instance_variables

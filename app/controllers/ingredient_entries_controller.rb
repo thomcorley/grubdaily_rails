@@ -2,7 +2,15 @@ class IngredientEntriesController < ApplicationController
   before_action :set_instance_variables, only: [:show, :edit, :touch, :update, :destroy]
 
   def index
-    @ingredient_entries = IngredientEntry.where("updated_at < ?", Date.new(2020,5,27)).order(original_string: :asc)
+    @ingredient_entries = IngredientEntry.all
+
+    @old_ingredient_entries = IngredientEntry
+                                .where("updated_at < ?", Date.today)
+                                .order(original_string: :asc)
+
+    @recently_updated_ingredient_entries = IngredientEntry
+                                .where("updated_at >= ?", Date.today)
+                                .order(original_string: :asc)
   end
 
   def show
@@ -64,6 +72,6 @@ class IngredientEntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_entry_params
-      params.require(:ingredient_entry).permit(:quantity, :unit, :size, :modifier, :original_string)
+      params.require(:ingredient_entry).permit(:quantity, :unit, :size, :modifier, :original_string, :ingredient)
     end
 end
