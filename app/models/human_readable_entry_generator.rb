@@ -26,7 +26,10 @@ class HumanReadableEntryGenerator
   def get_quantity
     return "" if quantity.nil?
     return "1/2" if quantity_is_half_as_fraction?
-    quantity.to_i.to_s
+
+    return quantity.to_i.to_s if quantity.to_f.floor == quantity.to_f
+
+    quantity
   end
 
   def get_unit
