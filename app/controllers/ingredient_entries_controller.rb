@@ -5,12 +5,15 @@ class IngredientEntriesController < ApplicationController
     @ingredient_entries = IngredientEntry.all
 
     @old_ingredient_entries = IngredientEntry
-                                .where("updated_at < ?", Date.today)
+                                .where("updated_at < ?", Date.new(2020,5,31))
                                 .order(original_string: :asc)
 
     @recently_updated_ingredient_entries = IngredientEntry
                                 .where("updated_at >= ?", Date.today)
                                 .order(original_string: :asc)
+                                .limit(5)
+
+    @entries_updated = @ingredient_entries.count - @old_ingredient_entries.count
   end
 
   def show
@@ -43,7 +46,6 @@ class IngredientEntriesController < ApplicationController
   end
 
   def update
-    # @ingredient_entries = IngredientEntry.where("created_at < ?", Date.new(2020,5,27)).order(original_string: :asc)
     respond_to do |format|
       if @ingredient_entry.update(ingredient_entry_params)
         format.html { redirect_to ingredient_entries_path, notice: 'Ingredient entry was successfully updated.' }
