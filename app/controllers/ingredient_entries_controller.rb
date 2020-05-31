@@ -10,7 +10,7 @@ class IngredientEntriesController < ApplicationController
 
     @recently_updated_ingredient_entries = IngredientEntry
                                 .where("updated_at >= ?", Date.today)
-                                .order(original_string: :asc)
+                                .order(updated_at: :desc)
                                 .limit(5)
 
     @entries_updated = @ingredient_entries.count - @old_ingredient_entries.count
