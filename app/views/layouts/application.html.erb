@@ -1,11 +1,69 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GrubdailyRails</title>
+    <title><%= @recipe.title %> | grubdaily &mdash; For tasty things </title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application.css' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109063146-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-109063146-1');
+    </script>
+    <meta name="p:domain_verify" content="9d9fd8a69b2c412192f82e9042d86909"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title><%= @recipe.title %> | grubdaily &mdash; For tasty things </title>
+    <meta property="og:title" content="<%= @recipe.title %> | grubdaily &mdash; For tasty things " />
+    <meta name="twitter:title" content="<%= @recipe.title %> | grubdaily &mdash; For tasty things " />
+
+    <meta name="description" content="For tasty things">
+    <meta name="description" property="og:description" content="For tasty things" />
+    <meta name="twitter:description" content="For tasty things" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="twitter:site" content="@your_handler" />
+
+    <meta property="og:url" content="https://www.grubdaily.com/sourdough-bread" />
+
+    <meta property="og:image" content="<%= @recipe.image_url %>" />
+    <meta name="twitter:image" content="<%= @recipe.image_url %>" />
+
+    <meta name="author" content="grubdaily" />
+
+    <meta name="copyright" content="Copyright by grubdaily. All Rights Reserved." />
+
+    <link href="https://s3.eu-west-2.amazonaws.com/grubdaily/favicon_square.png" rel="shortcut icon" type="image/x-icon" />
+
+    <script type="application/ld+json">null</script>
+
+    <link href="https://fonts.googleapis.com/css?family=Cardo&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Lora|Raleway:500" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <link rel="canonical" href="<%= request.original_url %>">
+
+    <link rel="alternate" type="application/rss+xml" title="" href="<%= request.base_url %>/feed.xml">
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ['Oswald:400,700', 'Patrick Hand:400', 'Abel:400', 'Droid Serif:400,700', 'Yellowtail:400']
+            }
+        });
+    </script>
+    <meta name="google-site-verification" content="aomWX31Idx6uLZL7Ka1ojyR1Gjg_WiA99nih90VtLhw" />
   </head>
 
   <body>
