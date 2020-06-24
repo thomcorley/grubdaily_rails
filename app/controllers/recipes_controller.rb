@@ -11,8 +11,16 @@ class RecipesController < ApplicationController
   # GET /recipes/1.json
   def show
     @ingredient_sets = @recipe.ingredient_sets
-    @introduction_paragraphs = @recipe.introduction.split("\n")
-    @method_steps = @recipe.method_steps.order(:position)
+
+    @introduction_paragraphs = @recipe.introduction.split("\n").map do |paragraph|
+      MarkdownConverter.convert(paragraph)
+    end
+
+    @method_steps = @recipe.method_steps.order(:position).map do |method_step|
+      MarkdownConverter.convert(method_step.description)
+    end
+
+    @tags = @recipe.tags.split(",")
   end
 
   # GET /recipes/new

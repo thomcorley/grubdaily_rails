@@ -77,7 +77,7 @@ class HumanReadableEntryGenerator
   end
 
   def special_entry?
-    IngredientEntryProcessor::SPECIAL_ENTRIES.include?(original_string)
+    IngredientEntryProcessor::SPECIAL_ENTRIES.include?(original_string.strip)
   end
 
   def quantity_is_half_as_fraction?
