@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= @recipe.title %> | grubdaily &mdash; For tasty things </title>
+    <title>grubdaily &mdash; For tasty things </title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag 'application.css' %>
+    <%= stylesheet_link_tag 'application' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -21,9 +21,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title><%= @recipe.title %> | grubdaily &mdash; For tasty things </title>
-    <meta property="og:title" content="<%= @recipe.title %> | grubdaily &mdash; For tasty things " />
-    <meta name="twitter:title" content="<%= @recipe.title %> | grubdaily &mdash; For tasty things " />
+    <title>grubdaily &mdash; For tasty things </title>
+    <meta property="og:title" content="grubdaily &mdash; For tasty things " />
+    <meta name="twitter:title" content="grubdaily &mdash; For tasty things " />
 
     <meta name="description" content="For tasty things">
     <meta name="description" property="og:description" content="For tasty things" />
@@ -35,8 +35,8 @@
 
     <meta property="og:url" content="https://www.grubdaily.com/sourdough-bread" />
 
-    <meta property="og:image" content="<%= @recipe.image_url %>" />
-    <meta name="twitter:image" content="<%= @recipe.image_url %>" />
+    <meta property="og:image" content="" />
+    <meta name="twitter:image" content="" />
 
     <meta name="author" content="grubdaily" />
 
