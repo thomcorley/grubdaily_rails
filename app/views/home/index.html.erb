@@ -1,0 +1,65 @@
+<section class="delicious">
+  <main role="main">
+    <section class="index" itemscope itemtype="http://schema.org/Blog">
+      <section class="newest-recipes clear">
+
+        <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+          <div class="post-excerpt">
+            <p><img src="<%= @latest_recipe.image_url %>" alt="<%= @latest_recipe.title %>" /></p>
+          </div>
+          <div class="details">
+            <h6 class="post-title first-post" itemprop="name headline">
+              <a itemprop="url" href="<%= @latest_recipe.permalink %>"><%= @latest_recipe.title %></a>
+            </h6>
+
+            <div class="post-content">
+              <%= @latest_recipe.summary %>
+            </div>
+          </div>
+        </article>
+
+        <% @next_two_latest_recipes.each do |recipe| %>
+          <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="post-excerpt">
+              <p><img src="<%= recipe.image_url %>" alt="<%= recipe.title %>" /></p>
+            </div>
+            <div class="details">
+              <h6 class="post-title first-post" itemprop="name headline">
+                <a itemprop="url" href="<%= recipe.permalink %>"><%= recipe.title %></a>
+              </h6>
+            </div>
+          </article>
+        <% end %>
+
+      </section>
+
+      <section class="posts clear">
+        <div class="section-title"><span>Recent Recipes</span></div>
+
+        <% @recent_recipes.each do |recipe| %>
+          <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+            <h2 class="post-title" itemprop="name headline">
+              <a itemprop="url" href="<%= recipe.permalink %>">
+                <%= recipe.title %>
+              </a>
+            </h2>
+
+            <div class="post-content">
+              <p><img src="<%= recipe.image_url %>" alt="<%= recipe.title %>" /></p>
+            </div>
+          </article>
+        <% end %>
+      </section>
+
+      <section class="posts clear bottom-panel" style="margin-bottom: 80px;">
+        <div class="social clear">
+          <a href="https://facebook.com/grubdaily"><%= render "facebook_icon" %></a>
+          <a href="twitter.com/grubdaily_tom"><%= render "twitter_icon" %></a>
+          <a href="https://www.instagram.com/grubdaily"><%= render "instagram_icon" %></a>
+          <a href="https://www.pinterest.co.uk/grubdaily"><%= render "pinterest_icon" %></a>
+        </div>
+        <!-- <a class="view-all" href="/photos">Click here to see ALL photos</a> -->
+      </section>
+    </section>
+  </main>
+</section>
