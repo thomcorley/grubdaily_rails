@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get 'touch_ingredient_entry/:id', to: 'ingredient_entries#touch', as: 'touch_ingredient_entry'
 
+  get 'new_recipe' => 'recipe_imports#new'
+
   resources :ingredient_entries
   resources :ingredient_sets
   resources :recipes
@@ -30,5 +32,5 @@ Rails.application.routes.draw do
   resources :tags
   resources :method_steps
 
-  root :to => 'recipe_imports#new'
+  root :to => 'index#index'
 end
