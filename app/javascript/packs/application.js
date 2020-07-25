@@ -15,6 +15,15 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-console.log('Hello World from Webpacker')
+// require("jquery")
+
+import "core-js/stable"
+import "regenerator-runtime/runtime"
 
 import "scripts.js"
+// import "jquery-1.12.2.min.js"
+// import "lunr.min.js"
+// import "jquery.fitvids.js"
+// import "jquery.mCustomScrollbar.min.js"
+// import "svg4everybody.min.js"
+// import "lunr-feed.js"
