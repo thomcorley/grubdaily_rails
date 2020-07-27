@@ -1,6 +1,3 @@
-// const jquery = require("jquery");
-// window.jQuery = window.$ = jquery;
-
 svg4everybody();
 
 jQuery(document).ready( function() {
@@ -21,7 +18,7 @@ jQuery(document).ready( function() {
 		jQuery('meta[name="twitter:image"]').attr('content', firstImgSrc);
 	}
 
-	// /* Fires fitVids plugin. */
+ // /* Fires fitVids plugin. */
  //        jQuery(".delicious main").fitVids();
 	// /**/
 

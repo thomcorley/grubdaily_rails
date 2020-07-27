@@ -33,7 +33,6 @@ gem 'httparty'
 gem 'redcarpet'
 gem 'webpacker'
 
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
