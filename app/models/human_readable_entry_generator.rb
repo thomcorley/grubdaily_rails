@@ -13,7 +13,7 @@ class HumanReadableEntryGenerator
   end
 
   def generate
-    return original_string if special_entry?
+    return original_string if special_entry? || ingredient_entry.quantityless?
     get_quantity +
     get_unit +
     get_size +

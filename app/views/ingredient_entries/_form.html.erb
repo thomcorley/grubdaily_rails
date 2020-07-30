@@ -41,6 +41,11 @@
     <%= form.text_field :original_string, id: :original_string %>
   </div>
 
+  <div class="field">
+    <%= form.label :quantityless? %>
+    <%= form.check_box :quantityless, id: :quantityless %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
