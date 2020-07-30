@@ -48,7 +48,7 @@ class IngredientEntriesController < ApplicationController
   def update
     respond_to do |format|
       if @ingredient_entry.update(ingredient_entry_params)
-        format.html { redirect_to ingredient_entries_path, notice: 'Ingredient entry was successfully updated.' }
+        format.html { redirect_to recipe_path(@recipe), id: @recipe.id, notice: 'Ingredient entry was successfully updated.' }
       else
         format.html { render :edit }
         format.json { render json: @ingredient_entry.errors, status: :unprocessable_entity }
@@ -74,6 +74,6 @@ class IngredientEntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ingredient_entry_params
-      params.require(:ingredient_entry).permit(:quantity, :unit, :size, :modifier, :original_string, :ingredient)
+      params.require(:ingredient_entry).permit(:quantity, :unit, :size, :modifier, :original_string, :ingredient, :quantityless)
     end
 end

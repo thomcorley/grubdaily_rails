@@ -75,7 +75,12 @@ class RecipesController < ApplicationController
   private
 
   def set_recipe
+    # Confusingly, `recipe_title` is usually the permalink of the recipe, but sometimes the ID
     @recipe = Recipe.all.find { |recipe| recipe.permalink == "/#{params[:recipe_title]}" }
+
+    unless @recipe
+      @recipe = Recipe.find(params[:recipe_title])
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -40,7 +40,7 @@
         <hr />
         <ul>
           <% @recipe.ingredient_entries.each do |entry| %>
-            <li><%= entry.human_readable_entry %></li>
+            <li><%= entry.human_readable_entry %> (<%= link_to "edit", edit_ingredient_entry_path(entry) %>)</li>
           <% end %>
         </ul>
 
