@@ -1,4 +1,3 @@
-
 <% content_for :head do %>
   <script type="application/ld+json">{"test": "hello"}</script>
   <!-- TODO: add url method to recipe -->
@@ -33,7 +32,9 @@
       <div class="post-content" itemprop="text">
         <p><img src="<%= @recipe.image_url %>" alt="<%= @recipe.title %> Image"></p>
 
-        <% @introduction_paragraphs.each do |paragraph| %>
+        <p class="first-paragraph"><%= simple_format(@introduction_paragraphs.first) %></p>
+
+        <% @introduction_paragraphs.drop(1).each do |paragraph| %>
           <p><%= simple_format(paragraph) %></p>
         <% end %>
 

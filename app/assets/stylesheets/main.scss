@@ -226,8 +226,8 @@ body {background-color: #F1F1F1; margin: 0px;}
     h5 { font-size: 20px; }
     h6 { font-size: 18px; }
 
-    a { color: $grey-color-normal;
-      &:hover { color: $orange-color-hover; }
+    a { color: $orange-color-hover; text-decoration: underline;
+      &:hover { color: $grey-color-normal; }
       &:active { border: none; }
     }
 
@@ -266,7 +266,7 @@ body {background-color: #F1F1F1; margin: 0px;}
         &.selected { background: url(../svg/icon-square-check.svg) no-repeat left 6px; @include bgsizeNum(15px, 16px); text-decoration: line-through; }
       }
     }
-    p:nth-child(2):first-letter {color: #903; float: left; font-family: Cardo; font-size: 97px; line-height: 30px; padding-top: 30px; padding-right: 8px; }
+    /*p:nth-child(2):first-letter {color: #903; float: left; font-family: Cardo; font-size: 97px; line-height: 30px; padding-top: 30px; padding-right: 8px; }*/
   }
   .post-footer { position: relative; margin: 50px 0 0; padding: 35px 0 0;
     .author-info { float: left; width: 80%; padding: 0 20px 0 0;
@@ -289,7 +289,7 @@ body {background-color: #F1F1F1; margin: 0px;}
       }
     }
   }
-  p:nth-child(2):first-letter {color: #903; float: left; font-family: Cardo; font-size: 90px; line-height: 30px; padding-top: 30px; padding-right: 8px; }
+  /*p:nth-child(2):first-letter {color: #903; float: left; font-family: Cardo; font-size: 90px; line-height: 30px; padding-top: 30px; padding-right: 8px; }*/
 }
 /**/
 
