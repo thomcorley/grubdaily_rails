@@ -8,11 +8,10 @@ class HomeController < ApplicationController
   end
 
   def about
-
   end
 
   def recipe_index
-
+    @recipes = Recipe.all.order(title: :asc)
   end
 
   def photos
