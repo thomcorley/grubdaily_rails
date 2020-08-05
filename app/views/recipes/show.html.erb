@@ -32,7 +32,9 @@
       <div class="post-content" itemprop="text">
         <p><img src="<%= @recipe.image_url %>" alt="<%= @recipe.title %> Image"></p>
 
-        <p class="first-paragraph"><%= simple_format(@introduction_paragraphs.first) %></p>
+        <div class="first-paragraph">
+          <p><%= simple_format(@introduction_paragraphs.first) %></p>
+        </div>
 
         <% @introduction_paragraphs.drop(1).each do |paragraph| %>
           <p><%= simple_format(paragraph) %></p>
