@@ -10,6 +10,11 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    unless @recipe
+      render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found
+      return
+    end
+
     @ingredient_sets = @recipe.ingredient_sets
 
     @introduction_paragraphs = @recipe.introduction.split("\n").map do |paragraph|
@@ -76,10 +81,11 @@ class RecipesController < ApplicationController
 
   def set_recipe
     # Confusingly, `recipe_title` is usually the permalink of the recipe, but sometimes the ID
-    recipe_from_permalink = Recipe.all.find { |recipe| recipe.permalink == "/#{params[:recipe_title]}" }
-    recipe_from_id = Recipe.find_by_id(params[:recipe_title])
-
-    @recipe = recipe_from_permalink || recipe_from_id
+    if params[:recipe_title]
+      @recipe = Recipe.all.find { |recipe| recipe.permalink == "/#{params[:recipe_title]}" }
+    elsif params[:id]
+      @recipe = Recipe.find_by_id(params[:id])
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
