@@ -29,8 +29,6 @@ Rails.application.routes.draw do
 
   get "recipe_index" => "home#recipe_index"
 
-  get "photos" => "home#photos"
-
   constraints ->(req) { Recipe.all.map(&:permalink) } do
     get "/:recipe_title", as: :recipe, to: "recipes#show"
   end
