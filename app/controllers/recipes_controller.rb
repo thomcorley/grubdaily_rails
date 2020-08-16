@@ -81,8 +81,8 @@ class RecipesController < ApplicationController
 
   def set_recipe
     # Confusingly, `recipe_title` is usually the permalink of the recipe, but sometimes the ID
-    if params[:recipe_title]
-      @recipe = Recipe.all.find { |recipe| recipe.permalink == "/#{params[:recipe_title]}" }
+    if params[:recipe_path]
+      @recipe = Recipe.all.find { |recipe| recipe.permalink == "/#{params[:recipe_path]}" }
     elsif params[:id]
       @recipe = Recipe.find_by_id(params[:id])
     end
