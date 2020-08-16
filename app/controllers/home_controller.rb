@@ -15,6 +15,5 @@ class HomeController < ApplicationController
   end
 
   def photos
-
   end
 end

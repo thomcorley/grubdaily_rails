@@ -29,9 +29,7 @@ Rails.application.routes.draw do
 
   get "recipe_index" => "home#recipe_index"
 
-  constraints ->(req) { Recipe.all.map(&:permalink) } do
-    get "/:recipe_title", as: :recipe, to: "recipes#show"
-  end
+  get "/:recipe_path" => "recipes#show"
 
   resources :ingredient_entries
   resources :ingredient_sets
