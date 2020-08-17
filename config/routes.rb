@@ -1,18 +1,4 @@
 Rails.application.routes.draw do
-  get "tags/edit"
-
-  get "ingredient/index"
-
-  get "ingredient/create"
-
-  get "ingredient/show"
-
-  get "ingredient/new"
-
-  get "ingredient/update"
-
-  get "ingredient/delete"
-
   get "recipe_imports/new" => "recipe_imports#new"
 
   post "recipe_imports/create" => "recipe_imports#create"
@@ -32,10 +18,10 @@ Rails.application.routes.draw do
   get "/:recipe_path" => "recipes#show"
 
   resources :ingredient_entries
+  resources :ingredients
   resources :ingredient_sets
   resources :recipes
   resources :recipe_imports
-  resources :tags
   resources :method_steps
 
   root :to => "home#index"

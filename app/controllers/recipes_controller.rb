@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, only: [:index, :edit, :update, :destroy, :create]
 
   # GET /recipes
   # GET /recipes.json
@@ -78,6 +79,11 @@ class RecipesController < ApplicationController
   end
 
   private
+
+  def authenticate
+    # Only allowing access from home IP address
+    not_found unless Rails.env.development? || request.remote_ip == "82.44.245.7"
+  end
 
   def set_recipe
     # Confusingly, `recipe_title` is usually the permalink of the recipe, but sometimes the ID

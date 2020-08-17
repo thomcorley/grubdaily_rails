@@ -1,5 +1,6 @@
 class MethodStepsController < ApplicationController
 	before_action :set_instance_variables, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate
 
 	def edit
 

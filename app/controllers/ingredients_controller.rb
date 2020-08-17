@@ -1,4 +1,6 @@
-class IngredientController < ApplicationController
+class IngredientsController < ApplicationController
+  before_action :authenticate
+
   def index
   end
 
