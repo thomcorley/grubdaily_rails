@@ -1,4 +1,5 @@
 class JekyllPostsController < ApplicationController
+  before_action :authenticate
 
 	def generate
 		@recipe = Recipe.find(params[:recipe_id])

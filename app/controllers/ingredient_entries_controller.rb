@@ -1,5 +1,6 @@
 class IngredientEntriesController < ApplicationController
   before_action :set_instance_variables, only: [:show, :edit, :touch, :update, :destroy]
+  before_action :authenticate
 
   def index
     @ingredient_entries = IngredientEntry.all
