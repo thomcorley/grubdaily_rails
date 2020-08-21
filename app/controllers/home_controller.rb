@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   end
 
   def about
+    raise "this is an error"
   end
 
   def recipe_index
