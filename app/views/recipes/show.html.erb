@@ -42,7 +42,7 @@
 
         <hr />
         <ul>
-          <% @recipe.ingredient_entries.each do |entry| %>
+          <% @ingredient_entries.each do |entry| %>
             <li><%= entry.human_readable_entry %>
               <% if admin_session?  %>
                 (<%= link_to "edit", edit_ingredient_entry_path(entry) %>)

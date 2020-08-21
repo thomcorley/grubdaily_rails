@@ -20,6 +20,10 @@ class Recipe < ApplicationRecord
 
   before_save :set_image_url
 
+  def self.get(permalink)
+    Recipe.select{ |recipe| recipe.permalink == "/#{permalink}"}.first
+  end
+
   def title_with_no_accents
     remove_accents_from(title)
   end
@@ -67,7 +71,9 @@ class Recipe < ApplicationRecord
   end
 
   def ingredient_entries
-    ingredient_sets.flat_map(&:ingredient_entries)
+    IngredientEntry
+      .where(ingredient_set_id: self.ingredient_sets.map(&:id))
+      .order(id: :asc)
   end
 
   def serves_or_makes

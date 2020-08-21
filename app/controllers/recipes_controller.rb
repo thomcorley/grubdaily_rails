@@ -26,6 +26,8 @@ class RecipesController < ApplicationController
       MarkdownConverter.convert(method_step.description)
     end
 
+    @ingredient_entries = @recipe.ingredient_entries
+
     @tags = @recipe.tags.split(",")
   end
 
