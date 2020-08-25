@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2020_08_25_201716) do
     t.string "category"
     t.string "image_url"
     t.string "tags"
-    t.boolean "published"
+    t.boolean "published", default: false
   end
 
   create_table "tags", force: :cascade do |t|
