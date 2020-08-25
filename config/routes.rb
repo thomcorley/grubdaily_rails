@@ -20,7 +20,14 @@ Rails.application.routes.draw do
   resources :ingredient_entries
   resources :ingredients
   resources :ingredient_sets
-  resources :recipes
+
+  resources :recipes do
+    collection do
+      get "publish"
+      get "unpublish"
+    end
+  end
+
   resources :recipe_imports
   resources :method_steps
 

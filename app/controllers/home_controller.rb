@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
-    recipes_for_display = Recipe.last(7)
+    recipes = Recipe.where(published: true)
+    recipes_for_display = recipes.last(7)
 
     @latest_recipe = recipes_for_display[6]
     @next_two_latest_recipes = recipes_for_display[4..5]
@@ -11,7 +12,7 @@ class HomeController < ApplicationController
   end
 
   def recipe_index
-    @recipes = Recipe.all.order(title: :asc)
+    @recipes = Recipe.where(published: true).order(title: :asc)
   end
 
   def photos

@@ -1,15 +1,11 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, only: [:index, :edit, :update, :destroy, :create]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
+  before_action :authenticate, only: [:index, :edit, :update, :destroy, :create, :publish]
 
-  # GET /recipes
-  # GET /recipes.json
   def index
     @recipes = Recipe.all
   end
 
-  # GET /recipes/1
-  # GET /recipes/1.json
   def show
     unless @recipe
       render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found
@@ -34,17 +30,13 @@ class RecipesController < ApplicationController
     @next_recipe = Recipe.find_by_id(@recipe.id + 1)
   end
 
-  # GET /recipes/new
   def new
     @recipe = Recipe.new
   end
 
-  # GET /recipes/1/edit
   def edit
   end
 
-  # POST /recipes
-  # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
 
@@ -59,8 +51,6 @@ class RecipesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /recipes/1
-  # PATCH/PUT /recipes/1.json
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
@@ -73,8 +63,16 @@ class RecipesController < ApplicationController
     end
   end
 
-  # DELETE /recipes/1
-  # DELETE /recipes/1.json
+  def publish
+    @recipe.publish!
+    redirect_to recipe_path(@recipe), flash: { notice: "Recipe successfully published!" }
+  end
+
+  def unpublish
+    @recipe.unpublish!
+    redirect_to recipe_path(@recipe), flash: { notice: "Recipe unpublished" }
+  end
+
   def destroy
     @recipe.destroy
     respond_to do |format|
