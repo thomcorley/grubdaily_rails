@@ -29,6 +29,9 @@ class RecipesController < ApplicationController
     @ingredient_entries = @recipe.ingredient_entries
 
     @tags = @recipe.tags.split(",")
+
+    @prev_recipe = Recipe.find_by_id(@recipe.id - 1)
+    @next_recipe = Recipe.find_by_id(@recipe.id + 1)
   end
 
   # GET /recipes/new
