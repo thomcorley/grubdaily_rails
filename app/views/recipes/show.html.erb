@@ -23,9 +23,7 @@
           <span class="category">Serves: <%= @recipe.serves %></span>
 
           <% if admin_session? %>
-            <a href="<%= edit_recipe_path(@recipe) %>" class="print">
-              Edit
-            </a>
+            <%= render("admin_panel") %>
           <% end %>
 
           <a href="" class="print" onclick="window.print();">
@@ -62,6 +60,11 @@
             <li><p><%= simple_format(method_step) %></p></li>
           <% end %>
         </ol>
+      </div>
+      <div class="post-meta clear">
+        <% if admin_session? %>
+          <%= render("admin_panel") %>
+        <% end %>
       </div>
     </article>
   </main>

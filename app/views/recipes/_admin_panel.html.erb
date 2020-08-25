@@ -1,0 +1,15 @@
+<% if @next_recipe %>
+  <a href="<%= recipe_path(@next_recipe) %>" class="print">
+    Next
+  </a>
+<% end %>
+
+<% if @prev_recipe %>
+  <a href="<%= recipe_path(@prev_recipe) %>" class="print">
+    Previous
+  </a>
+<% end %>
+
+<a href="<%= edit_recipe_path(@recipe) %>" class="print">
+  Edit
+</a>
