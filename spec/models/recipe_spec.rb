@@ -51,5 +51,54 @@ RSpec.describe Recipe, type: :model do
     it "should have a non-numerical value for :makes_unit" do
       expect(recipe.makes_unit.is_a?(Numeric)).to eq false
     end
+
+    describe "#json_schema" do
+      let(:recipe) { FactoryBot.create(:recipe) }
+      let(:parsed_json) { JSON.parse(recipe.json_schema) }
+
+      it "generates valid json" do
+        expect(parsed_json).to be_truthy
+      end
+
+      it "has the correct keys" do
+        expected_keys = ["@context", "@type", "name", "author", "image"]
+        actual_keys = parsed_json.keys.first(5)
+
+        expect(expected_keys).to eq actual_keys
+      end
+
+      context "ingredients and method steps" do
+        before(:each) do
+          ingredient_set = FactoryBot.create(:ingredient_set, recipe: recipe)
+          FactoryBot.create_list(:ingredient_entry, 2, ingredient_set: ingredient_set)
+          FactoryBot.create_list(:method_step, 2, recipe: recipe)
+          recipe.reload
+        end
+
+        it "contains correct ingredients" do
+          parsed_ingredients = parsed_json["recipeIngredient"]
+          expected_ingredients = [
+            "10 g carrot, finely chopped",
+            "10 g carrot, finely chopped"
+          ]
+
+          expected_ingredients.each do |ingredient|
+            expect(parsed_ingredients).to include(ingredient)
+          end
+        end
+
+        it "contains correct method steps" do
+          parsed_method_steps = parsed_json["recipeInstructions"]
+          expected_method_steps = [
+            "Peel and finely chop the onions",
+            "Peel and finely chop the onions"
+          ]
+
+          expected_method_steps.each do |method_step|
+            expect(parsed_method_steps).to include(method_step)
+          end
+        end
+      end
+    end
   end
 end
