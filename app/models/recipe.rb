@@ -84,7 +84,37 @@ class Recipe < ApplicationRecord
     introduction.split("\n")
   end
 
+  def json_schema
+    JSON.generate({
+      "@context": "http://schema.org",
+      "@type": "Recipe",
+      name: title,
+      author: "Tom Corley",
+      image: image_url,
+      datePublished: created_at,
+      totalTime: total_time,
+      recipeYield: serves_or_makes,
+      description: summary,
+      aggregateRating: {
+        ratingValue: rating_value,
+        ratingCount: rating_count
+      },
+      recipeIngredient: ingredients_array,
+      recipeInstructions: method_steps_array
+    }).html_safe
+  end
+
+
+
   private
+
+  def ingredients_array
+    ingredient_entries.map(&:original_string)
+  end
+
+  def method_steps_array
+    method_steps.map(&:description)
+  end
 
   def set_image_url
     self.image_url = get_image_url if get_image_url

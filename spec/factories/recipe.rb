@@ -8,5 +8,11 @@ FactoryBot.define do
     makes { nil }
     recipe_type { "soup" }
     image_url { nil }
+
+    # TODO: this does not seem to work. Please fix!
+    # after(:create) do |recipe, _evaluator|
+    #   ingredient_set = FactoryBot.create(:ingredient_set, recipe: recipe)
+    #   FactoryBot.create_list(:ingredient_entry, 2, ingredient_set: ingredient_set)
+    # end
   end
 end

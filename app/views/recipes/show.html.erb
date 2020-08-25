@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <script type="application/ld+json">{"test": "hello"}</script>
+  <script type="application/ld+json"><%= @recipe.json_schema %></script>
   <!-- TODO: add url method to recipe -->
   <!-- <meta property="og:url" content="<%= %>" /> -->
 <% end %>
