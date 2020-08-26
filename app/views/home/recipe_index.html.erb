@@ -4,6 +4,9 @@
     <article class="page single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">Recipe Index</h2>
+        <% if admin_session? %>
+          <em><h5>Displaying <%= @recipes.count %> published recipes</h5></em>
+        <% end %>
       </header>
       <div class="post-content" itemprop="text">
         <div class="index-list">
