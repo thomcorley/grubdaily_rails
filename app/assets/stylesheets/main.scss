@@ -209,7 +209,9 @@ body {background-color: #F1F1F1; margin: 0px;}
       &:hover { color: $grey-color-dark; border-bottom: none;
         svg path { fill: $grey-color-dark; }
       }
+
     }
+    .published-tag { color: $orange-color-hover; }
   }
   .post-content, .page-content {
     abbr { border-bottom: 1px dotted $grey-color-normal; cursor: help; }

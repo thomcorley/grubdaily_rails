@@ -23,6 +23,9 @@
           <span class="category">Serves: <%= @recipe.serves %></span>
 
           <% if admin_session? %>
+            <% if @recipe.published? %>
+              <p>/</p><p class="published-tag">Published</p>
+            <% end %>
             <%= render("admin_panel") %>
           <% end %>
 
