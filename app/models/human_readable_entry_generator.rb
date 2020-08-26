@@ -25,8 +25,8 @@ class HumanReadableEntryGenerator
 
   def get_quantity
     return "" if quantity.nil?
-    return "1/2" if quantity_is_half_as_fraction?
-
+    return fractional_quantity if quantity_should_be_a_fraction?
+    # This ensures we display "5" instead of "5.0", for example
     return quantity.to_i.to_s if quantity.to_f.floor == quantity.to_f
 
     quantity
@@ -80,7 +80,20 @@ class HumanReadableEntryGenerator
     IngredientEntryProcessor::SPECIAL_ENTRIES.include?(original_string.strip)
   end
 
-  def quantity_is_half_as_fraction?
-    quantity == "0.5" && original_string =~ /^1\/2/
+  def quantity_should_be_a_fraction?
+    %w(0.5 0.25 0.75 0.125 0.333 0.666).include?(quantity)
+  end
+
+  def fractional_quantity
+    decimal_to_fraction_map = {
+      "0.5"   => "½",
+      "0.25"  => "¼",
+      "0.75"  => "¾",
+      "0.125" => "⅛",
+      "0.333" => "⅓",
+      "0.666" => "⅔",
+    }
+
+    decimal_to_fraction_map[quantity]
   end
 end
