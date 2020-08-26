@@ -1,95 +1,109 @@
 class IngredientEntryTestData
   ENTRIES = [
     {
-      original_string: "1 carrot",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [1, nil,  nil, "carrot", nil]
+      expected_output: "1 carrot",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [1, nil,  nil, "carrot", nil, false]
     },
     {
-      original_string: "100 g plain flour",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [100, "g",  nil, "plain flour", nil]
+      expected_output: "100 g plain flour",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [100, "g",  nil, "plain flour", nil, false]
     },
     {
-      original_string: "10 g carrot, diced",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [10, "g",  nil, "carrot", "diced"]
+      expected_output: "10 g carrot, diced",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [10, "g",  nil, "carrot", "diced", false]
     },
     {
-      original_string: "25 large tomatoes, peeled and chopped",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [25, nil,  "large", "tomatoes", "peeled and chopped"]
+      expected_output: "25 large tomatoes, peeled and chopped",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [25, nil,  "large", "tomatoes", "peeled and chopped", false]
     },
     {
-      original_string: "3 handfuls basil, leaves picked",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [3, "handful",  nil, "basil", "leaves picked"]
+      expected_output: "3 handfuls basil, leaves picked",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [3, "handful",  nil, "basil", "leaves picked", false]
     },
     {
-      original_string: "3 large cloves garlic, chopped",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [3, "large clove",  nil, "garlic", "chopped"]
+      expected_output: "3 large cloves garlic, chopped",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [3, "large clove",  nil, "garlic", "chopped", false]
     },
     {
-      original_string: "vegetable oil, for frying",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [nil, nil,  nil, "vegetable oil, for frying", nil]
+      expected_output: "vegetable oil, for frying",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [nil, nil,  nil, "vegetable oil, for frying", nil, true]
     },
     {
-      original_string: "2 small cloves garlic",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [2, "small clove",  nil, "garlic", nil]
+      expected_output: "2 small cloves garlic",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [2, "small clove",  nil, "garlic", nil, false]
     },
     {
-      original_string: "750 g cavolo nero",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [750, "g",  nil, "cavolo nero", nil]
+      expected_output: "750 g cavolo nero",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [750, "g",  nil, "cavolo nero", nil, false]
     },
     {
-      original_string: "1 tsp extra virgin olive oil",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [1, "tsp",  nil, "extra virgin olive oil", nil]
+      expected_output: "1 tsp extra virgin olive oil",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [1, "tsp",  nil, "extra virgin olive oil", nil, false]
     },
     {
-      original_string: "1 pinch ground asafoetida",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [1, "pinch",  nil, "ground asafoetida", nil]
+      expected_output: "1 pinch ground asafoetida",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [1, "pinch",  nil, "ground asafoetida", nil, false]
     },
     {
-      original_string: "sea salt and freshly cracked black pepper",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [nil, nil,  nil, "sea salt and freshly cracked black pepper", nil]
+      expected_output: "sea salt and freshly cracked black pepper",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [nil, nil,  nil, "sea salt and freshly cracked black pepper", nil, true]
     },
     {
-      original_string: "1/2 leek",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [0.5, nil,  nil, "leek", nil],
+      expected_output: "½ leek",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [0.5, nil,  nil, "leek", nil, false]
     },
     {
-      original_string: "250 g cream cheese",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [250, "g",  nil, "cream cheese", nil],
+      expected_output: "250 g cream cheese",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [250, "g",  nil, "cream cheese", nil, false]
     },
     {
-      original_string: "2 medium banana shallots, finely chopped",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [2, nil,  "medium", "banana shallots", "finely chopped"],
+      expected_output: "2 medium banana shallots, finely chopped",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [2, nil,  "medium", "banana shallots", "finely chopped", false]
     },
     {
-      original_string: "1 handful red seedless grapes",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [1, "handful",  nil, "red seedless grapes", nil],
+      expected_output: "1 handful red seedless grapes",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [1, "handful",  nil, "red seedless grapes", nil, false]
     },
     {
-      original_string: "1 bay leaf",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [1.0, "",  "", "bay leaf", ""],
+      expected_output: "1 bay leaf",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [1.0, "",  "", "bay leaf", "", false]
     },
     {
-      original_string: "0.5 lime, juice of",
-      # [:quantity, :unit, :size, :ingredient, :modifier]
-      params: [0.5, "",  "", "lime", "juice of"],
+      expected_output: "½ lime, juice of",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [0.5, "",  "", "lime", "juice of", false]
     },
-
+    {
+      expected_output: "¼ tsp chilli powder",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [0.25, "tsp",  "", "chilli powder", "", false]
+    },
+    {
+      expected_output: "⅛ tsp chilli powder",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [0.125, "tsp",  "", "chilli powder", "", false]
+    },
+    {
+      expected_output: "⅔ tsp chilli powder",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [0.666, "tsp",  "", "chilli powder", "", false]
+    },
   ]
 end

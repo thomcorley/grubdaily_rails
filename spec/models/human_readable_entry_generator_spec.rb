@@ -8,20 +8,23 @@ type: :model do
       test_data = IngredientEntryTestData::ENTRIES
 
       test_data.each do |hash|
-        it "#{hash[:original_string]} has a human readable string equal to the original one" do
+        it "'#{hash[:expected_output]}' has a human readable string equal to the expected one" do
 
-          params = {
+          entry_params = {
             quantity: hash[:params][0],
             unit: hash[:params][1],
             size: hash[:params][2],
             ingredient: hash[:params][3],
             modifier: hash[:params][4],
-            original_string: hash[:original_string]
+            quantityless: hash[:params][5],
+            original_string: hash[:expected_output]
           }
+          entry = IngredientEntry.create(entry_params)
 
-          entry = IngredientEntry.create(params)
+          generated_output = described_class.new(entry).generate
+          expected_output = hash[:expected_output]
 
-          expect(described_class.new(entry).generate).to eq(hash[:original_string])
+          expect(generated_output).to eq(expected_output)
         end
       end
     end

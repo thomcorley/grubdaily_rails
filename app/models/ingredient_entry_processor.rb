@@ -1,3 +1,7 @@
+# This class is concerned with taking the inputted string
+# from the RecipeImport, eg: "10 g tomatoes, chopped" and
+# parsing it into the quantity, unit etc. The reverse process
+# is handled by HumanReadableEntryGenerator
 class IngredientEntryProcessor
 
 	SIZES = %w(small medium large generous)
