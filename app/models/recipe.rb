@@ -104,7 +104,13 @@ class Recipe < ApplicationRecord
     }).html_safe
   end
 
+  def publish!
+    self.update!(published: true)
+  end
 
+  def unpublish!
+    self.update!(published: false)
+  end
 
   private
 
