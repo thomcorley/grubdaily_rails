@@ -313,7 +313,7 @@ body {background-color: #F1F1F1; margin: 0px;}
   }
 }
 
-.footer { background-color: #4D4D4E; border: 1px solid rgba(77, 77, 78, 0.2); height: 180px;
+.footer { background-color: #4D4D4E; border: 1px solid rgba(77, 77, 78, 0.2); height: 180px; padding-top: 35px;
   p { color: $white; line-height: 25px; text-align: left; padding-left: 10px;
     a { color: $white;
       &:hover { color: $orange-color-hover; }
