@@ -59,8 +59,15 @@
         </ul>
 
         <ol>
-          <% @method_steps.each do |method_step| %>
-            <li><p><%= simple_format(method_step) %></p></li>
+          <% @method_steps_with_description.each do |obj| %>
+            <li>
+              <p>
+                <%= simple_format(obj.description) %>
+                <% if admin_session?  %>
+                  (<%= link_to "edit", edit_method_step_path(obj.method_step) %>)
+                <% end %>
+              </p>
+            </li>
           <% end %>
         </ol>
       </div>

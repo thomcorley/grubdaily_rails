@@ -18,8 +18,11 @@ class RecipesController < ApplicationController
       MarkdownConverter.convert(paragraph)
     end
 
-    @method_steps = @recipe.method_steps.order(:position).map do |method_step|
-      MarkdownConverter.convert(method_step.description)
+    @method_steps_with_description = @recipe.method_steps.order(:position).map do |method_step|
+      OpenStruct.new(
+        method_step: method_step,
+        description: MarkdownConverter.convert(method_step.description)
+      )
     end
 
     @ingredient_entries = @recipe.ingredient_entries
