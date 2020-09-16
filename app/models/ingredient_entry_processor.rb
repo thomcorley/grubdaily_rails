@@ -39,7 +39,6 @@ class IngredientEntryProcessor
 
 
 	def get_modifier
-
 		# Handles the case where there are brackets instead of
 		# a comma. Assumes there isn't both a comma and brackets.
 		if @ingredient_entry_string.match(/(\(.+\))/)
