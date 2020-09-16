@@ -30,8 +30,8 @@ class IngredientEntryProcessor
 			quantity: get_quantity,
 			unit: get_unit,
 			size: get_size,
-			modifier: get_modifier,
 			ingredient: get_ingredient,
+			modifier: get_modifier,
 			original_string: @ingredient_entry_string,
 			ingredient_set_id: @ingredient_set_id
 		}
@@ -39,10 +39,11 @@ class IngredientEntryProcessor
 
 
 	def get_modifier
-		# Handles the case where there's brackets instead of
+
+		# Handles the case where there are brackets instead of
 		# a comma. Assumes there isn't both a comma and brackets.
 		if @ingredient_entry_string.match(/(\(.+\))/)
-			return @ingredient_entry_string.match(/(\(.+\))/)[1]
+			return @ingredient_entry_string.match(/\((.+)\)/)[1]
 		end
 
 		array = @ingredient_entry_string.split(",")
@@ -67,20 +68,22 @@ class IngredientEntryProcessor
 	end
 
 	def get_unit
+		entry = ingredient_entry_string_without_modifier
+
 		return nil if special_exception
 		# If there's a spaced unit (singular or plural) that
 		# matches in the entry string, this is the unit.
 		unit = nil
 
 		Units::SPACED.each do |i|
-			unit = @ingredient_entry_string.match(i)[0] if @ingredient_entry_string.match?(i)
+			unit = entry.match(i)[0] if entry.match?(i)
 		end
 
 		return unit if unit
 
 		# The unit should be space separated, so we can grab it
 		# by splitting the string and match using the array of known units
-		array = @ingredient_entry_string.split(" ")
+		array = entry.split(" ")
 		unit = array.select{ |i| Units::ALL.include?(i) }.first
 
 		return unit if unit
@@ -88,7 +91,7 @@ class IngredientEntryProcessor
 		# Or, the unit might be suffixed to a number.
 		# Match this and use a group to separate the unit from the numerical part.
 		# Otherwise, there's no unit so just return nil
-		matcher = @ingredient_entry_string.match(UNIT_REGEX)
+		matcher = entry.match(UNIT_REGEX)
 		matcher ? unit = matcher[1] : unit = nil
 	end
 
@@ -157,5 +160,17 @@ class IngredientEntryProcessor
 
 	def special_exception
 		SPECIAL_ENTRIES.include?(@ingredient_entry_string)
+	end
+
+	def ingredient_entry_string_without_modifier
+		entry = @ingredient_entry_string
+
+		if entry =~ /\(/
+			entry.split("(").first.strip
+		elsif entry =~ /,/
+			entry.split(",").first.strip
+		else
+			entry
+		end
 	end
 end

@@ -48,7 +48,13 @@ class HumanReadableEntryGenerator
   end
 
   def get_modifier
-    blank?(modifier) ? "" : ", #{modifier}"
+    if ingredient_entry.original_string =~ /\(/
+      mod = " (#{modifier})"
+    else
+      mod = ", #{modifier}"
+    end
+
+    blank?(modifier) ? "" : mod
   end
 
   def blank?(attribute)

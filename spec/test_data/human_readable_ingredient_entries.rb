@@ -105,5 +105,10 @@ class IngredientEntryTestData
       # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
       params: [0.666, "tsp",  "", "chilli powder", "", false]
     },
+    {
+      expected_output: "10 g cavolo nero (black kale)",
+      # [:quantity, :unit, :size, :ingredient, :modifier, :quantityless]
+      params: [10, "g",  "", "cavolo nero", "black kale", false]
+    },
   ]
 end
