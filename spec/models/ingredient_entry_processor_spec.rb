@@ -209,8 +209,8 @@ RSpec.describe IngredientEntryProcessor, type: :model do
       expect(processor.get_size).to be_nil
     end
 
-    it "has a modifier of '(black kale)'" do
-      expect(processor.get_modifier).to eq "(black kale)"
+    it "has a modifier of 'black kale'" do
+      expect(processor.get_modifier).to eq "black kale"
     end
 
     it "has an ingredient of 'cavolo nero'" do
@@ -335,6 +335,30 @@ RSpec.describe IngredientEntryProcessor, type: :model do
 
     it "has an ingredient of 'red seedless grapes'" do
       expect(processor.get_ingredient).to eq "red seedless grapes"
+    end
+  end
+
+  context "10 carrots, cut into 5mm dice" do
+    let(:processor) { described_class.new("10 carrots, cut into 5mm dice", 1) }
+
+    it "has a quantity of 10" do
+      expect(processor.get_quantity).to eq(10)
+    end
+
+    it "has a unit of nil" do
+      expect(processor.get_unit).to be_nil
+    end
+
+    it "has a size of nil" do
+      expect(processor.get_size).to be_nil
+    end
+
+    it "has a modifier of nil" do
+      expect(processor.get_modifier).to eq("cut into 5mm dice")
+    end
+
+    it "has an ingredient of 'carrots'" do
+      expect(processor.get_ingredient).to eq "carrots"
     end
   end
 end

@@ -152,7 +152,21 @@ RSpec.describe "Importing a Recipe from a YAML file" do
       it_behaves_like("attributes are correct", expected_attributes)
     end
 
-    xcontext "10 carrots, cut into 5mm dice" do
+    context "100g cavolo nero (black kale)" do
+      expected_attributes = {
+        quantity: 100,
+        unit: "g",
+        size: nil,
+        modifier: "black kale",
+        ingredient: "cavolo nero"
+      }
+
+      let(:original_string) { "100g cavolo nero (black kale)" }
+
+      it_behaves_like("attributes are correct", expected_attributes)
+    end
+
+    context "10 carrots, cut into 5mm dice" do
       expected_attributes = {
         quantity: 10,
         unit: nil,
