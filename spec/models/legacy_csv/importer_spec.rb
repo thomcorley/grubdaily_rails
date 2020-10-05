@@ -12,7 +12,7 @@ RSpec.describe LegacyCsv::Importer, type: :model do
       }
     }
 
-		let(:importer) { LegacyCsv::Importer.new(params) }
+		let(:importer) { LegacyCsv::Importer.new(**params) }
 
     let(:recipe_info) {
       {
