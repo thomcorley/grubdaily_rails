@@ -113,7 +113,7 @@ class Recipe < ApplicationRecord
   end
 
   def excerpt
-    "#{introduction.first(100)} ..."
+    "#{introduction.first(140)} ..."
   end
 
   private

@@ -105,7 +105,7 @@ RSpec.describe Recipe, type: :model do
   describe "#excerpt" do
     let(:recipe) { FactoryBot.create(:recipe) }
     let(:expected_excerpt) {
-      "An old French classic, this is truly an old school soup. It is rich and dark with beef stock and, if ..."
+      "An old French classic, this is truly an old school soup. It is rich and dark with beef stock and, if made correctly, should be very thick. ..."
     }
 
     it "returns the first part of the introduction" do
