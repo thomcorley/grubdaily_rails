@@ -112,6 +112,10 @@ class Recipe < ApplicationRecord
     self.update!(published: false)
   end
 
+  def excerpt
+    "#{introduction.first(140)} ..."
+  end
+
   private
 
   def ingredients_array
