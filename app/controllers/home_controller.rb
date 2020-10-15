@@ -9,6 +9,8 @@ class HomeController < ApplicationController
   end
 
   def about
+    RecipeTouchWorker.perform_async
+    @recent_recipes = Recipe.where(updated_at: 1.second.ago..Time.now)
   end
 
   def recipe_index
