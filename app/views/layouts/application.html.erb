@@ -80,6 +80,9 @@
                   <li><%= link_to("Home", root_path) %></li>
                   <li><%= link_to("Recipe Index", recipe_index_path) %></li>
                   <li><%= link_to("About", about_path) %></li>
+                  <% if admin_session? %>
+                    <li><%= link_to("Testing Ground", testing_ground_path) %></li>
+                  <% end %>
               </ul>
             </nav>
 <!--             <div class="search" role="search">

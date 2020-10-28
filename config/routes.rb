@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get "recipe_index" => "home#recipe_index"
 
+  get "testing_ground" => "home#testing_ground"
+
   get "/:recipe_path" => "recipes#show"
 
   resources :ingredient_entries
