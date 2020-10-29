@@ -17,7 +17,7 @@ class HomeController < ApplicationController
 
   def testing_ground
     RecipeTouchWorker.perform_async
-    @recent_recipes = Recipe.where(updated_at: 1.second.ago..Time.now)
+    @recent_recipes = Recipe.where(updated_at: 10.seconds.ago..Time.now)
   end
 
   def photos
