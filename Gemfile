@@ -31,7 +31,7 @@ gem "jbuilder", "~> 2.5"
 gem "httparty"
 gem "redcarpet"
 gem "webpacker"
-gem "sidekiq"
+gem "sidekiq", "~> 5.2.8"
 gem "redis"
 
 # Use Capistrano for deployment
