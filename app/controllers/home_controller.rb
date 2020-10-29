@@ -15,6 +15,12 @@ class HomeController < ApplicationController
     @recipes = Recipe.where(published: true).order(title: :asc)
   end
 
+  def testing_ground
+    RecipeTouchWorker.perform_async
+    @recent_recipes = Recipe.where(updated_at: 10.seconds.ago..Time.now)
+  end
+
+
   def photos
   end
 end

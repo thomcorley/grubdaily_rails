@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get "about" => "home#about"
 
+  get "testing_ground" => "home#testing_ground"
+
   get "recipe_index" => "home#recipe_index"
 
   get "/:recipe_path" => "recipes#show"
