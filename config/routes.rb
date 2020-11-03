@@ -1,3 +1,5 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   get "recipe_imports/new" => "recipe_imports#new"
 
@@ -14,6 +16,8 @@ Rails.application.routes.draw do
   get "about" => "home#about"
 
   get "recipe_index" => "home#recipe_index"
+
+  get "testing_ground" => "home#testing_ground"
 
   get "/:recipe_path" => "recipes#show"
 
@@ -32,4 +36,8 @@ Rails.application.routes.draw do
   resources :method_steps
 
   root :to => "home#index"
+
+  # if admin_session? { mount Sidekiq::Web => "/sidekiq" }
+  #   get "/sidekiq" => redirect("/")
+  # end
 end
