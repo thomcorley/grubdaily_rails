@@ -32,6 +32,7 @@ gem "httparty"
 gem "redcarpet"
 gem "webpacker"
 gem "sidekiq"
+gem "rest-client"
 
 # Use Capistrano for deployment
 # gem "capistrano-rails", group: :development
