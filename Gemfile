@@ -31,6 +31,7 @@ gem "jbuilder", "~> 2.5"
 gem "httparty"
 gem "redcarpet"
 gem "webpacker"
+gem "mailgun-ruby"
 
 # Use Capistrano for deployment
 # gem "capistrano-rails", group: :development
