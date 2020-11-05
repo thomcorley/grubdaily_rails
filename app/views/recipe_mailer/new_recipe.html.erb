@@ -5,7 +5,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>@recipe.title</h1>
+    <h1><%= @recipe.title %></h1>
+    <p><img src="<%= @recipe.image_url %>" width="900px" alt="<%= @recipe.title %> Image"></p>
     <p>Enjoy :)</p>
   </body>
 </html>

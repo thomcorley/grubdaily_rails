@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  include ApplicationHelper
+
   before_action :set_recipe, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
   before_action :authenticate, only: [:index, :edit, :update, :destroy, :create, :publish]
 
@@ -67,6 +69,11 @@ class RecipesController < ApplicationController
   end
 
   def publish
+    # Only send a new recipe email if the recipe hasn't been published before
+    unless @recipe.published_at
+      RecipeMailer.new_recipe(recipe: @recipe, email: "thomcorley@gmail.com")
+    end
+
     @recipe.publish!
     redirect_to recipe_path(@recipe), flash: { notice: "Recipe successfully published!" }
   end
@@ -87,8 +94,7 @@ class RecipesController < ApplicationController
   private
 
   def authenticate
-    # Only allowing access from home IP address
-    not_found unless Rails.env.development? || request.remote_ip == "82.44.245.7"
+    not_found unless admin_session?
   end
 
   def set_recipe

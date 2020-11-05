@@ -3,6 +3,6 @@ class RecipeMailer < ApplicationMailer
 
   def new_recipe(recipe:, email:)
     @recipe = recipe
-    mail(to: email, subject: "Something tasty for you")
+    mail(to: email, subject: "Something tasty for you: #{@recipe.title}")
   end
 end

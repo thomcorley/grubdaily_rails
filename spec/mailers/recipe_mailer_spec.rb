@@ -14,6 +14,6 @@ RSpec.describe RecipeMailer, type: :mailer do
   end
 
   it "has the expected subject" do
-    expect(mail.subject).to eq("Something tasty for you")
+    expect(mail.subject).to eq("Something tasty for you: #{recipe.title}")
   end
 end

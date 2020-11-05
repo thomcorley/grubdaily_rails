@@ -32,6 +32,7 @@ gem "httparty"
 gem "redcarpet"
 gem "webpacker"
 gem "mailgun-ruby"
+gem "rails-controller-testing"
 
 # Use Capistrano for deployment
 # gem "capistrano-rails", group: :development
