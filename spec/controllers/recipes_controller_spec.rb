@@ -17,7 +17,7 @@ RSpec.describe RecipesController do
 
     context "email marketing" do
       it "sends an email" do
-        expect(RecipeMailer).to receive(:new_recipe)
+        expect(RecipeMailer).to receive(:new_recipe).and_call_original
         get :publish, params: { id: recipe.id }
       end
     end
