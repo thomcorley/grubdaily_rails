@@ -58,7 +58,6 @@ Rails.application.configure do
 
   config.action_mailer.mailgun_settings = {
     api_key: ENV["MAILGUN_API_KEY"],
-    domain: "mail.grubdaily.com",
-    api_host: "api.eu.mailgun.net"
+    domain: "sandbox26bf25bdfd394def8172bb54ea809d61.mailgun.org",
   }
 end

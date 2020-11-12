@@ -5,8 +5,31 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1><%= @recipe.title %></h1>
-    <p><img src="<%= @recipe.image_url %>" width="900px" alt="<%= @recipe.title %> Image"></p>
-    <p>Enjoy :)</p>
+    <p>
+      <a href="https://www.grubdaily.com" target="_blank">
+        <img src="<%= asset_path("grubdaily-header-logo.png") %>" width="900px" alt="Grubdaily homepage">
+      </a>
+    </p>
+
+    <p>
+      <a href="https://www.grubdaily.com/<%= @recipe.permalink %>" target="_blank">
+        <img src="<%= @recipe.image_url %>" width="600px" alt="<%= @recipe.title %> Image" title="<%= @recipe.title %>">
+      </a>
+    </p>
+
+    <h1>
+      <a href="https://www.grubdaily.com/<%= @recipe.permalink %>" target="_blank">
+        <%= @recipe.title %>
+      </a>
+    </h1>
+    <p><%= @recipe.summary %></p>
+    <h3>
+      It's tasty! <a href="https://www.grubdaily.com/<%= @recipe.permalink %>" target="_blank">Click here</a>
+      for the full recipe.
+    </h3>
+    <p>
+      Happy cooking,
+    </p>
+    <p>Love Tom</p>
   </body>
 </html>
