@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    # Only allowing access from home IP address
-    not_found unless Rails.env.development? || request.remote_ip == "82.44.245.7"
+    not_found unless admin_session?
   end
 end

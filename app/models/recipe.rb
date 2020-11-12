@@ -105,7 +105,7 @@ class Recipe < ApplicationRecord
   end
 
   def publish!
-    self.update!(published: true)
+    self.update!(published_at: DateTime.now, published: true)
   end
 
   def unpublish!
