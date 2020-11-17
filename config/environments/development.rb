@@ -33,6 +33,10 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.default_url_options = { host: "http://localhost:2020" }
+
+  config.action_mailer.asset_host = "http://localhost:2020"
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -58,7 +62,6 @@ Rails.application.configure do
 
   config.action_mailer.mailgun_settings = {
     api_key: ENV["MAILGUN_API_KEY"],
-    domain: "mail.grubdaily.com",
-    api_host: "api.eu.mailgun.net"
+    domain: "sandbox26bf25bdfd394def8172bb54ea809d61.mailgun.org",
   }
 end

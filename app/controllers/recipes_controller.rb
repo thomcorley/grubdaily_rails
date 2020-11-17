@@ -71,7 +71,7 @@ class RecipesController < ApplicationController
   def publish
     # Only send a new recipe email if the recipe hasn't been published before
     unless @recipe.published_at
-      RecipeMailer.new_recipe(recipe: @recipe, email: "thomcorley@gmail.com").deliver
+      BulkRecipeEmailer.deliver_email_update(@recipe)
     end
 
     @recipe.publish!
