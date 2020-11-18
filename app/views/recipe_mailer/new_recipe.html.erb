@@ -7,29 +7,29 @@
   <body>
     <p>
       <a href="https://www.grubdaily.com" target="_blank">
-        <img src="<%= @host %>/images/email-header-logo.png" width="900px" title="grubdaily" alt="grubdaily">
+        <img src="<%= @host %>/images/email-header-logo.png" width="600px" title="grubdaily" alt="grubdaily">
       </a>
     </p>
 
     <p>
-      <a href="https://www.grubdaily.com/<%= @recipe.permalink %>" target="_blank">
+      <a href="https://www.grubdaily.com<%= @recipe.permalink %>" target="_blank">
         <img src="<%= @recipe.image_url %>" width="600px" alt="<%= @recipe.title %> Image" title="<%= @recipe.title %>">
       </a>
     </p>
 
     <h1>
-      <a href="https://www.grubdaily.com/<%= @recipe.permalink %>" target="_blank">
+      <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">
         <%= @recipe.title %>
       </a>
     </h1>
-    <p><%= @recipe.summary %></p>
+    <p style="max-width: 600px;"><%= @recipe.summary %></p>
     <h3>
-      It's tasty! <a href="https://www.grubdaily.com/<%= @recipe.permalink %>" target="_blank">Click here</a>
-      for the full recipe.
+      It's tasty! <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com/<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">Click here</a>
+      for the full recipe...
     </h3>
     <p>
-      Happy cooking,
+      Happy cooking and happy eating :)
     </p>
-    <p>Love Tom</p>
+    <p>Tom x</p>
   </body>
 </html>
