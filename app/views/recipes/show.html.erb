@@ -11,7 +11,7 @@
         <h1 class="post-title" itemprop="name headline"><%= @recipe.title %></h1>
         <div class="post-meta clear">
           <time datetime="<%= @recipe.created_at.to_datetime %>" itemprop="datePublished">
-            <%= @recipe.created_at.strftime("%-m %b %Y") %>
+            <%= @recipe.created_at.strftime("%-d %b %Y") %>
           </time>
 
           <span class="category"><%= serves_or_makes_text %></span>
