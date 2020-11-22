@@ -113,7 +113,7 @@ class Recipe < ApplicationRecord
   end
 
   def excerpt
-    MarkdownConverter.convert("#{introduction.first(140)} ...")
+    "#{introduction.first(140)} ..."
   end
 
   private
