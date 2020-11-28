@@ -7,7 +7,7 @@ RSpec.describe BulkRecipeEmailer, type: :model do
 
      it "calls RecipeMailer" do
       expect(RecipeMailer).to receive(:new_recipe)
-        .with(recipe: recipe, email: "mail@example.com")
+        .with(recipe: recipe, email_subscriber: email_subscriber)
         .once.and_call_original
 
       described_class.deliver_email_update(recipe)

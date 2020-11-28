@@ -21,6 +21,12 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :ingredient_sets
 
+  resources :email_subscribers do
+    member do
+      get :delete
+    end
+  end
+
   resources :recipes do
     collection do
       get "publish"
