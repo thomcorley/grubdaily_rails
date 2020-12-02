@@ -7,7 +7,7 @@
   <body>
     <p>
       <a href="https://www.grubdaily.com" target="_blank">
-        <img src="<%= @host %>/images/email-header-logo.png" width="600px" title="grubdaily" alt="grubdaily">
+        <img src="https://www.grubdaily.com/images/email-header-logo.png" width="600px" title="grubdaily" alt="grubdaily">
       </a>
     </p>
 
@@ -22,14 +22,23 @@
         <%= @recipe.title %>
       </a>
     </h1>
-    <p style="max-width: 600px;"><%= @recipe.summary %></p>
+    <p style="max-width: 600px;"><%= @recipe.introduction_paragraphs.first.delete_suffix(".") %>... <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">Read More</a></p>
     <h3>
-      It's tasty! <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com/<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">Click here</a>
-      for the full recipe...
+       <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">It's tasty!</a>
     </h3>
     <p>
       Happy cooking and happy eating :)
     </p>
-    <p>Tom x</p>
+    <p>Tom</p>
+    <p>
+      <em>PS. If you're not interested in these email updates, you can
+        <%= link_to(
+          "unsubscribe",
+          delete_email_subscriber_url(id: @email_subscriber.id),
+          method: :delete,
+          title: "Unsubscribe"
+        ) %>.
+      </em>
+    </p>
   </body>
 </html>
