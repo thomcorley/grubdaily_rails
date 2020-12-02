@@ -6,26 +6,25 @@
   </head>
   <body>
     <p>
-      <a href="https://www.grubdaily.com" target="_blank">
-        <img src="https://www.grubdaily.com/images/email-header-logo.png" width="600px" title="grubdaily" alt="grubdaily">
-      </a>
+      <img src="https://www.grubdaily.com/images/email-header-logo.png" width="600px" title="grubdaily" alt="grubdaily">
     </p>
 
     <p>
-      <a href="https://www.grubdaily.com<%= @recipe.permalink %>" target="_blank">
-        <img src="<%= @recipe.image_url %>" width="600px" alt="<%= @recipe.title %> Image" title="<%= @recipe.title %>">
+      <img src="<%= @recipe.image_url %>" width="600px" alt="<%= @recipe.title %> Image" title="<%= @recipe.title %>">
+    </p>
+
+    <h1 style="color: #E5A636;">
+        <%= @recipe.title %>
+    </h1>
+
+    <p style="max-width: 600px;">
+      <%= @recipe.introduction_paragraphs.first.delete_suffix(".") %>...
+      <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">
+        Read More
       </a>
     </p>
 
-    <h1>
-      <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">
-        <%= @recipe.title %>
-      </a>
-    </h1>
-    <p style="max-width: 600px;"><%= @recipe.introduction_paragraphs.first.delete_suffix(".") %>... <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">Read More</a></p>
-    <h3>
-       <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">It's tasty!</a>
-    </h3>
+    <h3>It's tasty!</h3>
     <p>
       Happy cooking and happy eating :)
     </p>

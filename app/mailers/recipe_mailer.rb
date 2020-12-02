@@ -1,5 +1,5 @@
 class RecipeMailer < ApplicationMailer
-  default from: "grubdaily <tom@grubdaily.com>"
+  default from: "grubdaily <grubdaily@mail.grubdaily.com>"
 
   def new_recipe(recipe:, email_subscriber:)
     @recipe = recipe
