@@ -31,6 +31,7 @@ class RecipeImporter
 			introduction: content_hash[:introduction].join("\n"),
 			ingredient_sets: ingredient_sets,
 			method_steps: content_hash[:method_steps],
+			published: true,
 		}
 	end
 

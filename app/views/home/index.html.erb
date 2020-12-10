@@ -5,7 +5,7 @@
 
         <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
           <div class="post-excerpt">
-            <p><img src="<%= @latest_recipe.image_url %>" alt="<%= @latest_recipe.title %>" /></p>
+            <p><img src="<%= @latest_recipe.image_url %>" alt="<%= @latest_recipe.title %>"/></p>
           </div>
           <div class="details">
             <h6 class="post-title first-post" itemprop="name headline">
@@ -17,6 +17,8 @@
             </div>
           </div>
         </article>
+
+        <div id="subscribed" style="display: none"></div>
 
         <% @next_two_latest_recipes.each do |recipe| %>
           <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
@@ -30,8 +32,26 @@
             </div>
           </article>
         <% end %>
-
       </section>
+
+      <% if admin_session? %>
+        <section class="subscribe-form clear">
+          <%= form_with model: @email_subscriber, url: email_subscribers_path do |form| %>
+            <div class="field has-addons is-justify-content-center">
+              <div class="control">
+                  <%= form.email_field :email, class: "input is-medium email-field", placeholder: "Email me tasty things!" %>
+              </div>
+              <div class="control">
+                  <%= form.submit value: "Go", class: "button is-medium submit-button" %>
+              </div>
+            </div>
+          <% end %>
+
+          <% if flash[:email_subscribed_notice] %>
+            <div class="notice"><%= flash[:email_subscribed_notice] %></div>
+          <% end %>
+        </section>
+      <% end %>
 
       <section class="posts clear">
         <div class="section-title"><span>Recent Recipes</span></div>

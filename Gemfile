@@ -33,6 +33,7 @@ gem "redcarpet"
 gem "webpacker"
 gem "mailgun-ruby"
 gem "rails-controller-testing"
+gem "bulma-rails", "~> 0.9.1"
 
 # Use Capistrano for deployment
 # gem "capistrano-rails", group: :development
