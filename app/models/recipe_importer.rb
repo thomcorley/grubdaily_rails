@@ -5,7 +5,7 @@ class RecipeImporter
 	require "yaml"
 
 	attr_accessor  :content, :title, :total_time, :serves, :makes, :makes_unit, :recipe_type, :category, :tags, :summary,
-						 :introduction, :ingredient_sets, :method_steps, :content_hash
+						 :introduction, :ingredient_sets, :method_steps, :content_hash, :published
 
 
 	def initialize(content)
