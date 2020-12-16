@@ -21,6 +21,9 @@ body {background-color: #F1F1F1; margin: 0px;}
   ul { columns: 2; -webkit-columns: 2; -moz-columns: 2; }
 }
 
+/* email_subscribers/<ID>/send_confirmation */
+.send-confirmation { margin-bottom: 600px }
+
 /* Header */
 .header { padding: 0; display: block; text-align: left; background-color: #4D4D4E;
   .navbar { padding: 0; background-color: white; height: 50px; border-bottom: 1px solid rgba(77, 77, 78, 0.2); }
@@ -37,7 +40,6 @@ body {background-color: #F1F1F1; margin: 0px;}
       }
     }
   }
-
   .mainmenu { text-align: left; width: 600px; min-width: 500px; margin: 0 10px 0 10px;
     & > ul > li { float: left; margin-left: 15px; padding: 8px 0 0 8px;
       &:first-of-type { margin: 0 0 0 10px; padding: 8px 0 0 8px;}
