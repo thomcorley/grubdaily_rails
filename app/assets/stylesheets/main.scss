@@ -3,6 +3,7 @@
 @import "helpers";
 @import "mixins";
 @import "customscroll";
+@import "bulma";
 
 hr {
   height: 15px;
@@ -161,6 +162,15 @@ body {background-color: #F1F1F1; margin: 0px;}
         }
         &:hover { background: $grey-color-light; }
       }
+    }
+  }
+  .subscribe-form {
+    @include flex-wrap(wrap); padding: 16px 8px 8px 8px; background-color: white; border: 1px solid rgba(77, 77, 78, 0.2); border-radius: 2px;
+    .email-field { font: 18px/22px Abel, sans-serif }
+    .submit-button {
+      background: $grey-color-normal; color: white; font: 18px/22px Abel, sans-serif;
+      &:active { background-color: $orange-color-hover; }
+      &:visited { background-color: $grey-color-light; }
     }
   }
   .view-all { max-width: 100px; border-radius: 3px; display: inline-block; background: $grey-color-normal; margin: 40px auto 40px auto; padding: 5px 10px; color: $white; font-size: 14px; @include transition(opacity, .1s, ease-in-out);
