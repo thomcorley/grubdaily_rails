@@ -45,10 +45,10 @@
                   <%= form.submit value: "Go", class: "button is-medium submit-button" %>
               </div>
             </div>
-          <% end %>
 
-          <% if flash[:email_subscribed_notice] %>
-            <div class="notice"><%= flash[:email_subscribed_notice] %></div>
+            <% if flash[:validation_error] %>
+              <div class="notice"><%= flash[:validation_error].sub("Validation failed: Email", "Error: email") %></div>
+            <% end %>
           <% end %>
         </section>
       <% end %>

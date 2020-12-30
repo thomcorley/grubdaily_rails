@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   resources :email_subscribers do
     member do
       get :delete
+      get :send_confirmation
+      get :confirm
     end
   end
 
