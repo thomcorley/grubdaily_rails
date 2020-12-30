@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe BulkRecipeEmailer, type: :model do
   describe "#deliver_email_update" do
-    let!(:email_subscriber) { EmailSubscriber.create(email: "mail@example.com") }
+    let!(:email_subscriber) { EmailSubscriber.create(email: "mail@example.com", confirmed: true) }
     let(:recipe) { FactoryBot.create(:recipe) }
 
      it "calls RecipeMailer" do
