@@ -1,0 +1,52 @@
+<%= form_with(model: blog_post, local: true) do |form| %>
+  <% if blog_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(blog_post.errors.count, "error") %> prohibited this blog post from being saved:</h2>
+
+      <ul>
+      <% blog_post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :blog_post_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :summary %>
+    <%= form.text_field :summary, id: :blog_post_summary %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :blog_post_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :images %>
+    <%= form.text_area :images, id: :blog_post_images %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tags %>
+    <%= form.text_field :tags, id: :blog_post_tags %>
+  </div>
+
+  <div class="field">
+    <%= form.label :published %>
+    <%= form.check_box :published, id: :blog_post_published %>
+  </div>
+
+  <div class="field">
+    <%= form.label :published_at %>
+    <%= form.date_field :published_at, id: :blog_post_published_at %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
