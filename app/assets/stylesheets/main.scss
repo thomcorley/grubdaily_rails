@@ -12,6 +12,11 @@ hr {
   margin-top: 0;
 }
 
+/* Tweaking forms */
+#blog_post_images { height: 60px; }
+#blog_post_tags { width: 800px; }
+#blog_post_summary { width: 800px; }
+
 /* Layout */
 .delicious { border-radius: 5px; max-width: $default-width; margin: 0 auto; padding: 0; background-color: white; }
 body {background-color: #F1F1F1; margin: 0px;}

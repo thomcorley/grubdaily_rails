@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>
+      <img src="https://www.grubdaily.com/images/email-header-logo.png" width="600px" title="grubdaily" alt="grubdaily">
+    </p>
+
+    <p>
+      <img src="<%= @blog_post.first_image %>" width="600px" alt="<%= @blog_post.title %> Image" title="<%= @blog_post.title %>">
+    </p>
+
+    <h1 style="color: #E5A636;">
+        <%= @blog_post.title %>
+    </h1>
+
+    <p style="max-width: 600px;">
+      <%= @blog_post.content_paragraphs.first.delete_suffix(".") %>...
+      <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @blog_post.permalink %>" title="<%= @blog_post.title %>" target="_blank">
+        Read More
+      </a>
+    </p>
+    <p>
+      Happy reading, happy eating :)
+    </p>
+    <p>Tom</p>
+    <p>
+      <em>PS. If you're not interested in these email updates, you can
+        <%= link_to(
+          "unsubscribe",
+          delete_email_subscriber_url(id: @email_subscriber.id),
+          method: :delete,
+          title: "Unsubscribe"
+        ) %>.
+      </em>
+    </p>
+  </body>
+</html>

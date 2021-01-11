@@ -1,0 +1,49 @@
+<% content_for :head do %>
+<!-- TODO: add json schema for blogpost from scehma.org -->
+<% end %>
+
+<section class="delicious">
+  <main role="main">
+    <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline"><%= @blog_post.title %></h1>
+        <div class="post-meta clear">
+          <time datetime="<%= @blog_post.created_at.to_datetime %>" itemprop="datePublished">
+            <%= @blog_post.created_at.strftime("%-d %b %Y") %>
+          </time>
+
+          <span class="tags">
+            <% @tags.each do |tag| %>
+              <span><%= tag %></span>
+            <% end %>
+          </span>
+
+          <% if admin_session? %>
+            <% if @blog_post.published? %>
+              <p class="published-tag">/ Published</p>
+            <% end %>
+              <%= render("admin_panel") %>
+          <% end %>
+
+        </div>
+      </header>
+
+       <div class="post-content" itemprop="text">
+        <p><img src="<%= @blog_post.first_image %>" width="900px" alt="<%= @blog_post.title %> Image"></p>
+
+        <div class="first-paragraph">
+          <p><%= simple_format(@blog_post.content_paragraphs.first) %></p>
+        </div>
+
+        <% @blog_post.content_paragraphs.drop(1).each do |paragraph| %>
+          <p><%= simple_format(paragraph) %></p>
+        <% end %>
+      </div>
+      <div class="post-meta clear">
+        <% if admin_session? %>
+          <%= render("admin_panel") %>
+        <% end %>
+      </div>
+    </article>
+  </main>
+</section>

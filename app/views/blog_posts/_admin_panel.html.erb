@@ -1,0 +1,23 @@
+<% if @next_post %>
+  <a href="<%= blog_post_path(@next_post.id) %>" class="print">
+    Next
+  </a>
+<% end %>
+
+<% if @prev_post %>
+  <a href="<%= blog_post_path(@prev_post.id) %>" class="print">
+    Previous
+  </a>
+<% end %>
+
+<a href="<%= unpublish_blog_posts_path %>?id=<%= @blog_post.id %>" class="print">
+  Unpublish
+</a>
+
+<a href="<%= publish_blog_posts_path %>?id=<%= @blog_post.id %>" class="print">
+  Publish
+</a>
+
+<a href="<%= edit_blog_post_path(@blog_post) %>" class="print">
+  Edit
+</a>

@@ -1,4 +1,6 @@
 class Recipe < ApplicationRecord
+  include TitleFormatter
+
   # This is the ISO 8601 standardised time format
   TIME_FORMAT_REGEX = /P(\d{1,2}D)?(T\d{1,2}(H|M))?(\d{1,2}(H|M))?/
   CONNECTIVES = %w(and with of au a la)
@@ -22,20 +24,6 @@ class Recipe < ApplicationRecord
 
   def self.get(permalink)
     Recipe.select{ |recipe| recipe.permalink == "/#{permalink}"}.first
-  end
-
-  def title_with_no_accents
-    remove_accents_from(title)
-  end
-
-  # The title of the recipe stripped of all commas, dots, apostrophes and accents
-  def url_friendly_title
-    removed_punctuation = remove_punctuation_from(title_with_no_accents)
-    removed_punctuation.split.reject{ |i| CONNECTIVES.include? i }.join(" ")
-  end
-
-  def permalink
-    "/#{url_friendly_title.downcase.split.join("-")}"
   end
 
   # This will generate the image in the proper format with dashes.
@@ -128,14 +116,6 @@ class Recipe < ApplicationRecord
 
   def set_image_url
     self.image_url = get_image_url if get_image_url
-  end
-
-  def remove_punctuation_from(string)
-    string = string.gsub(/[\,\.':]/, "")
-  end
-
-  def remove_accents_from(string)
-    ActiveSupport::Inflector.transliterate(string)
   end
 
   # Extra model validations

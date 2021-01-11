@@ -17,9 +17,14 @@ Rails.application.routes.draw do
 
   get "/:recipe_path" => "recipes#show"
 
-  resources :ingredient_entries
-  resources :ingredients
-  resources :ingredient_sets
+  get "/posts/:blog_post_path" => "blog_posts#show"
+
+  resources :blog_posts do
+    collection do
+      get "publish"
+      get "unpublish"
+    end
+  end
 
   resources :email_subscribers do
     member do
@@ -29,6 +34,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :ingredient_entries
+  resources :ingredients
+  resources :ingredient_sets
+  resources :method_steps
+  resources :recipe_imports
+
   resources :recipes do
     collection do
       get "publish"
@@ -36,8 +47,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :recipe_imports
-  resources :method_steps
 
   root :to => "home#index"
 end
