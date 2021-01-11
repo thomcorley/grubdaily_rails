@@ -2,7 +2,7 @@ class BlogPostsController < ApplicationController
   include ApplicationHelper
 
   before_action :set_blog_post, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
-  before_action :authenticate, only: [:index, :edit, :update, :destroy, :create, :publish]
+  before_action :authenticate, only: [:new, :index, :edit, :update, :destroy, :create, :publish, :unpublish]
 
   def new
     @blog_post = BlogPost.new
@@ -57,6 +57,10 @@ class BlogPostsController < ApplicationController
   end
 
   private
+
+  def authenticate
+    not_found unless admin_session?
+  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def blog_post_params
