@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_05_183128) do
+ActiveRecord::Schema.define(version: 2021_01_11_202700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,10 +19,12 @@ ActiveRecord::Schema.define(version: 2021_01_05_183128) do
     t.string "title"
     t.text "summary"
     t.text "content"
-    t.string "images"
+    t.text "images"
     t.string "tags"
     t.boolean "published"
     t.datetime "published_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "email_subscribers", force: :cascade do |t|
