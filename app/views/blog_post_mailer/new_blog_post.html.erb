@@ -19,7 +19,7 @@
 
     <p style="max-width: 600px;">
       <%= @blog_post.content_paragraphs.first.delete_suffix(".") %>...
-      <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @blog_post.permalink %>" title="<%= @blog_post.title %>" target="_blank">
+      <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com/posts<%= @blog_post.permalink %>" title="<%= @blog_post.title %>" target="_blank">
         Read More
       </a>
     </p>
