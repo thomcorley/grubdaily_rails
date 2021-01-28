@@ -17,12 +17,12 @@
         <%= @recipe.title %>
     </h1>
 
-    <p style="max-width: 600px;">
-      <%= @recipe.introduction_paragraphs.first.delete_suffix(".") %>...
+    <div style="max-width: 600px">
+      <%= simple_format(@introduction) %>...
       <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com<%= @recipe.permalink %>" title="<%= @recipe.title %>" target="_blank">
         Read More
       </a>
-    </p>
+    </div>
 
     <h3>It's tasty!</h3>
     <p>

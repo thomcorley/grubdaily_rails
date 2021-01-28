@@ -4,6 +4,10 @@ class RecipeMailer < ApplicationMailer
   def new_recipe(recipe:, email_subscriber:)
     @recipe = recipe
     @email_subscriber = email_subscriber
+
+    raw_introduction = @recipe.introduction_paragraphs.first.delete_suffix(".")
+    @introduction = MarkdownConverter.convert(raw_introduction)
+
     @host = ActionMailer::Base.default_url_options[:host]
     headers["List-Unsubscribe"] = delete_email_subscriber_url(id: @email_subscriber.id)
 
