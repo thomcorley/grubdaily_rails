@@ -4,6 +4,10 @@
   <!-- <meta property="og:url" content="<%= %>" /> -->
 <% end %>
 
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
+
 <section class="delicious">
   <main role="main">
     <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">

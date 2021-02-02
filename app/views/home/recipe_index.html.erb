@@ -1,3 +1,7 @@
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
+
 <section class="delicious">
   <main role="main">
     <div class="section-title"></div>

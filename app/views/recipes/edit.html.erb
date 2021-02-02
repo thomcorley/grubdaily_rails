@@ -1,5 +1,29 @@
-<h1>Editing Recipe</h1>
+<div class="section">
+  <div class="container is-widescreen">
+    <h1>Editing Recipe</h1>
 
-<%= render 'form', recipe: @recipe %>
+    <%= render 'form', recipe: @recipe %>
 
-<%= link_to 'Back to Recipe Page', @recipe %>
+    </br>
+
+    <div class="columns">
+      <%= link_to(
+        "Back to Recipe",
+        @recipe,
+        class: "column is-three-quarters button"
+      )%>
+
+<!--       <%= button_to("Delete",
+        {
+          id: @recipe.id,
+          method: :delete,
+          data: { confirm: "Are you sure?", disable_with: "deleting..." },
+          class: "column button is-danger",
+        }
+      )%> -->
+      <%= link_to "Delete", @recipe, method: :delete, class: "column button is-danger", data: { confirm: "Really?", disable_with: "deleting..." } %>
+    </div>
+  </div>
+</div>
+
+
