@@ -13,14 +13,6 @@
         class: "column is-three-quarters button"
       )%>
 
-<!--       <%= button_to("Delete",
-        {
-          id: @recipe.id,
-          method: :delete,
-          data: { confirm: "Are you sure?", disable_with: "deleting..." },
-          class: "column button is-danger",
-        }
-      )%> -->
       <%= link_to "Delete", @recipe, method: :delete, class: "column button is-danger", data: { confirm: "Really?", disable_with: "deleting..." } %>
     </div>
   </div>

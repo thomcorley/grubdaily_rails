@@ -59,10 +59,7 @@ class IngredientEntriesController < ApplicationController
 
   def destroy
     @ingredient_entry.destroy
-    respond_to do |format|
-      format.html { redirect_to ingredient_entries_url, notice: 'Ingredient entry was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to recipe_url(@recipe), flash: { notice: "Ingredient entry was successfully destroyed." }
   end
 
   private
