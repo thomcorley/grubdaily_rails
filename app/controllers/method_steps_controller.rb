@@ -18,6 +18,11 @@ class MethodStepsController < ApplicationController
 		end
 	end
 
+	def destroy
+    @method_step.destroy
+    redirect_to recipe_path(@recipe), flash: { notice: "Method step was successfully deleted" }
+	end
+
 	private
 
 	def set_instance_variables
