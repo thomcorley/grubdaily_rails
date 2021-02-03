@@ -1,5 +1,21 @@
-<h1>Editing Method Step</h1>
+<div class="section">
+  <div class="container is-widescreen">
+    <h1>Editing Method Step</h1>
 
-<%= render 'form', method_step: @method_step %>
+    <%= render "form", method_step: @method_step %>
 
-<%= link_to 'Back to Recipe Page', @recipe %>
+    </br>
+
+    <div class="columns">
+      <%= link_to(
+        "Back to Recipe",
+        @recipe,
+        class: "column is-three-quarters button"
+      )%>
+
+      <%= link_to "Delete", @method_step, method: :delete, class: "column button is-danger", data: { confirm: "Really?", disable_with: "deleting..." } %>
+    </div>
+  </div>
+</div>
+
+
