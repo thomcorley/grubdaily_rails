@@ -5,29 +5,29 @@
 
         <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
           <div class="post-excerpt">
-            <p><img src="<%= @latest_recipe.image_url %>" alt="<%= @latest_recipe.title %>"/></p>
+            <p><img src="<%= @latest_entry.image_url %>" alt="<%= @latest_entry.title %>"/></p>
           </div>
           <div class="details">
             <h6 class="post-title first-post" itemprop="name headline">
-              <a itemprop="url" href="<%= @latest_recipe.permalink %>"><%= @latest_recipe.title %></a>
+              <a itemprop="url" href="<%= @latest_entry.permalink %>"><%= @latest_entry.title %></a>
             </h6>
 
             <div class="post-content">
-              <%= simple_format(@latest_recipe_excerpt) %>
+              <%= simple_format(@latest_entry_excerpt) %>§
             </div>
           </div>
         </article>
 
         <div id="subscribed" style="display: none"></div>
 
-        <% @next_two_latest_recipes.each do |recipe| %>
+        <% @next_two_latest_entries.each do |entry| %>
           <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="post-excerpt">
-              <p><img src="<%= recipe.image_url %>" alt="<%= recipe.title %>" /></p>
+              <p><img src="<%= entry.image_url %>" alt="<%= entry.title %>" /></p>
             </div>
             <div class="details">
               <h6 class="post-title first-post" itemprop="name headline">
-                <a itemprop="url" href="<%= recipe.permalink %>"><%= recipe.title %></a>
+                <a itemprop="url" href="<%= entry.permalink %>"><%= entry.title %></a>
               </h6>
             </div>
           </article>
@@ -52,18 +52,18 @@
       </section>
 
       <section class="posts clear">
-        <div class="section-title"><span>Recent Recipes</span></div>
+        <div class="section-title"><span>Recent Posts</span></div>
 
-        <% @recent_recipes.each do |recipe| %>
+        <% @recent_entries.each do |entry| %>
           <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
             <h2 class="post-title" itemprop="name headline">
-              <a itemprop="url" href="<%= recipe.permalink %>">
-                <%= recipe.title %>
+              <a itemprop="url" href="<%= entry.permalink %>">
+                <%= entry.title %>
               </a>
             </h2>
 
             <div class="post-content">
-              <p><img src="<%= recipe.image_url %>" alt="<%= recipe.title %>" /></p>
+              <p><img src="<%= entry.image_url %>" alt="<%= entry.title %>" /></p>
             </div>
           </article>
         <% end %>

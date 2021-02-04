@@ -70,7 +70,7 @@ class BlogPostsController < ApplicationController
   def set_blog_post
     # Confusingly, `recipe_title` is usually the permalink of the recipe, but sometimes the ID
     if params["blog_post_path"]
-      @blog_post = BlogPost.all.find { |blog_post| blog_post.permalink == "/#{params["blog_post_path"]}" }
+      @blog_post = BlogPost.all.find { |blog_post| blog_post.permalink == "/posts/#{params["blog_post_path"]}" }
     elsif params[:id]
       @blog_post = BlogPost.find(params[:id])
     end

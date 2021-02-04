@@ -4,7 +4,7 @@ class BlogPost < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :title, length: { maximum: 50 }
 
-  def first_image
+  def image_url
     images.split("\r\n").first
   end
 
@@ -18,5 +18,13 @@ class BlogPost < ApplicationRecord
 
   def unpublish!
     self.update!(published: false)
+  end
+
+  def excerpt
+    "#{content.first(140)} ..."
+  end
+
+  def permalink
+    "/posts/#{url_friendly_title.downcase.split.join("-")}"
   end
 end

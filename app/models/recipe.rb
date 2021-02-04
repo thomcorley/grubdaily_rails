@@ -22,10 +22,12 @@ class Recipe < ApplicationRecord
 
   before_save :set_image_url
 
+  # TODO: make this a common method
   def self.get(permalink)
     Recipe.select{ |recipe| recipe.permalink == "/#{permalink}"}.first
   end
 
+  # TODO: make this a common method
   # This will generate the image in the proper format with dashes.
   # There are a number of older images that are with underscores instead however,
   # which will be handled by the check_photo_exists callback
@@ -34,11 +36,13 @@ class Recipe < ApplicationRecord
     "https://s3.eu-west-2.amazonaws.com/grubdaily/#{image_title}.jpg"
   end
 
+  # TODO: make this a common method
   def image_url_with_underscores
     image_title = url_friendly_title.split.join("_").downcase
     "https://s3.eu-west-2.amazonaws.com/grubdaily/#{image_title}.jpg"
   end
 
+  # TODO: make this a common method
   def get_image_url
     with_underscores = request_image(image_url_with_underscores)
     with_dashes = request_image(image_url_with_dashes)
@@ -50,10 +54,12 @@ class Recipe < ApplicationRecord
     end
   end
 
+  # TODO: make this a common method
   def rating_value
     [4, 4.5, 5].sample
   end
 
+  # TODO: make this a common method
   def rating_count
     rand(20..98)
   end
@@ -68,6 +74,7 @@ class Recipe < ApplicationRecord
     serves ? serves : "#{makes} #{makes_unit}"
   end
 
+  # TODO: make this a common method and rename
   def introduction_paragraphs
     introduction.split("\n")
   end
@@ -92,16 +99,24 @@ class Recipe < ApplicationRecord
     }).html_safe
   end
 
+  # TODO: make this a common method
   def publish!
     self.update!(published_at: DateTime.now, published: true)
   end
 
+  # TODO: make this a common method
   def unpublish!
     self.update!(published: false)
   end
 
+  # TODO: make this a common method
   def excerpt
     "#{introduction.first(140)} ..."
+  end
+
+  # TODO: make this a common method
+  def permalink
+    "/#{url_friendly_title.downcase.split.join("-")}"
   end
 
   private
@@ -130,6 +145,7 @@ class Recipe < ApplicationRecord
     end
   end
 
+  # TODO: make this a common method
   # Gets the status code for a given image url
   # if the status isn't 200 OK, then we assume the image doesn't exist
   def request_image(url)
