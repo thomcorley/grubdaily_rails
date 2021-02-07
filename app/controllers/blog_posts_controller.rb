@@ -56,6 +56,11 @@ class BlogPostsController < ApplicationController
     redirect_to blog_post_path(@blog_post), flash: { notice: "Blog post unpublished" }
   end
 
+  def destroy
+    @blog_post.destroy
+    redirect_to recipe_index_path, flash: { notice: "Blog post was successfully deleted" }
+  end
+
   private
 
   def authenticate
