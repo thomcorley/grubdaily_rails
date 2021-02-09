@@ -1,12 +1,12 @@
 class HomeController < ApplicationController
   def index
-    recipes = Recipe.where(published: true)
-    recipes_for_display = recipes.last(7)
+    entries = (Recipe.where(published: true) + BlogPost.where(published: true))
+    entries_for_display = entries.sort_by{ |entry| entry.created_at }.last(7)
 
-    @latest_recipe = recipes_for_display[6]
-    @latest_recipe_excerpt = MarkdownConverter.convert(@latest_recipe.excerpt)
-    @next_two_latest_recipes = recipes_for_display[4..5]
-    @recent_recipes = recipes_for_display[0..3]
+    @latest_entry = entries_for_display[6]
+    @latest_entry_excerpt = MarkdownConverter.convert(@latest_entry.excerpt)
+    @next_two_latest_entries = entries_for_display[4..5].reverse
+    @recent_entries = entries_for_display[0..3]
   end
 
   def about

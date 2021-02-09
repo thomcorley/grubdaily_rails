@@ -6,10 +6,6 @@ module TitleFormatter
     remove_punctuation_from(title_with_no_accents).split.reject{ |i| %w(and with of au a la).include? i }.join(" ")
   end
 
-  def permalink
-    "/#{url_friendly_title.downcase.split.join("-")}"
-  end
-
   def remove_punctuation_from(string)
     string.gsub(/[\,\.':]/, "")
   end

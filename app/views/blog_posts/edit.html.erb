@@ -1,5 +1,21 @@
-<h1>Editing Blog Post</h1>
+<div class="section">
+  <div class="container is-widescreen">
+    <h1>Editing Blog Post</h1>
 
-<%= render 'form', blog_post: @blog_post %>
+    <%= render 'form', blog_post: @blog_post %>
 
-<%= link_to 'Back to Blog Post', @blog_post %>
+    </br>
+
+    <div class="columns">
+      <%= link_to(
+        "Back to Blog Post",
+        @blog_post,
+        class: "column is-three-quarters button"
+      )%>
+
+      <%= link_to "Delete", @blog_post, method: :delete, class: "column button is-danger", data: { confirm: "Really?", disable_with: "deleting..." } %>
+    </div>
+  </div>
+</div>
+
+
