@@ -84,18 +84,32 @@ class Recipe < ApplicationRecord
       "@context": "http://schema.org",
       "@type": "Recipe",
       name: title,
-      author: "Tom Corley",
+      author: {
+        "@type": "Person",
+        givenName: "Tom",
+        familyName: "Corley",
+        jobTitle: "Chef"
+      },
       image: image_url,
       datePublished: created_at,
       totalTime: total_time,
       recipeYield: serves_or_makes,
       description: summary,
       aggregateRating: {
+        "@type": "AggregateRating",
         ratingValue: rating_value,
         ratingCount: rating_count
       },
       recipeIngredient: ingredients_array,
-      recipeInstructions: method_steps_array
+      recipeInstructions: method_steps_array,
+      publisher: {
+        "@type": "Organization",
+        name: "grubdaily",
+        logo: {
+          "@type": "ImageObject",
+          url: "http://www.grubdaily.com/favicon_large.jpg"
+        }
+      }
     }).html_safe
   end
 

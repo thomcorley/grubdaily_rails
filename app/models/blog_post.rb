@@ -27,4 +27,50 @@ class BlogPost < ApplicationRecord
   def permalink
     "/posts/#{url_friendly_title.downcase.split.join("-")}"
   end
+
+  # TODO: make this a common method
+  def rating_value
+    [4, 4.5, 5].sample
+  end
+
+  # TODO: make this a common method
+  def rating_count
+    rand(20..98)
+  end
+
+  def word_count
+    content.split.size
+  end
+
+  def url
+    "https://www.grubdaily.com#{permalink}"
+  end
+
+  def json_schema
+    JSON.generate({
+      "@context": "http://schema.org",
+      "@type": "BlogPosting",
+      name: title,
+      headline: title,
+      author: {
+        "@type": "Person",
+        givenName: "Tom",
+        familyName: "Corley",
+        jobTitle: "Chef"
+      },
+      image: image_url,
+      datePublished: published_at,
+      abstract: summary,
+      articleBody: content,
+      wordCount: word_count,
+      publisher: {
+        "@type": "Organization",
+        name: "grubdaily",
+        logo: {
+          "@type": "ImageObject",
+          url: "http://www.grubdaily.com/favicon_large.jpg"
+        }
+      }
+    }).html_safe
+  end
 end
