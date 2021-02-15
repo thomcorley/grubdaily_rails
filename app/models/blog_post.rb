@@ -54,6 +54,7 @@ class BlogPost < ApplicationRecord
       headline: title,
       author: {
         "@type": "Person",
+        name: "Tom Corley",
         givenName: "Tom",
         familyName: "Corley",
         jobTitle: "Chef"

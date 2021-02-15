@@ -86,6 +86,7 @@ class Recipe < ApplicationRecord
       name: title,
       author: {
         "@type": "Person",
+        name: "Tom Corley",
         givenName: "Tom",
         familyName: "Corley",
         jobTitle: "Chef"
