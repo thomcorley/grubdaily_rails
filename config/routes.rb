@@ -13,11 +13,16 @@ Rails.application.routes.draw do
 
   get "about" => "home#about"
 
+  get "feed.xml"  => "recipes#feed", format: "rss"
+
+  get "feed"  => "recipes#feed", format: "rss"
+
   get "recipe_index" => "home#recipe_index"
 
   get "/:recipe_path" => "recipes#show"
 
   get "/posts/:blog_post_path" => "blog_posts#show"
+
 
   resources :blog_posts do
     collection do

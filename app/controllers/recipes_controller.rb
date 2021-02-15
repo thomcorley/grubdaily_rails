@@ -88,6 +88,13 @@ class RecipesController < ApplicationController
     redirect_to recipe_index_path, flash: { notice: "Recipe was successfully deleted" }
   end
 
+  def feed
+    @recipes = Recipe.published
+    respond_to do |format|
+      format.rss { render :layout => false }
+    end
+  end
+
   private
 
   def authenticate
