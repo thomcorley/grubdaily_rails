@@ -89,7 +89,7 @@ class RecipesController < ApplicationController
   end
 
   def feed
-    @recipes = Recipe.all
+    @recipes = Recipe.published
     respond_to do |format|
       format.rss { render :layout => false }
     end
