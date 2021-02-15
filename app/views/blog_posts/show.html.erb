@@ -1,5 +1,5 @@
 <% content_for :head do %>
-<!-- TODO: add json schema for blogpost from scehma.org -->
+  <script type="application/ld+json"><%= @blog_post.json_schema %></script>
 <% end %>
 
 <section class="delicious">
