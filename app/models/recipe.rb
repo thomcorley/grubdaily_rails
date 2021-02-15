@@ -20,7 +20,7 @@ class Recipe < ApplicationRecord
   validate :presence_of_serves_or_makes
   validate :numericality_of_serves_or_makes
 
-  scope :published -> { where("published_at IS NOT NULL") }
+  scope :published, -> { where("recipes.published_at IS NOT NULL") }
 
   before_save :set_image_url
 
