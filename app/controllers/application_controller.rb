@@ -10,8 +10,4 @@ class ApplicationController < ActionController::Base
   def authenticate
     not_found unless admin_session?
   end
-
-  def default_url_options(options = {})
-   { :secure => Rails.env.production? }
-  end
 end
