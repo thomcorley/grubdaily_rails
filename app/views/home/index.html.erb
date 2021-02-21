@@ -63,7 +63,7 @@
             </h2>
 
             <div class="post-content">
-              <p><img src="<%= entry.image_url %>" alt="<%= entry.title %>" /></p>
+              <p><img src="<%= asset_path(entry.image) %>" alt="<%= entry.title %>" /></p>
             </div>
           </article>
         <% end %>
