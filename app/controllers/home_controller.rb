@@ -17,5 +17,6 @@ class HomeController < ApplicationController
   end
 
   def photos
+    @recipes = Recipe.published.last(12)
   end
 end

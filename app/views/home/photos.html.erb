@@ -1,0 +1,23 @@
+<section class="delicious">
+  <main role="main">
+    <section class="index" itemscope itemtype="http://schema.org/Blog">
+      <section class="posts clear">
+        <div class="section-title"><span>Photo Gallery</span></div>
+
+        <% @recipes.each do |recipe| %>
+          <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+            <h2 class="post-title" itemprop="name headline">
+              <a itemprop="url" href="<%= recipe.permalink %>">
+                <%= recipe.title %>
+              </a>
+            </h2>
+
+            <div class="post-content">
+              <p><img src="<%= asset_path(recipe.image) %>" alt="<%= recipe.title %>" /></p>
+            </div>
+          </article>
+        <% end %>
+      </section>
+    </section>
+  </main>
+</section>
