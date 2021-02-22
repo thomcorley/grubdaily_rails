@@ -22,13 +22,38 @@ class Recipe < ApplicationRecord
 
   scope :published, -> { where("recipes.published_at IS NOT NULL") }
 
+  before_save :set_image_url
+
   # TODO: make this a common method
   def self.get(permalink)
     Recipe.select{ |recipe| recipe.permalink == "/#{permalink}"}.first
   end
 
-  def image
-    url_friendly_title.parameterize
+  # TODO: make this a common method
+  # This will generate the image in the proper format with dashes.
+  # There are a number of older images that are with underscores instead however,
+  # which will be handled by the check_photo_exists callback
+  def image_url_with_dashes
+    image_title = url_friendly_title.split.join("-").downcase
+    "https://s3.eu-west-2.amazonaws.com/grubdaily/#{image_title}.jpg"
+  end
+
+  # TODO: make this a common method
+  def image_url_with_underscores
+    image_title = url_friendly_title.split.join("_").downcase
+    "https://s3.eu-west-2.amazonaws.com/grubdaily/#{image_title}.jpg"
+  end
+
+  # TODO: make this a common method
+  def get_image_url
+    with_underscores = request_image(image_url_with_underscores)
+    with_dashes = request_image(image_url_with_dashes)
+
+    if with_dashes == 200
+      image_url_with_dashes
+    elsif with_underscores == 200
+      image_url_with_underscores
+    end
   end
 
   # TODO: make this a common method
@@ -56,6 +81,41 @@ class Recipe < ApplicationRecord
     introduction.split("\n")
   end
 
+  def json_schema
+    JSON.generate({
+      "@context": "http://schema.org",
+      "@type": "Recipe",
+      name: title,
+      author: {
+        "@type": "Person",
+        name: "Tom Corley",
+        givenName: "Tom",
+        familyName: "Corley",
+        jobTitle: "Chef"
+      },
+      image: image_url,
+      datePublished: created_at,
+      totalTime: total_time,
+      recipeYield: serves_or_makes,
+      description: summary,
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: rating_value,
+        ratingCount: rating_count
+      },
+      recipeIngredient: ingredients_array,
+      recipeInstructions: method_steps_array,
+      publisher: {
+        "@type": "Organization",
+        name: "grubdaily",
+        logo: {
+          "@type": "ImageObject",
+          url: "http://www.grubdaily.com/favicon_large.jpg"
+        }
+      }
+    }).html_safe
+  end
+
   # TODO: make this a common method
   def publish!
     self.update!(published_at: DateTime.now, published: true)
@@ -76,6 +136,8 @@ class Recipe < ApplicationRecord
     "/#{url_friendly_title.downcase.split.join("-")}"
   end
 
+  private
+
   def ingredients_array
     ingredient_entries.map(&:original_string)
   end
@@ -84,7 +146,9 @@ class Recipe < ApplicationRecord
     method_steps.map(&:description)
   end
 
-  private
+  def set_image_url
+    self.image_url = get_image_url if get_image_url
+  end
 
   # Extra model validations
   # Must have EITHER :serves OR :makes AND :makes_unit

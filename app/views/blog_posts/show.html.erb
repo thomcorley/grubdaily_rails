@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <script type="application/ld+json"><%= blog_post_json_schema %></script>
+  <script type="application/ld+json"><%= @blog_post.json_schema %></script>
 <% end %>
 
 <section class="delicious">
@@ -29,7 +29,7 @@
       </header>
 
        <div class="post-content" itemprop="text">
-        <p><img src="<%= asset_path(@blog_post.image) %>" width="900px" alt="<%= @blog_post.title %> Image"></p>
+        <p><img src="<%= @blog_post.image_url %>" width="900px" alt="<%= @blog_post.title %> Image"></p>
 
         <div class="first-paragraph">
           <p><%= simple_format(@blog_post.content_paragraphs.first) %></p>

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :recipe, class: Recipe do
-    title { "Berber Omelette" }
+    title { "Onion Soup" }
     introduction { "An old French classic, this is truly an old school soup. It is rich and dark with beef stock and, if made correctly, should be very thick." }
     summary { "This is a rich and hearty soup from the classic French repertoire. It's one of my favourites." }
     total_time { "PT6H" }

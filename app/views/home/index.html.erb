@@ -5,7 +5,7 @@
 
         <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
           <div class="post-excerpt">
-            <p><img src="<%= asset_path(@latest_entry.image) %>" alt="<%= @latest_entry.title %>"/></p>
+            <p><img src="<%= @latest_entry.image_url %>" alt="<%= @latest_entry.title %>"/></p>
           </div>
           <div class="details">
             <h6 class="post-title first-post" itemprop="name headline">
@@ -23,7 +23,7 @@
         <% @next_two_latest_entries.each do |entry| %>
           <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="post-excerpt">
-              <p><img src="<%= asset_path(entry.image) %>" alt="<%= entry.title %>" /></p>
+              <p><img src="<%= entry.image_url %>" alt="<%= entry.title %>" /></p>
             </div>
             <div class="details">
               <h6 class="post-title first-post" itemprop="name headline">
@@ -63,7 +63,7 @@
             </h2>
 
             <div class="post-content">
-              <p><img src="<%= asset_path(entry.image) %>" alt="<%= entry.title %>" /></p>
+              <p><img src="<%= entry.image_url %>" alt="<%= entry.title %>" /></p>
             </div>
           </article>
         <% end %>

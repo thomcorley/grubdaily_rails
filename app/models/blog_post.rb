@@ -4,12 +4,8 @@ class BlogPost < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :title, length: { maximum: 50 }
 
-  def image
-    if images.present?
-      images.split("\n").first
-    else
-      url_friendly_title.parameterize
-    end
+  def image_url
+    images.split("\r\n").first
   end
 
   def content_paragraphs
@@ -48,5 +44,34 @@ class BlogPost < ApplicationRecord
 
   def url
     "https://www.grubdaily.com#{permalink}"
+  end
+
+  def json_schema
+    JSON.generate({
+      "@context": "http://schema.org",
+      "@type": "BlogPosting",
+      name: title,
+      headline: title,
+      author: {
+        "@type": "Person",
+        name: "Tom Corley",
+        givenName: "Tom",
+        familyName: "Corley",
+        jobTitle: "Chef"
+      },
+      image: image_url,
+      datePublished: published_at,
+      abstract: summary,
+      articleBody: content,
+      wordCount: word_count,
+      publisher: {
+        "@type": "Organization",
+        name: "grubdaily",
+        logo: {
+          "@type": "ImageObject",
+          url: "http://www.grubdaily.com/favicon_large.jpg"
+        }
+      }
+    }).html_safe
   end
 end

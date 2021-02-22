@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     @latest_entry = entries_for_display[6]
     @latest_entry_excerpt = MarkdownConverter.convert(@latest_entry.excerpt)
     @next_two_latest_entries = entries_for_display[4..5].reverse
-    @recent_entries = entries_for_display[0..3].reverse
+    @recent_entries = entries_for_display[0..3]
   end
 
   def about
