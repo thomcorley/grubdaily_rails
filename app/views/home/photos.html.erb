@@ -1,30 +1,24 @@
 <section class="delicious">
   <main role="main">
     <section class="index" itemscope itemtype="http://schema.org/Blog">
-      <section class="posts clear">
-        <div class="section-title"><span>Photo Gallery</span></div>
+      <section class="photo-gallery clear">
+        <div class="section-title">
+          <span>Photo Gallery</span>
+        </div>
+        </br>
 
-          <% @recipe_batches.each do |recipe_batch| %>
-            <div class="columns is-mobile">
-              <% recipe_batch.each do |recipe| %>
-                <div class="column">
-                  <div class="post-content">
-                    <div class="image is-300x300">
-                      <img src="<%= asset_path(recipe.image) %>" alt="<%= recipe.title %>" />
-                    </div>
-                  </div>
-                  <h2 class="post-title" itemprop="name headline">
-                    <a itemprop="url" href="<%= recipe.permalink %>" title="recipe.title">
-                      <%= recipe.title %>
-                    </a>
-                  </h2>
-                </div>
-              <% end %>
-            </div>
+        <div class="gallery">
+          <% @recipes.each do |recipe| %>
+            <figure class=”gallery__item gallery__item--1">
+              <a href="<%= recipe.permalink %>" title="<%= recipe.title %>">
+                <img src="<%= asset_path(recipe.image) %>" class="gallery__img" alt="<%= recipe.title %>">
+              </a>
+            </figure>
           <% end %>
-
-
+        </div>
       </section>
     </section>
   </main>
 </section>
+
+
