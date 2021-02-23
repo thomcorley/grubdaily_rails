@@ -7,17 +7,6 @@ class ImageTitleChecker
   end
 
   def check
-    # mismatched_image_filenames = []
-    # recipe_images = recipes.map(&:image)
-
-    # image_filenames.each do |filename|
-    #   unless recipe_images.include?(filename)
-    #     mismatched_image_filenames << filename
-    #   end
-    # end
-
-    # puts "Found #{mismatched_image_filenames.count} mismatched filenames:\n"
-    # puts mismatched_image_filenames
     mismatched_recipe_titles = []
     recipe_images = recipes.map(&:image)
 
