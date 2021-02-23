@@ -17,6 +17,6 @@ class HomeController < ApplicationController
   end
 
   def photos
-    @recipes = Recipe.published.last(12)
+    @recipe_batches = Recipe.where(published: true).find_in_batches(batch_size: 4)
   end
 end
