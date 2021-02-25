@@ -13,11 +13,14 @@ Rails.application.routes.draw do
 
   get "about" => "home#about"
 
+  get "recipe_index" => "home#recipe_index"
+
+  get "photos" => "home#photos"
+
   get "feed.xml"  => "recipes#feed", format: "rss"
 
   get "feed"  => "recipes#feed", format: "rss"
 
-  get "recipe_index" => "home#recipe_index"
 
   get "/:recipe_path" => "recipes#show"
 

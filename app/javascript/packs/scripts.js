@@ -18,10 +18,6 @@ jQuery(document).ready( function() {
 		jQuery('meta[name="twitter:image"]').attr('content', firstImgSrc);
 	}
 
- // /* Fires fitVids plugin. */
- //        jQuery(".delicious main").fitVids();
-	// /**/
-
 	/* Get first post image and make it thumbnail. */
 		function generateThumbs() {
 			function createNewImgIndex(url, src, el) {
