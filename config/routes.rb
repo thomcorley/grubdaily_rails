@@ -12,10 +12,9 @@ Rails.application.routes.draw do
   get "new_recipe" => "recipe_imports#new"
 
   get "about" => "home#about"
-
   get "recipe_index" => "home#recipe_index"
-
   get "photos" => "home#photos"
+  get "latest-entry" => "home#latest_entry"
 
   get "feed.xml"  => "recipes#feed", format: "rss"
 
@@ -25,7 +24,6 @@ Rails.application.routes.draw do
   get "/:recipe_path" => "recipes#show"
 
   get "/posts/:blog_post_path" => "blog_posts#show"
-
 
   resources :blog_posts do
     collection do
