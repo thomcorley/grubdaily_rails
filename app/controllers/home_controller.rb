@@ -26,8 +26,12 @@ class HomeController < ApplicationController
       BlogPost.where(published: true).order("created_at DESC").first
     ]
 
-    @latest_entry = entries.sort_by{ |entry| entry.created_at }.last
+    if entries.empty?
+      redirect_to root_url
+    else
+      @latest_entry = entries.sort_by{ |entry| entry.created_at }.last
 
-    redirect_to @latest_entry.permalink
+      redirect_to @latest_entry.permalink
+    end
   end
 end
