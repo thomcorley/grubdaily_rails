@@ -19,4 +19,20 @@ class HomeController < ApplicationController
   def photos
     @recipes = Recipe.where(published: true).last(24).reverse
   end
+
+  def latest_entry
+    entries = [
+      Recipe.where(published: true).order("created_at DESC").first,
+      BlogPost.where(published: true).order("created_at DESC").first
+    ]
+
+    @latest_entry = entries.sort_by{ |entry| entry.created_at }.last
+
+    if @latest_entry.is_a?(Recipe)
+      redirect_to recipe_url(@latest_entry)
+    elsif
+      @latest_entry.is_a?(BlogPost)
+      redirect_to blog_post_url(@latest_entry)
+    end
+  end
 end
