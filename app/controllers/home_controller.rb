@@ -28,11 +28,6 @@ class HomeController < ApplicationController
 
     @latest_entry = entries.sort_by{ |entry| entry.created_at }.last
 
-    if @latest_entry.is_a?(Recipe)
-      redirect_to recipe_url(@latest_entry)
-    elsif
-      @latest_entry.is_a?(BlogPost)
-      redirect_to blog_post_url(@latest_entry)
-    end
+    redirect_to @latest_entry.permalink
   end
 end
