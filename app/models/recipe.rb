@@ -68,7 +68,7 @@ class Recipe < ApplicationRecord
 
   # TODO: make this a common method
   def excerpt
-    "#{introduction.first(140)} ..."
+    MarkdownConverter.convert("#{introduction.first(140)} ...")
   end
 
   # TODO: make this a common method

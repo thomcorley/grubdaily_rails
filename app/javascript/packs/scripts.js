@@ -18,29 +18,7 @@ jQuery(document).ready( function() {
 		jQuery('meta[name="twitter:image"]').attr('content', firstImgSrc);
 	}
 
-	/* Get first post image and make it thumbnail. */
-		function generateThumbs() {
-			function createNewImgIndex(url, src, el) {
-        jQuery('<a href="' + url + '" style="background-image: url('+ src +');"></a>').prependTo(el);
-			}
-
-      jQuery('.index .post').each( function() {
-				var postURL = jQuery(this).find('.post-title a').attr('href');
-				var firstImg = jQuery(this).find('img:first-of-type');
-				var firstImgSrc = firstImg.attr('src');
-
-				if (typeof firstImgSrc !== 'undefined') {
-					createNewImgIndex(postURL, firstImgSrc, this);
-					firstImg.parent().remove();
-					firstImg.parent().parent().parent().find('.post-excerpt').remove();
-				}
-			});
-
-      jQuery('.index .post > a').wrap('<div class="post-image" />');
-		}
-	/**/
-
-	generateThumbs();
+	// generateThumbs();
 
 	/* Category detector. */
 		// Without "main".

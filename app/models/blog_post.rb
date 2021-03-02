@@ -25,7 +25,7 @@ class BlogPost < ApplicationRecord
   end
 
   def excerpt
-    "#{content.first(140)} ..."
+    MarkdownConverter.convert("#{content.first(140)} ...")
   end
 
   def permalink

@@ -1,37 +1,21 @@
+<% content_for :head do %>
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<% end %>
+
 <section class="delicious">
   <main role="main">
     <section class="index" itemscope itemtype="http://schema.org/Blog">
       <section class="newest-recipes clear">
-
-        <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-          <div class="post-excerpt">
-            <p><img src="<%= asset_path(@latest_entry.image) %>" alt="<%= @latest_entry.title %>"/></p>
-          </div>
-          <div class="details">
-            <h6 class="post-title first-post" itemprop="name headline">
-              <a itemprop="url" href="<%= @latest_entry.permalink %>"><%= @latest_entry.title %></a>
-            </h6>
-
-            <div class="post-content">
-              <%= simple_format(@latest_entry_excerpt) %>
+        <div class="main-carousel">
+          <% @entries_for_display.each do |entry| %>
+            <div class="carousel-cell">
+              <img src="<%= asset_path(entry.image) %>" alt="<%= entry.title %>"/>
             </div>
-          </div>
-        </article>
+          <% end %>
+        </div>
 
         <div id="subscribed" style="display: none"></div>
-
-        <% @next_two_latest_entries.each do |entry| %>
-          <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="post-excerpt">
-              <p><img src="<%= asset_path(entry.image) %>" alt="<%= entry.title %>" /></p>
-            </div>
-            <div class="details">
-              <h6 class="post-title first-post" itemprop="name headline">
-                <a itemprop="url" href="<%= entry.permalink %>"><%= entry.title %></a>
-              </h6>
-            </div>
-          </article>
-        <% end %>
       </section>
 
       <section class="subscribe-form clear">
@@ -76,8 +60,19 @@
           <a href="https://www.instagram.com/grubdaily"><%= render "instagram_icon" %></a>
           <a href="https://www.pinterest.co.uk/grubdaily"><%= render "pinterest_icon" %></a>
         </div>
-        <!-- <a class="view-all" href="/photos">Click here to see ALL photos</a> -->
       </section>
     </section>
   </main>
 </section>
+
+<script>
+  const carouselElement = document.querySelector(".main-carousel");
+  const flkty = new Flickity(carouselElement, {
+    cellAlign: "left",
+    wrapAround: true,
+    lazyLoad: true,
+    resize: true,
+    setGallerySize: true,
+    autoPlay: 3000,
+  });
+</script>
