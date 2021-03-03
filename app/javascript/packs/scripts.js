@@ -2,24 +2,6 @@ svg4everybody();
 
 jQuery(document).ready( function() {
 
-	/* Fires search results's custom scroll. */
-		jQuery(window).on('load', function(){
-			jQuery(".results-container").mCustomScrollbar({
-				theme: "dark-thick"
-			});
-		});
-	/**/
-
-	// Automatically sets the first post image as a featured image on Facebook and Twitter.
-	var firstImg = jQuery('.post.single').find('img:first-of-type');
-	var firstImgSrc = firstImg.attr('src');
-	if (typeof firstImgSrc !== 'undefined') {
-		jQuery('meta[property="og:image"]').attr('content', firstImgSrc);
-		jQuery('meta[name="twitter:image"]').attr('content', firstImgSrc);
-	}
-
-	// generateThumbs();
-
 	/* Category detector. */
 		// Without "main".
 		var availableCategories = [ "asian", "bbq", "beer", "breakfast", "cocktail", "coffee", "dessert", "drink", "fruit", "junk", "meat", "pasta", "pizza", "salad", "seafood", "snack", "soup", "tea", "vegetarian", "vegan" ];
@@ -48,14 +30,5 @@ jQuery(document).ready( function() {
 		getFirstUnList.find('li').on('click', function() {
             jQuery(this).toggleClass('selected');
 		});
-	/**/
-
-	/* Hides search results box. */
-    jQuery(document).on('click focus', function(e) {
-        if (jQuery(e.target).closest('.share').length === 0 && jQuery(e.target).closest('#search-input').length === 0) {
-            jQuery('.results-container').hide();
-            jQuery('#search-input').val('');
-        }
-    });
 	/**/
 });
