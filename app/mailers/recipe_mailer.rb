@@ -6,7 +6,7 @@ class RecipeMailer < ApplicationMailer
     @email_subscriber = email_subscriber
 
     raw_introduction = @recipe.introduction_paragraphs.first.delete_suffix(".")
-    read_more_link = "... [Read More](#{@recipe.permalink})"
+    read_more_link = "... [Read More](https://www.grubdaily.com#{@recipe.permalink})"
     introduction_with_read_more_link = raw_introduction + read_more_link
     @introduction = MarkdownConverter.convert(introduction_with_read_more_link)
 
