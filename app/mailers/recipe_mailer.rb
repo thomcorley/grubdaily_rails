@@ -12,6 +12,7 @@ class RecipeMailer < ApplicationMailer
 
     @host = ActionMailer::Base.default_url_options[:host]
     headers["List-Unsubscribe"] = delete_email_subscriber_url(id: @email_subscriber.id)
+    attachments.inline["recipe.jpg"] = File.read("#{Rails.root}/app/assets/images/#{@recipe.image}.jpg")
 
     mail(to: @email_subscriber.email, subject: "Something tasty for you: #{@recipe.title}")
     Rails.logger.info("Successfully sent new recipe email for #{@recipe.title}")
