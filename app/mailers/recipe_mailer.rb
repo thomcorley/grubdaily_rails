@@ -6,7 +6,9 @@ class RecipeMailer < ApplicationMailer
     @email_subscriber = email_subscriber
 
     raw_introduction = @recipe.introduction_paragraphs.first.delete_suffix(".")
-    @introduction = MarkdownConverter.convert(raw_introduction)
+    read_more_link = "... [Read More](#{@recipe.permalink})"
+    introduction_with_read_more_link = raw_introduction + read_more_link
+    @introduction = MarkdownConverter.convert(introduction_with_read_more_link)
 
     @host = ActionMailer::Base.default_url_options[:host]
     headers["List-Unsubscribe"] = delete_email_subscriber_url(id: @email_subscriber.id)
