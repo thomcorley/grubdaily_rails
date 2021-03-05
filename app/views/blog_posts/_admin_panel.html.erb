@@ -1,23 +1,42 @@
-<% if @next_post %>
-  <a href="<%= blog_post_path(@next_post.id) %>" class="print">
+<div class="dropdown is-hoverable print">
+  <div class="dropdown-trigger">
+    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Admin Panel</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <a href="<%= test_email_blog_posts_path %>?id=<%= @blog_post.id %>" class="dropdown-item">
+        Test Email
+      </a>
+
+      <a href="<%= unpublish_blog_posts_path %>?id=<%= @blog_post.id %>" class="dropdown-item">
+        Unpublish
+      </a>
+
+      <a href="<%= publish_blog_posts_path %>?id=<%= @blog_post.id %>" class="dropdown-item">
+        Unpublish
+      </a>
+
+      <a href="<%= edit_blog_post_path(@blog_post) %>" class="dropdown-item">
+        Edit
+      </a>
+    </div>
+  </div>
+</div>
+
+<% if @next_recipe %>
+  <a href="<%= blog_post_path(@next_recipe) %>" class="print">
     Next
   </a>
 <% end %>
 
-<% if @prev_post %>
-  <a href="<%= blog_post_path(@prev_post.id) %>" class="print">
+<% if @prev_recipe %>
+  <a href="<%= blog_post_path(@prev_recipe) %>" class="print">
     Previous
   </a>
 <% end %>
 
-<a href="<%= unpublish_blog_posts_path %>?id=<%= @blog_post.id %>" class="print">
-  Unpublish
-</a>
-
-<a href="<%= publish_blog_posts_path %>?id=<%= @blog_post.id %>" class="print">
-  Publish
-</a>
-
-<a href="<%= edit_blog_post_path(@blog_post) %>" class="print">
-  Edit
-</a>
