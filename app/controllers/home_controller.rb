@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     entries = (Recipe.where(published: true) + BlogPost.where(published: true))
-    entries_for_display = entries.sort_by{ |entry| entry.created_at }.last(7)
+    entries_for_display = entries.sort_by{ |entry| entry.published_at }.last(7)
 
     @latest_entry = entries_for_display[6]
     @latest_entry_excerpt = MarkdownConverter.convert(@latest_entry.excerpt)
@@ -22,14 +22,14 @@ class HomeController < ApplicationController
 
   def latest_entry
     entries = [
-      Recipe.where(published: true).order("created_at DESC").first,
-      BlogPost.where(published: true).order("created_at DESC").first
+      Recipe.where(published: true).order("published_at DESC").first,
+      BlogPost.where(published: true).order("published_at DESC").first
     ]
 
     if entries.empty?
       redirect_to root_url
     else
-      @latest_entry = entries.sort_by{ |entry| entry.created_at }.last
+      @latest_entry = entries.sort_by{ |entry| entry.published_at }.last
 
       redirect_to @latest_entry.permalink
     end
