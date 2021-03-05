@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   include ApplicationHelper
 
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :publish, :unpublish, :test_email]
   before_action :authenticate, only: [:index, :edit, :update, :destroy, :create, :publish]
 
   def index
@@ -81,6 +81,15 @@ class RecipesController < ApplicationController
   def unpublish
     @recipe.unpublish!
     redirect_to recipe_path(@recipe), flash: { notice: "Recipe unpublished" }
+  end
+
+  def test_email
+    RecipeMailer::TEST_EMAILS.each do |email|
+      subscriber = EmailSubscriber.find_by_email(email)
+      RecipeMailer.new_recipe(recipe: @recipe, email_subscriber: subscriber).deliver
+    end
+
+    redirect_to recipe_path(@recipe), flash: { notice: "Test emails were sent!" }
   end
 
   def destroy
