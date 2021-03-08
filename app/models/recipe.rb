@@ -1,4 +1,4 @@
-class Recipe < ApplicationRecord
+class Recipe < Entry
   include TitleFormatter
 
   # This is the ISO 8601 standardised time format
@@ -9,8 +9,6 @@ class Recipe < ApplicationRecord
   has_many :ingredient_sets, dependent: :destroy
   has_many :method_steps, dependent: :destroy
 
-  validates :title, presence: true, uniqueness: true
-  validates :title, length: { maximum: 50 }
   validates :total_time, format: { :with => TIME_FORMAT_REGEX,
     :message => "total_time must be in valid ISO 8601 format."
   }
@@ -21,11 +19,6 @@ class Recipe < ApplicationRecord
   validate :numericality_of_serves_or_makes
 
   scope :published, -> { where(published: true) }
-
-  # TODO: make this a common method
-  def self.get(permalink)
-    Recipe.select{ |recipe| recipe.permalink == "/#{permalink}"}.first
-  end
 
   def image
     url_friendly_title.parameterize
@@ -49,11 +42,6 @@ class Recipe < ApplicationRecord
 
   def serves_or_makes
     serves ? serves : "#{makes} #{makes_unit}"
-  end
-
-  # TODO: make this a common method and rename
-  def introduction_paragraphs
-    introduction.split("\n")
   end
 
   # TODO: make this a common method

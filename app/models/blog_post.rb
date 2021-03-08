@@ -1,9 +1,4 @@
-class BlogPost < ApplicationRecord
-  include TitleFormatter
-
-  validates :title, presence: true, uniqueness: true
-  validates :title, length: { maximum: 50 }
-
+class BlogPost < Entry
   def image
     # TODO: add multiple image handling for blog posts
     # this will involve ensuring all blog posts in the DB

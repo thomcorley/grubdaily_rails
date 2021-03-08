@@ -66,6 +66,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :entries do
+    collection do
+      get "publish"
+      get "unpublish"
+    end
+  end
+
   # Redirects
   get "/chocolate/chocolate_mousse", to: redirect("chocolate-mousse")
   get "/soup/chicken_and_coriander_broth", to: redirect("chicken-coriander-broth")

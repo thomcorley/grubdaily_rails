@@ -14,10 +14,8 @@ class RecipeSeeder
 
         count += 1
         puts "Recipe created: #{yaml_filename}"
-      rescue Psych::SyntaxError => e
+      rescue StandardError => e
         puts "Error parsing YAML file #{yaml_filename}. Message: #{e}"
-      rescue ActiveRecord::RecordInvalid => e
-        puts "Recipe (#{yaml_filename}) could not be created: #{e}"
       end
     end
 

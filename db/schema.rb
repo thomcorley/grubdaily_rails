@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_111543) do
+ActiveRecord::Schema.define(version: 2021_04_12_193207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,25 @@ ActiveRecord::Schema.define(version: 2021_03_06_111543) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "confirmed"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.string "title"
+    t.text "summary"
+    t.text "content"
+    t.string "tags"
+    t.text "images"
+    t.boolean "published"
+    t.datetime "published_at"
+    t.string "total_time"
+    t.integer "serves"
+    t.integer "makes"
+    t.string "makes_unit"
+    t.string "recipe_type"
+    t.string "category"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "ingredient_entries", force: :cascade do |t|
@@ -101,6 +120,16 @@ ActiveRecord::Schema.define(version: 2021_03_06_111543) do
     t.bigint "taggable_id"
     t.index ["recipe_id"], name: "index_tags_on_recipe_id"
     t.index ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password"
+    t.string "address1"
+    t.string "address2"
+    t.string "address3"
+    t.string "postcode"
   end
 
 end

@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
 
     @ingredient_sets = @recipe.ingredient_sets
 
-    @introduction_paragraphs = @recipe.introduction.split("\n").map do |paragraph|
+    @content_paragraphs = @recipe.content_paragraphs.map do |paragraph|
       MarkdownConverter.convert(paragraph)
     end
 
