@@ -1,23 +1,5 @@
-<% if @next_recipe %>
-  <a href="<%= recipe_path(@next_recipe) %>" class="print">
-    Next
-  </a>
-<% end %>
-
-<% if @prev_recipe %>
-  <a href="<%= recipe_path(@prev_recipe) %>" class="print">
-    Previous
-  </a>
-<% end %>
-
-<a href="<%= unpublish_recipes_path %>?id=<%= @recipe.id %>" class="print">
-  Unpublish
-</a>
-
-<a href="<%= publish_recipes_path %>?id=<%= @recipe.id %>" class="print">
-  Publish
-</a>
-
-<a href="<%= edit_recipe_path(@recipe) %>" class="print">
-  Edit
-</a>
+<%= link_to("Next", recipe_path(@next_recipe), class: "print") if @next_recipe %>
+<%= link_to("Previous", recipe_path(@prev_recipe), class: "print") if @prev_recipe %>
+<%= link_to("Unpublish", "#{unpublish_recipes_path}?id=#{@recipe.id}", class: "print") %>
+<%= link_to("Publish", "#{publish_recipes_path}?id=#{@recipe.id}", data: { confirm: "Publish this recipe?", disable_with: "Publishing..." }, class: "print") %>
+<%= link_to("Edit", edit_recipe_path(@recipe), class: "print") %>
