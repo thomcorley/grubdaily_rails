@@ -19,14 +19,14 @@ class HomeController < ApplicationController
 
   def latest_entry
     entries = [
-      Recipe.where(published: true).order("created_at DESC").first,
-      BlogPost.where(published: true).order("created_at DESC").first
+      Recipe.where(published: true).order("published_at DESC").first,
+      BlogPost.where(published: true).order("published_at DESC").first
     ]
 
     if entries.empty?
       redirect_to root_url
     else
-      @latest_entry = entries.sort_by{ |entry| entry.created_at }.last
+      @latest_entry = entries.sort_by{ |entry| entry.published_at }.last
 
       redirect_to @latest_entry.permalink
     end
