@@ -1,55 +1,42 @@
+<% content_for :head do %>
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
 <section class="delicious">
   <main role="main">
     <section class="index" itemscope itemtype="http://schema.org/Blog">
       <section class="newest-recipes clear">
 
-        <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-          <div class="post-excerpt">
-            <p><img src="<%= asset_path(@latest_entry.image) %>" alt="<%= @latest_entry.title %>"/></p>
-          </div>
-          <div class="details">
-            <h6 class="post-title first-post" itemprop="name headline">
-              <a itemprop="url" href="<%= @latest_entry.permalink %>"><%= @latest_entry.title %></a>
-            </h6>
-
-            <div class="post-content">
-              <%= simple_format(@latest_entry_excerpt) %>
+        <div class="main-carousel">
+          <% @entries_for_carousel.each do |entry| %>
+            <div class="carousel-cell">
+              <a itemprop="url" href="<%= entry.permalink %>">
+                <img class="carousel-image" src="<%= asset_path(entry.image) %>" alt="<%= entry.title %>"/>
+              </a>
             </div>
-          </div>
-        </article>
+          <% end %>
+        </div>
 
         <div id="subscribed" style="display: none"></div>
-
-        <% @next_two_latest_entries.each do |entry| %>
-          <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="post-excerpt">
-              <p><img src="<%= asset_path(entry.image) %>" alt="<%= entry.title %>" /></p>
-            </div>
-            <div class="details">
-              <h6 class="post-title first-post" itemprop="name headline">
-                <a itemprop="url" href="<%= entry.permalink %>"><%= entry.title %></a>
-              </h6>
-            </div>
-          </article>
-        <% end %>
       </section>
 
-      <section class="posts clear">
-        <div class="section-title"><span>Recent Posts</span></div>
+      <section class="photo-gallery clear">
+        <div class="section-title">
+          <span>Recent Entries</span>
+        </div>
+        </br>
 
-        <% @recent_entries.each do |entry| %>
-          <article class="post" role="article" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-            <h2 class="post-title" itemprop="name headline">
-              <a itemprop="url" href="<%= entry.permalink %>">
-                <%= entry.title %>
+        <div class="gallery">
+          <% @recent_entries.each do |recipe| %>
+            <figure class=”gallery__item gallery__item--1">
+              <a href="<%= recipe.permalink %>" title="<%= recipe.title %>">
+                <img src="<%= asset_path(recipe.image) %>" class="gallery__img" alt="<%= recipe.title %>">
               </a>
-            </h2>
-
-            <div class="post-content">
-              <p><img src="<%= asset_path(entry.image) %>" alt="<%= entry.title %>" /></p>
-            </div>
-          </article>
-        <% end %>
+            </figure>
+          <% end %>
+        </div>
       </section>
 
       <section class="posts clear bottom-panel" style="margin-bottom: 80px;">
@@ -59,8 +46,21 @@
           <a href="https://www.instagram.com/grubdaily"><%= render "instagram_icon" %></a>
           <a href="https://www.pinterest.co.uk/grubdaily"><%= render "pinterest_icon" %></a>
         </div>
-        <!-- <a class="view-all" href="/photos">Click here to see ALL photos</a> -->
       </section>
     </section>
   </main>
 </section>
+
+<script>
+  document.addEventListener("turbolinks:load", function() {
+    const carouselElement = document.querySelector(".main-carousel");
+    const flkty = new Flickity( carouselElement, {
+        lazyLoad: true,
+        resize: true,
+        setGallerySize: true,
+        autoPlay: 3000,
+        autoPlay: 5000,
+        wrapAround: true
+    });
+  });
+</script>

@@ -2,46 +2,6 @@ svg4everybody();
 
 jQuery(document).ready( function() {
 
-	/* Fires search results's custom scroll. */
-		jQuery(window).on('load', function(){
-			jQuery(".results-container").mCustomScrollbar({
-				theme: "dark-thick"
-			});
-		});
-	/**/
-
-	// Automatically sets the first post image as a featured image on Facebook and Twitter.
-	var firstImg = jQuery('.post.single').find('img:first-of-type');
-	var firstImgSrc = firstImg.attr('src');
-	if (typeof firstImgSrc !== 'undefined') {
-		jQuery('meta[property="og:image"]').attr('content', firstImgSrc);
-		jQuery('meta[name="twitter:image"]').attr('content', firstImgSrc);
-	}
-
-	/* Get first post image and make it thumbnail. */
-		function generateThumbs() {
-			function createNewImgIndex(url, src, el) {
-        jQuery('<a href="' + url + '" style="background-image: url('+ src +');"></a>').prependTo(el);
-			}
-
-      jQuery('.index .post').each( function() {
-				var postURL = jQuery(this).find('.post-title a').attr('href');
-				var firstImg = jQuery(this).find('img:first-of-type');
-				var firstImgSrc = firstImg.attr('src');
-
-				if (typeof firstImgSrc !== 'undefined') {
-					createNewImgIndex(postURL, firstImgSrc, this);
-					firstImg.parent().remove();
-					firstImg.parent().parent().parent().find('.post-excerpt').remove();
-				}
-			});
-
-      jQuery('.index .post > a').wrap('<div class="post-image" />');
-		}
-	/**/
-
-	generateThumbs();
-
 	/* Category detector. */
 		// Without "main".
 		var availableCategories = [ "asian", "bbq", "beer", "breakfast", "cocktail", "coffee", "dessert", "drink", "fruit", "junk", "meat", "pasta", "pizza", "salad", "seafood", "snack", "soup", "tea", "vegetarian", "vegan" ];
@@ -70,14 +30,5 @@ jQuery(document).ready( function() {
 		getFirstUnList.find('li').on('click', function() {
             jQuery(this).toggleClass('selected');
 		});
-	/**/
-
-	/* Hides search results box. */
-    jQuery(document).on('click focus', function(e) {
-        if (jQuery(e.target).closest('.share').length === 0 && jQuery(e.target).closest('#search-input').length === 0) {
-            jQuery('.results-container').hide();
-            jQuery('#search-input').val('');
-        }
-    });
 	/**/
 });
