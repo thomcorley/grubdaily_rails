@@ -39,23 +39,6 @@
         </div>
       </section>
 
-      <section class="subscribe-form clear">
-        <%= form_with model: @email_subscriber, url: email_subscribers_path do |form| %>
-          <div class="field has-addons is-justify-content-center">
-            <div class="control">
-                <%= form.email_field :email, class: "input is-medium email-field", placeholder: "Email me tasty things!" %>
-            </div>
-            <div class="control">
-                <%= form.submit value: "Go", class: "button is-medium submit-button" %>
-            </div>
-          </div>
-
-          <% if flash[:validation_error] %>
-            <div class="notice"><%= flash[:validation_error].sub("Validation failed: Email", "Error: email") %></div>
-          <% end %>
-        <% end %>
-      </section>
-
       <section class="posts clear bottom-panel" style="margin-bottom: 80px;">
         <div class="social clear">
           <a href="https://facebook.com/grubdaily"><%= render "facebook_icon" %></a>
