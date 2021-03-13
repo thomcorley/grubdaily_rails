@@ -53,6 +53,19 @@ Rails.application.routes.draw do
     end
   end
 
+  # Redirects
+  get "/chocolate/chocolate_mousse", to redirect("chocolate-mousse")
+  get "/soup/chicken_and_coriander_broth", to redirect("chicken-coriander-broth")
+  get "/dessert/peanut_caramel_cheesecake", to redirect("peanut-caramel-cheesecake")
+  get "/fish/cod_with_cockles_a_la_creme", to redirect("cod-cockles-creme")
+  get "/pork/pork_belly_asparagus_and_ale_sauce", to redirect("pork-belly-asparagus-ale-sauce")
+  get "/blog/barley-risotto-with-chicken", to redirect("barley-risotto-chicken")
+  get "/blog/salmon-and-hollandaise", to redirect("salmon-hollandaise")
+  get "/blog/confit-duck", to redirect("duck-rilettes")
+  get "/2011/09/peanut-butter-and-jam-creme-brulee", to redirect("barley-risotto-chicken")
+  get "/2011/09/peanut-butter-millionaire-shortbread", to redirect("barley-risotto-chicken")
+  get "/2010/11/ale-braised-pigs-cheeks", to redirect("barley-risotto-chicken")
+  get "/2010/08/eggs-benedict", to redirect("barley-risotto-chicken")
 
   root :to => "home#index"
 end
