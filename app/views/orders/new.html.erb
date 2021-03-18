@@ -1,0 +1,74 @@
+<% content_for :head do %>
+  <script src="https://kit.fontawesome.com/35cac145b0.js" crossorigin="anonymous"></script>
+  <meta name="robots" content="noindex">
+<% end %>
+
+<section class="delicious">
+  <main role="main">
+    <div class="section-title"></div>
+      <article class="page single shop" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="container">
+          <header class="post-header">
+              <h2 class="post-title" itemprop="name headline">Shop</h2>
+          </header>
+          <div class="page-content">
+            <p>
+              Fresh sourdough bread is available for delivery, from Tuesday to Friday, in the Edinburgh EH6 neighbourhood only. I only have a small oven,
+              so the supply is limited!
+            </p>
+
+            <p>
+              If you are interested, fill out the contact form below and and I will get back to you as soon as I can.
+            </p>
+
+            <p>
+              Please include your address in the message field, and your phone number if you prefer text message or WhatsApp to email.
+            </p>
+
+            <%= form_with scope: :contact_form_message, url: contact_form_messages_path, local: true do |form| %>
+            <div class="field">
+              <div class="control has-icons-left">
+                <%= form.text_field :name, required: true, class: "input", placeholder: "Name", autocomplete: "name" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control has-icons-left">
+                <%= form.email_field :email,  required: true, class: "input", placeholder: "Email", autocomplete: "email" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope-square"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <%= form.text_area :message, required: true, class: "textarea", placeholder: "Message" %>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <%= form.check_box :subscribe %>
+                  I would like to receive grubdaily blog updates via email
+                </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control actions">
+                <%= form.submit "Submit", class: "button is-fullwidth is-success" %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </article>
+  </main>
+</section>
+
+

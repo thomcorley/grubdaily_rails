@@ -1,31 +1,29 @@
-<div class="send-confirmation mt-6 mx-6">
-  <div class="container">
-    <h1 style="font-size: 30px">
-      You have successfully subscribed
-    </h1>
+<% content_for :head do %>
+  <meta name="robots" content="noindex">
+<% end %>
 
-    </br>
+<section class="delicious">
+  <main role="main">
+    <div class="section-title"></div>
+      <article class="page single contact-form" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="container">
+          <header class="post-header">
+              <h3 class="post-title" itemprop="name headline">You're subscribed to grubdaily!</h3>
+          </header>
+          <div class="page-content">
+            <p> Each time something tasty is added to grubdaily.com, you'll receive an
+        email update. If you want to unsubscribe, there will be a link in the footer of each email, or just click <%= link_to("here", delete_email_subscriber_url(@email_subscriber)) %>.
+            </p>
 
-    <p> Each time something tasty is added to grubdaily.com, you will receive an
-email update! If you want to unsubscribe, there will be a link in the footer of each email, or just click <%= link_to("here", delete_email_subscriber_url(@email_subscriber)) %>.
-    </p>
-
-    </br>
-
-    <p>
-      I hope you enjoy my recipes and general food chat :)
-    </p>
-
-    </br>
-
-    <p>
-      If you have any feedback or questions, feel free to message me; <strong>@grubdaily</strong> on Instagram or email <strong>tom@grubdaily.com</strong>
-    </p>
-
-    </br>
-
-    <p>Cheers!</p>
-    <p>Tom</p>
-  </div>
-</div>
-
+            <p>
+              I hope you enjoy the recipes and general food chat :)
+            </p>
+            <p>
+              If you have any feedback or questions, feel free to message me; <%= link_to("@grubdaily", "https://www.instagram.com/grubdaily") %> on Instagram or email <%= mail_to("tom@grubdaily.com") %>
+            </p>
+            <p>Tom</p>
+          </div>
+        </div>
+      </article>
+  </main>
+</section
