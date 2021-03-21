@@ -1,9 +1,9 @@
 class HomeController < ApplicationController
   def index
     entries = (Recipe.where(published: true) + BlogPost.where(published: true))
-    entries_for_display = entries.sort_by{ |entry| entry.created_at }.last(17).reverse
-    @entries_for_carousel = entries_for_display.first(5)
-    @recent_entries = entries_for_display.last(12)
+    @entries_for_display = entries.sort_by{ |entry| entry.created_at }.last(17).reverse
+    @entries_for_carousel = @entries_for_display.first(5)
+    @recent_entries = @entries_for_display.last(12)
   end
 
   def about

@@ -26,3 +26,4 @@ spec/examples.txt
 yarn-debug.log*
 .yarn-integrity
 .DS_Store
+scratch*
