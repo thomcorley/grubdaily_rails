@@ -1,0 +1,16 @@
+<%= javascript_include_tag "https://www.google.com/recaptcha/api.js?render=#{recaptcha_site_key}&onload=recaptchaOnloadCallback&render=explicit", async: true, defer: true %>
+
+<%= javascript_tag do %>
+
+  var recaptchaOnloadCallback = function() {
+    var re_captcha_token = "<%= recaptcha_site_key %>";
+
+    grecaptcha.execute(re_captcha_token).then(function(token) {
+        document.getElementById('re_captcha_re_captcha_token').value = token;
+      });
+  }
+<% end %>
+
+<% content_for :re_captcha do %>
+  <%= hidden_field :re_captcha, :re_captcha_token %>
+<% end %>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "qrcode", to: redirect("/")
+  get "qrcode", to: redirect("menu")
 
   # Recipe Imports
   get "recipe_imports/new" => "recipe_imports#new"

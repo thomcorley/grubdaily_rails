@@ -1,7 +1,10 @@
 <% content_for :head do %>
   <script src="https://kit.fontawesome.com/35cac145b0.js" crossorigin="anonymous"></script>
   <meta name="robots" content="noindex">
+  <script src="https://www.google.com/recaptcha/api.js"></script>
 <% end %>
+
+<%= render partial: "re_captcha" %>
 
 <section class="delicious">
   <main role="main">
@@ -44,7 +47,7 @@
             Please include your address in the message field, and your phone number if you prefer text message to email.
           </p>
 
-          <%= form_with scope: :contact_form_message, url: contact_form_messages_path, local: true do |form| %>
+          <%= form_with scope: :contact_form_message, url: contact_form_messages_path, local: true, id: "contact-form" do |form| %>
             <div class="field">
               <div class="control has-icons-left">
                 <%= form.text_field :name, required: true, class: "input", placeholder: "Name", autocomplete: "name" %>
@@ -80,7 +83,12 @@
 
             <div class="field">
               <div class="control actions">
-                <%= form.submit "Submit", class: "button is-fullwidth is-success" %>
+                <%= form.submit "Submit",
+                  class: "button is-fullwidth is-success g-recaptcha",
+                    "data-sitekey" => recaptcha_site_key,
+                    "data-callback" => "onSubmit",
+                    "data-action" => "submit"
+                %>
               </div>
             </div>
           <% end %>
@@ -90,4 +98,8 @@
   </main>
 </section>
 
-
+ <script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
