@@ -20,7 +20,7 @@ section { max-width: $default-width }
 #blog_post_summary { width: 800px; }
 
 /* Layout */
-  .delicious { border-radius: 5px; max-width: $default-width; margin: 0 auto; padding: 0; background-color: white; }
+.delicious { border-radius: 5px; max-width: $default-width; margin: 0 auto; padding: 0; background-color: white; }
 body {background-color: #F1F1F1; margin: 0px;}
 /**/
 
@@ -227,6 +227,9 @@ body {background-color: #F1F1F1; margin: 0px;}
 .page.single {
   .post-header { margin: 10px 0 30px 0; }
   .contact-form, .shop { min-height: 400px }
+  .shop-thumbnail  {
+    img { object-fit: cover; width:180px; height:180px; }
+  }
 }
 
 .page.single.contact-form { min-height: 400px }

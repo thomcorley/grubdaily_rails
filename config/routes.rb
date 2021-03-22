@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get "feed"  => "recipes#feed", format: "rss"
 
   # Orders
-  get "shop" => "orders#new"
+  get "menu" => "orders#new"
   resources :orders
 
   get "/:recipe_path" => "recipes#show"

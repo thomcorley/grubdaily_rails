@@ -5,27 +5,46 @@
 
 <section class="delicious">
   <main role="main">
-    <div class="section-title"></div>
-      <article class="page single shop" role="article" itemscope itemtype="http://schema.org/BlogPosting">
-        <div class="container">
-          <header class="post-header">
-              <h2 class="post-title" itemprop="name headline">Shop</h2>
-          </header>
-          <div class="page-content">
-            <p>
-              Fresh sourdough bread is available for delivery, from Tuesday to Friday, in the Edinburgh EH6 neighbourhood only. I only have a small oven,
-              so the supply is limited!
-            </p>
+    <article class="page single shop" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+      <div class="container">
+        <header class="post-header">
+          <h2 class="post-title" itemprop="name headline">Menu</h2>
+        </header>
+        <div class="page-content block">
+          <p>
+            Fresh sourdough bread is available for delivery, from Tuesday to Friday, in the Edinburgh EH6 neighbourhood only. I only have a small oven,
+            so supply is limited!
+          </p>
 
-            <p>
-              If you are interested, fill out the contact form below and and I will get back to you as soon as I can.
-            </p>
+          <p>
+            I'm currently developing some new and interesting products to sell in addition to sourdough, so watch this space.
+          </p>
 
-            <p>
-              Please include your address in the message field, and your phone number if you prefer text message or WhatsApp to email.
-            </p>
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <%= image_tag(asset_path("sourdough"), title: "Sourdough Loaf", alt: "Sourdough Loaf Photo") %>
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-4">Rye/Wheat Sourdough Loaf</p>
+              <p class="title is-5">£3.80</p>
 
-            <%= form_with scope: :contact_form_message, url: contact_form_messages_path, local: true do |form| %>
+              <div class="content">
+                Wholemeal rye starter is mixed with unbleached white flour, water and sea salt for this medium-crusty loaf. The slow cold fermentation process gives it a wonderful depth of flavour and a delectable texture.
+              </div>
+            </div>
+          </div>
+
+          <p>
+            If you're interested, fill out the contact form below and I'll get back to you as soon as I can.
+          </p>
+
+          <p>
+            Please include your address in the message field, and your phone number if you prefer text message to email.
+          </p>
+
+          <%= form_with scope: :contact_form_message, url: contact_form_messages_path, local: true do |form| %>
             <div class="field">
               <div class="control has-icons-left">
                 <%= form.text_field :name, required: true, class: "input", placeholder: "Name", autocomplete: "name" %>
@@ -64,10 +83,10 @@
                 <%= form.submit "Submit", class: "button is-fullwidth is-success" %>
               </div>
             </div>
-            <% end %>
-          </div>
+          <% end %>
         </div>
-      </article>
+      </div>
+    </article>
   </main>
 </section>
 
