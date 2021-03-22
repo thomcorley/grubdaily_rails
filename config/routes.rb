@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "qrcode", to: redirect("/")
+
   get "recipe_imports/new" => "recipe_imports#new"
 
   post "recipe_imports/create" => "recipe_imports#create"
@@ -19,7 +21,6 @@ Rails.application.routes.draw do
   get "feed.xml"  => "recipes#feed", format: "rss"
 
   get "feed"  => "recipes#feed", format: "rss"
-
 
   get "/:recipe_path" => "recipes#show"
 
