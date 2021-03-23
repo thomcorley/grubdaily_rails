@@ -1,29 +1,30 @@
 Rails.application.routes.draw do
-  get "qrcode", to: redirect("/")
+  get "qrcode", to: redirect("menu")
 
+  # Recipe Imports
   get "recipe_imports/new" => "recipe_imports#new"
-
+  get "new_recipe" => "recipe_imports#new"
   post "recipe_imports/create" => "recipe_imports#create"
-
   get "recipe_imports/show" => "recipe_imports#show"
+  resources :recipe_imports
 
   get "generate_jekyll_post" => "jekyll_posts#generate"
-
   get "touch_ingredient_entry/:id", to: "ingredient_entries#touch", as: "touch_ingredient_entry"
 
-  get "new_recipe" => "recipe_imports#new"
-
+  # Home
   get "about" => "home#about"
   get "recipe_index" => "home#recipe_index"
   get "photos" => "home#photos"
   get "latest-entry" => "home#latest_entry"
 
   get "feed.xml"  => "recipes#feed", format: "rss"
-
   get "feed"  => "recipes#feed", format: "rss"
 
-  get "/:recipe_path" => "recipes#show"
+  # Orders
+  get "menu" => "orders#new"
+  resources :orders
 
+  get "/:recipe_path" => "recipes#show"
   get "/posts/:blog_post_path" => "blog_posts#show"
 
   resources :blog_posts do
@@ -32,6 +33,10 @@ Rails.application.routes.draw do
       get "unpublish"
     end
   end
+
+  resources :contact_form_messages
+
+  get "contact_form/confirmation" => "contact_form_messages#confirmation"
 
   resources :email_subscribers do
     member do
@@ -45,7 +50,10 @@ Rails.application.routes.draw do
   resources :ingredients
   resources :ingredient_sets
   resources :method_steps
-  resources :recipe_imports
+
+  # Recipes
+  get "feed.xml"  => "recipes#feed", format: "rss"
+  get "feed"  => "recipes#feed", format: "rss"
 
   resources :recipes do
     collection do

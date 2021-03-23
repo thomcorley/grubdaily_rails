@@ -18,4 +18,12 @@ module HomeHelper
       }
     end
   end
+
+  def recaptcha_site_key
+    if Rails.env.development?
+      ENV["RECAPTCHA_SITE_KEY_DEV"]
+    else
+      ENV["RECAPTCHA_SITE_KEY"]
+    end
+  end
 end

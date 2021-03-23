@@ -1,0 +1,115 @@
+<% content_for :head do %>
+  <script src="https://kit.fontawesome.com/35cac145b0.js" crossorigin="anonymous"></script>
+  <meta name="robots" content="noindex">
+  <%= javascript_include_tag "https://www.google.com/recaptcha/api.js?render=#{recaptcha_site_key}&onload=recaptchaOnloadCallback&render=explicit", async: true, defer: true %>
+<% end %>
+
+<section class="delicious">
+  <main role="main">
+    <article class="page single shop" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+      <div class="container">
+        <header class="post-header">
+          <h2 class="post-title" itemprop="name headline">Menu</h2>
+        </header>
+        <div class="page-content block">
+          <p>
+            Fresh sourdough bread is available for delivery, from Tuesday to Friday, in the Edinburgh EH6 neighbourhood only. I only have a small oven,
+            so supply is limited!
+          </p>
+
+          <p>
+            I'm currently developing some new and interesting products to sell in addition to sourdough, so watch this space.
+          </p>
+
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <%= image_tag(asset_path("sourdough"), title: "Sourdough Loaf", alt: "Sourdough Loaf Photo") %>
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-4">Rye/Wheat Sourdough Loaf</p>
+              <p class="title is-5">£3.80</p>
+
+              <div class="content">
+                Wholemeal rye starter is mixed with unbleached white flour, water and sea salt for this medium-crusty loaf. The slow cold fermentation process gives it a wonderful depth of flavour and a delectable texture.
+              </div>
+            </div>
+          </div>
+
+          <p>
+            If you're interested, fill out the contact form below and I'll get back to you as soon as I can.
+          </p>
+
+          <p>
+            Please include your address in the message field, and your phone number if you prefer text message to email.
+          </p>
+
+          <%= form_with scope: :contact_form_message, url: contact_form_messages_path, local: true, id: "contact-form" do |form| %>
+
+            <%= hidden_field_tag :re_captcha, :re_captcha_token %>
+
+            <div class="field">
+              <div class="control has-icons-left">
+                <%= form.text_field :name, required: true, class: "input", placeholder: "Name", autocomplete: "name" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control has-icons-left">
+                <%= form.email_field :email,  required: true, class: "input", placeholder: "Email", autocomplete: "email" %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope-square"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <%= form.text_area :message, required: true, class: "textarea", placeholder: "Message" %>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <%= form.check_box :subscribe %>
+                  I would like to receive grubdaily blog updates via email
+                </label>
+              </div>
+            </div>
+
+
+            <div class="field">
+              <div class="control actions">
+                <%= form.submit "Submit",
+                  class: "button is-fullwidth is-success g-recaptcha",
+                    "data-sitekey" => recaptcha_site_key,
+                    "data-callback" => "onSubmit",
+                    "data-action" => "submit"
+                %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </article>
+  </main>
+</section>
+
+<script>
+  var recaptchaOnloadCallback = function() {
+    var re_captcha_token = "<%= recaptcha_site_key %>";
+
+    grecaptcha.execute(re_captcha_token).then(function(token) {
+        document.getElementById("re_captcha").value = token;
+      });
+  }
+
+    function onSubmit(token) {
+     document.getElementById("contact-form").submit();
+   }
+</script>
