@@ -1,10 +1,8 @@
 <% content_for :head do %>
   <script src="https://kit.fontawesome.com/35cac145b0.js" crossorigin="anonymous"></script>
   <meta name="robots" content="noindex">
-  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <%= javascript_include_tag "https://www.google.com/recaptcha/api.js?render=#{recaptcha_site_key}&onload=recaptchaOnloadCallback&render=explicit", async: true, defer: true %>
 <% end %>
-
-<%= render partial: "re_captcha" %>
 
 <section class="delicious">
   <main role="main">
@@ -48,6 +46,9 @@
           </p>
 
           <%= form_with scope: :contact_form_message, url: contact_form_messages_path, local: true, id: "contact-form" do |form| %>
+
+            <%= hidden_field_tag :re_captcha, :re_captcha_token %>
+
             <div class="field">
               <div class="control has-icons-left">
                 <%= form.text_field :name, required: true, class: "input", placeholder: "Name", autocomplete: "name" %>
@@ -81,6 +82,7 @@
               </div>
             </div>
 
+
             <div class="field">
               <div class="control actions">
                 <%= form.submit "Submit",
@@ -98,8 +100,16 @@
   </main>
 </section>
 
- <script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
+<script>
+  var recaptchaOnloadCallback = function() {
+    var re_captcha_token = "<%= recaptcha_site_key %>";
+
+    grecaptcha.execute(re_captcha_token).then(function(token) {
+        document.getElementById("re_captcha").value = token;
+      });
+  }
+
+    function onSubmit(token) {
+     document.getElementById("contact-form").submit();
    }
- </script>
+</script>
