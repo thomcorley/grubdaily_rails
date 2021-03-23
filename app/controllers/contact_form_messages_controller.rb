@@ -1,11 +1,17 @@
 class ContactFormMessagesController < ApplicationController
   def create
-    @contact_form_message = ContactFormMessage.new(formatted_params)
-    email = @contact_form_message.email
+    @contact_form_message = ContactFormMessage.new(**formatted_params)
 
-    ContactFormMailer.new_message(@contact_form_message).deliver
+    unless @contact_form_message.valid?
+      errors = @contact_form_message.errors.messages
+      render "orders/new", locals: { errors: errors }
+    else
+      email = @contact_form_message.email
 
-    redirect_to contact_form_confirmation_path
+      ContactFormMailer.new_message(@contact_form_message).deliver
+
+      redirect_to contact_form_confirmation_path
+    end
   end
 
   def confirmation

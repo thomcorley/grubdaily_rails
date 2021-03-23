@@ -45,13 +45,21 @@
             Please include your address in the message field, and your phone number if you prefer text message to email.
           </p>
 
+          <% flash.each do |type, msg| %>
+            <div id="form-errors" class="block" style="color: red;">
+              <%= msg %>
+            </div>
+          <% end %>
+
           <%= form_with scope: :contact_form_message, url: contact_form_messages_path, local: true, id: "contact-form" do |form| %>
+            <!-- This avoids a nilClass error when accessing the local `errors` variable passed back from the controller -->
+            <% errors = nil unless errors %>
 
             <%= hidden_field_tag :re_captcha, :re_captcha_token %>
 
             <div class="field">
               <div class="control has-icons-left">
-                <%= form.text_field :name, required: true, class: "input", placeholder: "Name", autocomplete: "name" %>
+                <%= form.text_field :name, required: true, class: "input form-field", autofocus: true, placeholder: "Name", autocomplete: "name" %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-user"></i>
                 </span>
@@ -60,28 +68,33 @@
 
             <div class="field">
               <div class="control has-icons-left">
-                <%= form.email_field :email,  required: true, class: "input", placeholder: "Email", autocomplete: "email" %>
+                <%= form.email_field :email,  required: true, class: "input form-field email", placeholder: "Email", autocomplete: "email" %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope-square"></i>
                 </span>
               </div>
             </div>
 
+            <% if errors && errors[:email].include?("invalid") %>
+              <div class="email-error form-error-message">
+                Email is invalid
+              </div>
+            <% end %>
+
             <div class="field">
               <div class="control">
-                <%= form.text_area :message, required: true, class: "textarea", placeholder: "Message" %>
+                <%= form.text_area :message, required: true, class: "textarea form-field", placeholder: "Message" %>
               </div>
             </div>
 
-            <div class="field">
+            <div class="field" id="subscribe-checkbox">
               <div class="control">
                 <label class="checkbox">
                   <%= form.check_box :subscribe %>
-                  I would like to receive grubdaily blog updates via email
+                  Yes! I want to receive grubdaily blog updates via email.
                 </label>
               </div>
             </div>
-
 
             <div class="field">
               <div class="control actions">
@@ -100,6 +113,8 @@
   </main>
 </section>
 
+<%= javascript_pack_tag "contactForm.js" %>
+
 <script>
   var recaptchaOnloadCallback = function() {
     var re_captcha_token = "<%= recaptcha_site_key %>";
@@ -109,7 +124,7 @@
       });
   }
 
-    function onSubmit(token) {
-     document.getElementById("contact-form").submit();
-   }
+  function onSubmit(token) {
+    document.getElementById("contact-form").submit();
+  }
 </script>

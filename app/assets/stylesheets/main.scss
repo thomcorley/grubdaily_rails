@@ -232,6 +232,11 @@ body {background-color: #F1F1F1; margin: 0px;}
   }
 }
 
+/* Form styles */
+.form-error-message { color: #f14668; font: 16px/16px Abel, sans-serif; margin-left: 5px;  }
+.email-error { padding-bottom: 8px; }
+#subscribe-checkbox { padding-left: 5px; }
+
 .page.single.contact-form { min-height: 400px }
 .page.single.shop { min-height: 400px }
 

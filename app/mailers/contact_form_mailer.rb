@@ -5,8 +5,19 @@ class ContactFormMailer < ApplicationMailer
   def new_message(contact_form_message)
     @contact_form_message = contact_form_message
     @host = ActionMailer::Base.default_url_options[:host]
+    email = @contact_form_message.email
 
-    mail(to: ADMIN_EMAIL_ADDRESS, subject: "New contact form message")
+    mail(to: to_address, subject: "New contact form message from #{email}")
     Rails.logger.info("Successfully sent a new contact form message")
+  end
+
+  private
+
+  def to_address
+    if Rails.env.production?
+      ADMIN_EMAIL_ADDRESS
+    else
+      ADMIN_EMAIL_ADDRESS_DEV
+    end
   end
 end
