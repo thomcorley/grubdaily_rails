@@ -66,7 +66,9 @@
 
     <!-- Environment banner to warn when in development mode -->
     <% if Rails.env == "development" %>
-        <div><h2 style="background-color: #E5A636"><strong><%= Rails.env %></strong></h2></div>
+        <div><h2 style="background-color: #E5A636"><strong>development</strong></h2></div>
+    <% elsif staging_environment? %>
+        <div><h2 style="background-color: #E5A636"><strong>staging</strong></h2></div>
     <% end %>
 
       <header class="header clear">
