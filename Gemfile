@@ -6,9 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", "~> 6.0.3.2"
+gem "rails", "6.1.3"
 # Use postgresql as the database for Active Record
-gem "pg", "~> 0.18"
+gem "pg", "~> 1.2.3"
 # Use Puma as the app server
 gem "puma", "~> 3.12"
 # Use SCSS for stylesheets
@@ -43,7 +43,7 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", "~> 2.13"
-  gem "rspec-rails", "~> 3.5"
+  gem "rspec-rails", "~> 4.0"
   gem "factory_bot_rails"
   gem "selenium-webdriver"
   gem "pry", "~> 0.9.9"
