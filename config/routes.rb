@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       get "publish"
       get "unpublish"
       get "test_email"
+      get "bulk_send_emails"
     end
   end
 

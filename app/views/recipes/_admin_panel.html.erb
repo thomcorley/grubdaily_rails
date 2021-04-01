@@ -1,42 +1,49 @@
-<div class="dropdown is-hoverable print">
+<nav class="pagination is-small" role="navigation" aria-label="pagination">
+  <% if @prev_recipe %>
+    <a href="<%= recipe_path(@prev_recipe) %>" class="pagination-previous">Previous</a>
+  <% else %>
+    <a class="pagination-previous" disabled>Previous</a>
+  <% end %>
+
+  <% if @next_recipe %>
+    <a href="<%= recipe_path(@next_recipe) %>" class="pagination-next">Next</a>
+  <% else %>
+    <a class="pagination-next" disabled>Next</a>
+  <% end %>
+<div class="pagination-list dropdown is-hoverable">
   <div class="dropdown-trigger">
-    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-      <span>Admin Panel</span>
+    <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Admin</span>
       <span class="icon is-small">
         <i class="fas fa-angle-down" aria-hidden="true"></i>
       </span>
     </button>
   </div>
-  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+  <div class="dropdown-menu is-left" id="dropdown-menu" role="menu">
     <div class="dropdown-content">
-      <a href="<%= test_email_recipes_path %>?id=<%= @recipe.id %>" class="dropdown-item">
-        Test Email
-      </a>
-
       <a href="<%= unpublish_recipes_path %>?id=<%= @recipe.id %>" class="dropdown-item">
         Unpublish
       </a>
 
       <a href="<%= publish_recipes_path %>?id=<%= @recipe.id %>" class="dropdown-item">
-        Unpublish
+        Publish
       </a>
 
       <a href="<%= edit_recipe_path(@recipe) %>" class="dropdown-item">
         Edit
       </a>
+
+      <a href="<%= test_email_recipes_path %>?id=<%= @recipe.id %>" class="dropdown-item">
+        Send Test Email
+      </a>
+
+      <a href="<%= bulk_send_emails_recipes_path %>?id=<%= @recipe.id %>" class="dropdown-item">
+        Bulk Send Emails
+      </a>
     </div>
   </div>
 </div>
+</nav>
 
-<% if @next_recipe %>
-  <a href="<%= recipe_path(@next_recipe) %>" class="print">
-    Next
-  </a>
-<% end %>
 
-<% if @prev_recipe %>
-  <a href="<%= recipe_path(@prev_recipe) %>" class="print">
-    Previous
-  </a>
-<% end %>
 
