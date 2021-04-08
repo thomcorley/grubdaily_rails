@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     collection do
       get "publish"
       get "unpublish"
+      get "test_email"
     end
   end
 
@@ -59,6 +60,7 @@ Rails.application.routes.draw do
     collection do
       get "publish"
       get "unpublish"
+      get "test_email"
     end
   end
 

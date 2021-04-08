@@ -1,4 +1,6 @@
 class BlogPostMailer < ApplicationMailer
+  TEST_EMAILS = RecipeMailer::TEST_EMAILS
+
   default from: "grubdaily <grubdaily@mail.grubdaily.com>"
 
   def new_blog_post(blog_post:, email_subscriber:)
