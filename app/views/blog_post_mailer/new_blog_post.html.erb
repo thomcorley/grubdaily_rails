@@ -10,19 +10,17 @@
     </p>
 
     <p>
-      <img src="<%= @blog_post.first_image %>" width="600px" alt="<%= @blog_post.title %> Image" title="<%= @blog_post.title %>">
+      <img src="<%= attachments["blog_post.jpg"].url %>" width="600px" alt="<%= @blog_post.title %> Image" title="<%= @blog_post.title %>">
     </p>
 
     <h1 style="color: #E5A636;">
         <%= @blog_post.title %>
     </h1>
 
-    <p style="max-width: 600px;">
-      <%= @blog_post.content_paragraphs.first.delete_suffix(".") %>...
-      <a style="color: #E5A636; text-decoration: none;" href="https://www.grubdaily.com/posts<%= @blog_post.permalink %>" title="<%= @blog_post.title %>" target="_blank">
-        Read More
-      </a>
-    </p>
+    <div style="max-width: 600px">
+      <%= simple_format(@introduction) %>
+    </div>
+
     <p>
       Happy reading, happy eating :)
     </p>

@@ -1,8 +1,13 @@
 class RecipesController < ApplicationController
   include ApplicationHelper
 
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :publish, :unpublish, :test_email]
-  before_action :authenticate, only: [:index, :edit, :update, :destroy, :create, :publish]
+  before_action :set_recipe, only: [
+    :show, :edit, :update, :destroy, :publish, :unpublish, :test_email, :bulk_send_emails
+  ]
+
+  before_action :authenticate, only: [
+    :index, :edit, :update, :destroy, :create, :publish, :unpublish, :test_email, :bulk_send_emails
+  ]
 
   def index
     @recipes = Recipe.all
@@ -69,11 +74,6 @@ class RecipesController < ApplicationController
   end
 
   def publish
-    # Only send a new recipe email if the recipe hasn't been published before
-    unless @recipe.published_at
-      BulkRecipeEmailer.deliver_email_update(@recipe)
-    end
-
     @recipe.publish!
     redirect_to recipe_path(@recipe), flash: { notice: "Recipe successfully published!" }
   end
@@ -84,12 +84,23 @@ class RecipesController < ApplicationController
   end
 
   def test_email
-    RecipeMailer::TEST_EMAILS.each do |email|
-      subscriber = EmailSubscriber.find_by_email(email)
+    subscribers = EmailSubscriber.where(email: RecipeMailer::TEST_EMAILS)
+
+    subscribers.each do |subscriber|
       RecipeMailer.new_recipe(recipe: @recipe, email_subscriber: subscriber).deliver
     end
 
-    redirect_to recipe_path(@recipe), flash: { notice: "Test emails were sent!" }
+    message = "Test emails were sent to: #{subscribers.map(&:email).join(", ")}"
+
+    redirect_to recipe_path(@recipe), flash: { notice: message }
+  end
+
+  def bulk_send_emails
+    # Only send a new recipe email if the recipe hasn't been published before
+    unless @recipe.published_at
+      BulkRecipeEmailer.deliver_email_update(@recipe)
+    end
+    redirect_to recipe_path(@recipe), flash: { notice: "Delivered bulk email update!" }
   end
 
   def destroy
