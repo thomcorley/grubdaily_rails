@@ -1,8 +1,13 @@
 class BlogPostsController < ApplicationController
   include ApplicationHelper
 
-  before_action :set_blog_post, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
-  before_action :authenticate, only: [:new, :index, :edit, :update, :destroy, :create, :publish, :unpublish]
+  before_action :set_blog_post, only: [
+    :show, :edit, :update, :destroy, :publish, :unpublish, :test_email, :bulk_send_emails
+  ]
+
+  before_action :authenticate, only: [
+    :new, :index, :edit, :update, :destroy, :create, :publish, :unpublish, :test_email, :bulk_send_emails
+  ]
 
   def new
     @blog_post = BlogPost.new
@@ -40,7 +45,6 @@ class BlogPostsController < ApplicationController
     end
   end
 
-
   def publish
     # Only send if it hasn't been published before
     unless @blog_post.published_at
@@ -54,6 +58,26 @@ class BlogPostsController < ApplicationController
   def unpublish
     @blog_post.unpublish!
     redirect_to blog_post_path(@blog_post), flash: { notice: "Blog post unpublished" }
+  end
+
+  def test_email
+    subscribers = EmailSubscriber.where(email: RecipeMailer::TEST_EMAILS)
+
+    subscribers.each do |subscriber|
+      BlogPostMailer.new_blog_post(blog_post: @blog_post, email_subscriber: subscriber).deliver
+    end
+
+    message = "Test emails were sent to: #{subscribers.map(&:email).join(", ")}"
+
+    redirect_to blog_post_path(@blog_post), flash: { notice: message }
+  end
+
+  def bulk_send_emails
+    # Only send a new recipe email if the recipe hasn't been published before
+    unless @blog_post.published_at
+      BulkBlogPostEmailer.deliver_email_update(@blog_post)
+    end
+    redirect_to blog_post_path(@blog_post), flash: { notice: "Delivered bulk email update!" }
   end
 
   def destroy

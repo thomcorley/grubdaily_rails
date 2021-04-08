@@ -2,6 +2,10 @@
   <script type="application/ld+json"><%= blog_post_json_schema %></script>
 <% end %>
 
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
+
 <section class="delicious">
   <main role="main">
     <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
@@ -12,20 +16,23 @@
             <%= @blog_post.created_at.strftime("%-d %b %Y") %>
           </time>
 
+          <% if admin_session? %>
+            <% if @blog_post.published? %>
+              <p class="published-tag">/ Published</p>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="post-meta clear">
           <span class="tags">
             <% @tags.each do |tag| %>
               <span><%= tag %></span>
             <% end %>
           </span>
-
-          <% if admin_session? %>
-            <% if @blog_post.published? %>
-              <p class="published-tag">/ Published</p>
-            <% end %>
-              <%= render("admin_panel") %>
-          <% end %>
-
         </div>
+
+        <% if admin_session? %>
+          <%= render("admin_panel") %>
+        <% end %>
       </header>
 
        <div class="post-content" itemprop="text">
@@ -37,11 +44,6 @@
 
         <% @blog_post.content_paragraphs.drop(1).each do |paragraph| %>
           <p><%= simple_format(paragraph) %></p>
-        <% end %>
-      </div>
-      <div class="post-meta clear">
-        <% if admin_session? %>
-          <%= render("admin_panel") %>
         <% end %>
       </div>
     </article>
