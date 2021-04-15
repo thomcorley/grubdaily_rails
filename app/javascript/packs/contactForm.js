@@ -4,6 +4,7 @@ const subscribeElement = document.getElementById("subscribe-checkbox");
 const emailErrorDiv = document.querySelector(".email-error.form-error-message")
 const emailField = document.querySelector(".input.form-field.email")
 const formParentElement = document.getElementById("contact-form");
+const firstFormField = document.getElementById("first-form-field");
 
 const formFieldValueIsBlank = (formField) => (
   formField.value == "" || formField.value == null
@@ -13,6 +14,7 @@ const formFieldValueIsBlank = (formField) => (
 // which is the error div created by Rails upon redirect with the model errors
 if (errorFieldsArray.length > 0) {
   let blankFields = 0;
+  firstFormField.focus();
 
   // Remove the Rails error class so we can apply our own styles
   errorFieldsArray.forEach(errorField => {
