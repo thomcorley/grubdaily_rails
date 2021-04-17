@@ -20,6 +20,12 @@ Rails.application.routes.draw do
   get "feed.xml"  => "recipes#feed", format: "rss"
   get "feed"  => "recipes#feed", format: "rss"
 
+  # API
+  constraints subdomain: "api" do
+    get "/recipes" => "api/recipes#index"
+    get "/recipe" => "api/recipes#sample"
+  end
+
   # Orders
   get "menu" => "orders#new"
   resources :orders

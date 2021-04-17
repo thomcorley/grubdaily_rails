@@ -100,4 +100,6 @@ Rails.application.configure do
     domain: "mail.grubdaily.com",
     api_host: "api.eu.mailgun.net"
   }
+
+  config.hosts << "api.grubdaily.com"
 end
