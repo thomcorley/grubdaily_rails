@@ -122,14 +122,4 @@ ActiveRecord::Schema.define(version: 2021_04_12_193207) do
     t.index ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password"
-    t.string "address1"
-    t.string "address2"
-    t.string "address3"
-    t.string "postcode"
-  end
-
 end
