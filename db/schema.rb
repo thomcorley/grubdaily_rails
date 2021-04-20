@@ -10,22 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_193207) do
+ActiveRecord::Schema.define(version: 2021_04_20_194946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "blog_posts", force: :cascade do |t|
-    t.string "title"
-    t.text "summary"
-    t.text "content"
-    t.text "images"
-    t.string "tags"
-    t.boolean "published"
-    t.datetime "published_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
 
   create_table "email_subscribers", force: :cascade do |t|
     t.string "email"
@@ -91,24 +79,6 @@ ActiveRecord::Schema.define(version: 2021_04_12_193207) do
     t.datetime "updated_at", null: false
     t.bigint "recipe_id"
     t.index ["recipe_id"], name: "index_method_steps_on_recipe_id"
-  end
-
-  create_table "recipes", force: :cascade do |t|
-    t.string "title"
-    t.text "summary"
-    t.string "total_time"
-    t.text "introduction"
-    t.integer "serves"
-    t.integer "makes"
-    t.string "makes_unit"
-    t.string "recipe_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "category"
-    t.string "image_url"
-    t.string "tags"
-    t.boolean "published", default: false
-    t.datetime "published_at"
   end
 
   create_table "tags", force: :cascade do |t|

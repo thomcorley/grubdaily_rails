@@ -17,13 +17,14 @@ Rails.application.routes.draw do
   get "photos" => "home#photos"
   get "latest-entry" => "home#latest_entry"
 
-  get "feed.xml"  => "recipes#feed", format: "rss"
-  get "feed"  => "recipes#feed", format: "rss"
+  get "feed.xml"  => "entries#feed", format: "rss"
+  get "feed"  => "entries#feed", format: "rss"
 
   # Orders
   get "menu" => "orders#new"
   resources :orders
 
+  # Dynamic routes
   get "/:recipe_path" => "recipes#show"
   get "/posts/:blog_post_path" => "blog_posts#show"
 
@@ -54,8 +55,8 @@ Rails.application.routes.draw do
   resources :method_steps
 
   # Recipes
-  get "feed.xml"  => "recipes#feed", format: "rss"
-  get "feed"  => "recipes#feed", format: "rss"
+  get "feed.xml"  => "entries#feed", format: "rss"
+  get "feed"  => "entries#feed", format: "rss"
 
   resources :recipes do
     collection do
@@ -63,13 +64,6 @@ Rails.application.routes.draw do
       get "unpublish"
       get "test_email"
       get "bulk_send_emails"
-    end
-  end
-
-  resources :entries do
-    collection do
-      get "publish"
-      get "unpublish"
     end
   end
 

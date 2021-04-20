@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :recipe, class: Recipe do
     title { "Berber Omelette" }
-    introduction { "An old French classic, this is truly an old school soup. It is rich and dark with beef stock and, if made correctly, should be very thick." }
+    content { "An old French classic, this is truly an old school soup. It is rich and dark with beef stock and, if made correctly, should be very thick." }
     summary { "This is a rich and hearty soup from the classic French repertoire. It's one of my favourites." }
     total_time { "PT6H" }
     serves { 2 }
     makes { nil }
     recipe_type { "soup" }
-    image_url { nil }
+    images { nil }
 
     # TODO: this does not seem to work. Please fix!
     # after(:create) do |recipe, _evaluator|

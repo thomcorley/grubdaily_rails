@@ -36,8 +36,8 @@ class RecipesController < ApplicationController
 
     @tags = @recipe.tags.split(",")
 
-    @prev_recipe = Recipe.find_by_id(@recipe.id - 1)
-    @next_recipe = Recipe.find_by_id(@recipe.id + 1)
+    @prev_recipe = Recipe.where("id < ?", @recipe.id).last
+    @next_recipe = Recipe.where("id > ?", @recipe.id).first
   end
 
   def new
@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
+        format.html { redirect_to @recipe, notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       else
         format.html { render :new }
@@ -64,7 +64,7 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
+        format.html { redirect_to @recipe, notice: "Recipe was successfully updated." }
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }
@@ -122,7 +122,8 @@ class RecipesController < ApplicationController
   end
 
   def set_recipe
-    # Confusingly, `recipe_title` is usually the permalink of the recipe, but sometimes the ID
+    # Confusingly, `recipe_path` is usually the permalink of the recipe, but
+    # sometimes the ID
     if params["recipe_path"]
       @recipe = Recipe.all.find { |recipe| recipe.permalink == "/#{params["recipe_path"]}" }
     elsif params[:id]
