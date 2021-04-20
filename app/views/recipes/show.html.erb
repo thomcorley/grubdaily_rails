@@ -42,10 +42,10 @@
         <p><img src="<%= asset_path(@recipe.image) %>" width="900px" alt="<%= @recipe.title %> Image"></p>
 
         <div class="first-paragraph">
-          <p><%= simple_format(@introduction_paragraphs.first) %></p>
+          <p><%= simple_format(@content_paragraphs.first) %></p>
         </div>
 
-        <% @introduction_paragraphs.drop(1).each do |paragraph| %>
+        <% @content_paragraphs.drop(1).each do |paragraph| %>
           <p><%= simple_format(paragraph) %></p>
         <% end %>
 

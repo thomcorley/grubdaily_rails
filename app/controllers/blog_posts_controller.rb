@@ -29,8 +29,8 @@ class BlogPostsController < ApplicationController
 
   def show
     @tags = @blog_post.tags.split(",")
-    @prev_post = BlogPost.find_by_id(@blog_post.id - 1)
-    @next_post = BlogPost.find_by_id(@blog_post.id + 1)
+    @prev_blog_post = BlogPost.where("id < ?", @blog_post.id).last
+    @next_blog_post = BlogPost.where("id > ?", @blog_post.id).first
   end
 
   def update

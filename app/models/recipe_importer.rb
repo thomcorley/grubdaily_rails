@@ -28,7 +28,7 @@ class RecipeImporter
 			category: content_hash[:category],
 			tags: content_hash[:tags],
 			summary: content_hash[:summary],
-			introduction: content_hash[:introduction].join("\n"),
+			content: content_hash[:introduction].join("\n"),
 			ingredient_sets: ingredient_sets,
 			method_steps: content_hash[:method_steps],
 			published: true,
@@ -45,7 +45,7 @@ class RecipeImporter
 	end
 
 	def save_recipe
-		params = attributes.slice(:title, :total_time, :serves, :makes, :makes_unit, :category, :recipe_type, :summary, :introduction, :tags)
+		params = attributes.slice(:title, :total_time, :serves, :makes, :makes_unit, :category, :recipe_type, :summary, :content, :tags, :published)
 		recipe = Recipe.create!(params)
 		recipe.id
 	end

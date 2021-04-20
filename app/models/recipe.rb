@@ -1,4 +1,4 @@
-class Recipe < ApplicationRecord
+class Recipe < Entry
   include TitleFormatter
 
   # This is the ISO 8601 standardised time format
@@ -7,10 +7,9 @@ class Recipe < ApplicationRecord
   PUNCTUATION = %w(' " , - )
 
   has_many :ingredient_sets, dependent: :destroy
+  has_many :ingredient_entries, through: :ingredient_sets
   has_many :method_steps, dependent: :destroy
 
-  validates :title, presence: true, uniqueness: true
-  validates :title, length: { maximum: 50 }
   validates :total_time, format: { :with => TIME_FORMAT_REGEX,
     :message => "total_time must be in valid ISO 8601 format."
   }
@@ -20,68 +19,24 @@ class Recipe < ApplicationRecord
   validate :presence_of_serves_or_makes
   validate :numericality_of_serves_or_makes
 
-  scope :published, -> { where(published: true) }
-
-  # TODO: make this a common method
-  def self.get(permalink)
-    Recipe.select{ |recipe| recipe.permalink == "/#{permalink}"}.first
-  end
-
   def image
     url_friendly_title.parameterize
-  end
-
-  # TODO: make this a common method
-  def rating_value
-    [4, 4.5, 5].sample
-  end
-
-  # TODO: make this a common method
-  def rating_count
-    rand(20..98)
-  end
-
-  def ingredient_entries
-    IngredientEntry
-      .where(ingredient_set_id: self.ingredient_sets.map(&:id))
-      .order(id: :asc)
   end
 
   def serves_or_makes
     serves ? serves : "#{makes} #{makes_unit}"
   end
 
-  # TODO: make this a common method and rename
-  def introduction_paragraphs
-    introduction.split("\n")
-  end
-
-  # TODO: make this a common method
-  def publish!
-    self.update!(published_at: DateTime.now, published: true)
-  end
-
-  # TODO: make this a common method
-  def unpublish!
-    self.update!(published: false)
-  end
-
-  # TODO: make this a common method
-  def excerpt
-    MarkdownConverter.convert("#{introduction.first(140)} ...")
-  end
-
-  # TODO: make this a common method
-  def permalink
-    "/#{url_friendly_title.downcase.split.join("-")}"
-  end
-
   def ingredients_array
-    ingredient_entries.map(&:original_string)
+    ingredient_entries.map(&:human_readable_entry)
   end
 
   def method_steps_array
     method_steps.map(&:description)
+  end
+
+  def permalink
+    "/#{url_friendly_title.downcase.split.join("-")}"
   end
 
   private
@@ -96,13 +51,6 @@ class Recipe < ApplicationRecord
     elsif makes && !makes_unit.present?
       errors.add(:makes_unit,  "must be present if makes is present")
     end
-  end
-
-  # TODO: make this a common method
-  # Gets the status code for a given image url
-  # if the status isn't 200 OK, then we assume the image doesn't exist
-  def request_image(url)
-    HTTParty.get(url).code
   end
 
   # :serves and :makes must both be numbers greater than 0. :makes_unit must NOT be a number
