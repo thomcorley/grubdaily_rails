@@ -64,4 +64,6 @@ Rails.application.configure do
     api_key: ENV["MAILGUN_API_KEY"],
     domain: "sandbox26bf25bdfd394def8172bb54ea809d61.mailgun.org",
   }
+
+  config.hosts << "api.lvh.me"
 end
