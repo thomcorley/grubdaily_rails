@@ -102,4 +102,5 @@ Rails.application.configure do
   }
 
   config.hosts << "api.grubdaily.com"
+  config.hosts << "www.grubdaily.com"
 end
