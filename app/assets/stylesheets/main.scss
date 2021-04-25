@@ -32,8 +32,37 @@ body {background-color: #F1F1F1; margin: 0px;}
 .send-confirmation { margin-bottom: 600px }
 
 /* Header */
-.header { padding: 0; display: block; text-align: left; background-color: #4D4D4E;
-  .navbar { padding: 0; background-color: white; height: 50px; border-bottom: 1px solid rgba(77, 77, 78, 0.2); }
+.header { padding: 0; display: flex; text-align: left; background-color: $grubdaily-grey;
+  .navbar { background-color: $grubdaily-grey; position: relative; margin: auto;
+    .navbar-brand {
+      a.blog-logo.navbar-item { margin: auto; }
+      img {
+        margin: auto;
+        max-width: 230px;
+        max-height: 95px;
+        width: auto;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+    @media only screen and (min-width: 1024px) {
+      .navbar-item.navbar-search { display: none }
+    }
+    .navbar-burger {  color: white; margin: auto; background-color: $grubdaily-grey;
+      span { height: 2px; width: 20px; }
+    }
+    .navbar-menu {
+      .navbar-item {
+        color: white;
+        font-size: 13px;
+        font-family: Montserrat,Georgia,serif;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      a:hover { background-color: $grubdaily-grey; color: $orange-color-hover; }
+    }
+  }
   .blog-info { margin: 0 0 30px; height: 80px;
     .blog-logo { display: inline-block;
       img { margin-left: 25px; width: 300px; padding-top: 18px; @include transition(opacity, .2s, ease-in-out); }
@@ -371,8 +400,22 @@ body {background-color: #F1F1F1; margin: 0px;}
   }
 }
 
-.footer { background-color: #4D4D4E; border: 1px solid rgba(77, 77, 78, 0.2); height: 180px; padding-top: 35px;
-  p { color: $white; line-height: 25px; text-align: left; padding-left: 10px;
+.footer {
+  background-color: $grubdaily-grey;
+  border: 1px solid rgba(77, 77, 78, 0.2);
+  height: 180px;
+  padding-top: 35px;
+  z-index: 30;
+  position: relative;
+  p {
+    color: $white;
+    line-height: 25px;
+    text-align: left;
+    padding-left: 10px;
+    font-size: 13px;
+    font-family: Montserrat,Georgia,serif;
+    text-transform: uppercase;
+    font-weight: 700;
     a { color: $white;
       &:hover { color: $orange-color-hover; }
     }

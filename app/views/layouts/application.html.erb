@@ -4,8 +4,8 @@
     <title>grubdaily &mdash; For tasty things </title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag 'application' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <% if Rails.env.production? %>
@@ -40,11 +40,9 @@
     <link href="https://s3.eu-west-2.amazonaws.com/grubdaily/favicon_square.png" rel="shortcut icon" type="image/x-icon" />
 
     <link href="https://fonts.googleapis.com/css?family=Cardo&display=swap" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Lora|Raleway:500" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="canonical" href="<%= request.original_url %>">
 
     <link rel="alternate" type="application/rss+xml" title="" href="<%= request.base_url %>/feed.xml">
@@ -59,46 +57,50 @@
         });
     </script>
     <meta name="google-site-verification" content="aomWX31Idx6uLZL7Ka1ojyR1Gjg_WiA99nih90VtLhw" />
+    <script src="https://kit.fontawesome.com/35cac145b0.js" crossorigin="anonymous"></script>
     <%= yield :head %>
   </head>
+  <div id="main-container">
+    <body>
+      <!-- Environment banner to warn when in development mode -->
+      <% if Rails.env == "development" %>
+          <div><h2 style="background-color: #E5A636"><strong><%= Rails.env %></strong></h2></div>
+      <% end %>
 
-  <body>
+        <header class="header clear">
+          <nav class="navbar" role="navigation" aria-label="main navigation">
+              <div class="navbar-brand">
+                <a href="<%= recipe_index_path %>" role="button" class="navbar-item navbar-search" aria-label="menu" aria-expanded="false">
+                  <span class="icon is-medium">
+                    <i class="fas fa-search fa-lg"></i>
+                  </span>
+                </a>
+                <%= link_to root_path, class: "blog-logo navbar-item" do %>
+                  <%= image_tag(asset_path("grubdaily-white"), alt: "grubdaily") %>
+                <% end %>
 
-    <!-- Environment banner to warn when in development mode -->
-    <% if Rails.env == "development" %>
-        <div><h2 style="background-color: #E5A636"><strong><%= Rails.env %></strong></h2></div>
-    <% end %>
-
-      <header class="header clear">
-        <div class="blog-info clear">
-            <%= link_to root_path, class: "blog-logo" do %>
-                <%= image_tag(GrubdailyRails::HEADER_LOGO, alt: "grubdaily") %>
-            <% end %>
-        </div>
-        <div class="navbar">
-          <div class="clear" style="display: flex;">
-            <nav role="navigation" class="mainmenu">
-              <ul class="clear">
-                  <li><%= link_to("Home", root_path) %></li>
-                  <li><%= link_to("Photo Gallery", photos_path) %></li>
-                  <li><%= link_to("Recipe Index", recipe_index_path) %></li>
-                  <li><%= link_to("About", about_path) %></li>
-              </ul>
-            </nav>
-<!--             <div class="search" role="search">
-              <div class="search-holder clear">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 80 80" xml:space="preserve"><path fill="#ddd" d="M55.4 33.8c0-5.9-2.1-11-6.3-15.2s-9.3-6.3-15.2-6.3 -11 2.1-15.2 6.3 -6.3 9.3-6.3 15.2 2.1 11 6.3 15.2 9.3 6.3 15.2 6.3 11-2.1 15.2-6.3S55.4 39.8 55.4 33.8zM80 73.8c0 1.7-0.6 3.1-1.8 4.3C77 79.4 75.5 80 73.8 80c-1.7 0-3.2-0.6-4.3-1.8L53 61.7c-5.7 4-12.1 6-19.2 6 -4.6 0-9-0.9-13.1-2.7s-7.8-4.2-10.8-7.2S4.4 51.2 2.7 47 0 38.4 0 33.8s0.9-9 2.7-13.1 4.2-7.8 7.2-10.8 6.6-5.4 10.8-7.2S29.3 0 33.8 0s9 0.9 13.1 2.7 7.8 4.2 10.8 7.2 5.4 6.6 7.2 10.8 2.7 8.6 2.7 13.1c0 7.1-2 13.4-6 19.2l16.5 16.5C79.4 70.7 80 72.1 80 73.8z"/></svg>
-                <input type="text" id="search-input" placeholder="search...">
+                <a id="nav-burger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </a>
               </div>
-              <ul id="results-container" class="results-container"></ul>
-            </div> -->
-          </div>
-        </div>
-      </header>
-    <%= yield %>
+
+              <div id="nav-menu" class="navbar-menu">
+                <div class="navbar-start">
+                  <%= link_to("Home", root_path, class: "navbar-item") %>
+                  <%= link_to("Gallery", photos_path, class: "navbar-item") %>
+                  <%= link_to("Recipe Index", recipe_index_path, class: "navbar-item") %>
+                  <%= link_to("About", about_path, class: "navbar-item") %>
+                </div>
+              </div>
+          </nav>
+        </header>
+      <%= yield %>
+    </div>
 
     <footer>
-      <div class="footer clear">
+      <div id="footer" class="footer clear">
         <div class="footer-left-column">
             <%= link_to root_path do %>
                 <%= image_tag(GrubdailyRails::FAVICON_LOGO_LARGE, width: "80px") %>
@@ -108,6 +110,7 @@
 
         <div class="footer-right-column">
           <p><%= link_to("Home", root_path) %></p>
+          <p><%= link_to("Gallery", photos_path) %></p>
           <p><%= link_to("Recipe Index", recipe_index_path) %></p>
           <p><%= link_to("About", about_path) %></p>
         </div>
@@ -117,6 +120,7 @@
     <script src="<%= request.base_url %>/svg4everybody.min.js"></script>
     <%= javascript_pack_tag "scripts" %>
     <%= javascript_pack_tag "svg4everybody" %>
+    <%= javascript_pack_tag "navbarMenu.js" %>
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

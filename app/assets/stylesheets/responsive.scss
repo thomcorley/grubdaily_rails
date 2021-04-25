@@ -1,7 +1,68 @@
 @import "mixins";
 @import "vars";
 
+@media only screen and (max-width: 1024px) {
+  .header {
+    .navbar { background-color: $grubdaily-grey; position: relative; width: 100%;
+      .navbar-brand {
+        a.blog-logo.navbar-item { margin: auto; }
+        img {
+          margin: auto;
+          max-width: 230px;
+          max-height: 95px;
+          width: auto;
+          height: auto;
+          object-fit: cover;
+        }
+      }
+      .navbar-item.navbar-search { color: white; margin: auto; }
+      .navbar-burger {  color: white; margin: auto; background-color: $grubdaily-grey;
+        span { height: 2px; width: 20px; }
+      }
+      .navbar-menu { background-color: $grubdaily-grey; z-index: 1; position: absolute; width: 100%;
+        .navbar-item {
+          color: white;
+          font-size: 13px;
+          font-family: Montserrat,Georgia,serif;
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
 @include media-query($on-tablet) {
+  .header {
+    .navbar { background-color: $grubdaily-grey; position: relative;
+      .navbar-brand {
+        a.blog-logo.navbar-item { margin: auto; }
+        img {
+          margin: auto;
+          max-width: 230px;
+          max-height: 95px;
+          width: auto;
+          height: auto;
+          object-fit: cover;
+        }
+      }
+      .navbar-item.navbar-search { color: white; margin: auto; }
+      .navbar-burger {  color: white; margin: auto; background-color: $grubdaily-grey;
+        span { height: 2px; width: 20px; }
+      }
+      .navbar-menu { background-color: $grubdaily-grey; z-index: 1; position: absolute; width: 100%;
+        .navbar-item {
+          color: white;
+          font-size: 13px;
+          font-family: Montserrat,Georgia,serif;
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: 700;
+        }
+      }
+    }
+  }
   .index {
     .newest-recipes .post { width: 49.6%; width: calc(50% - 2px);
       &:first-of-type { width: 100%; margin: 0 0 4px; }
@@ -39,7 +100,34 @@
 }
 
 @include media-query($on-smaller-tablets) {
-  .header { padding: 0;
+  .header {
+    .navbar { background-color: $grubdaily-grey; position: relative;
+      .navbar-brand {
+        a.blog-logo.navbar-item { margin: auto; }
+        img {
+          margin: auto;
+          max-width: 230px;
+          max-height: 95px;
+          width: auto;
+          height: auto;
+          object-fit: cover;
+        }
+      }
+      .navbar-item.navbar-search { color: white; margin: auto; }
+      .navbar-burger {  color: white; margin: auto; background-color: $grubdaily-grey;
+        span { height: 2px; width: 20px; }
+      }
+      .navbar-menu { background-color: $grubdaily-grey; z-index: 1; position: absolute; width: 100%;
+        .navbar-item {
+          color: white;
+          font-size: 13px;
+          font-family: Montserrat,Georgia,serif;
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: 700;
+        }
+      }
+    }
     .blog-info {
       .blog-logo { float: left; margin: 0 12px 0 0;
       }
