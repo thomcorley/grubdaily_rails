@@ -4,7 +4,7 @@ const navMenu = document.getElementById("nav-menu");
 const setMenuHeight = () => {
   if (window.screen.width < 1024) {
     const mainContainerHeight = document.getElementById("main-container").clientHeight;
-    navMenu.style.height = `${mainContainerHeight}px`;
+    navMenu.style.height = `${mainContainerHeight + 50}px`;
   }
 };
 
