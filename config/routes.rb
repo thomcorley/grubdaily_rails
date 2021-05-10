@@ -23,7 +23,6 @@ Rails.application.routes.draw do
   # API
   constraints subdomain: "api" do
     get "/recipes" => "api/recipes#index"
-    get "/recipe" => "api/recipes#sample"
   end
 
   # Orders
