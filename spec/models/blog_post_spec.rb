@@ -21,23 +21,5 @@ RSpec.describe BlogPost do
         expect(blog_post.image).to eq expected_primary_image
       end
     end
-
-    context "when it has one image" do
-      before { blog_post.update(images: "first-image-name") }
-
-      it "returns the correct primary image" do
-        expected_primary_image = "first-image-name"
-        expect(blog_post.image).to eq expected_primary_image
-      end
-    end
-
-    context "when it has multiple images" do
-      before { blog_post.update(images: "first-image-name\nsecond-image-name") }
-
-      it "returns the correct primary image" do
-        expected_primary_image = "first-image-name"
-        expect(blog_post.image).to eq expected_primary_image
-      end
-    end
   end
 end
