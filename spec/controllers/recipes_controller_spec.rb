@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe RecipesController do
-  describe "GET #publish" do
-    let(:recipe) { FactoryBot.create(:recipe) }
+  let(:recipe) { FactoryBot.create(:recipe) }
 
+  describe "GET #publish" do
     it "assigns @recipe" do
       get :publish, params: { id: recipe.id }
       expect(response).to have_http_status(:found)
@@ -14,12 +14,12 @@ RSpec.describe RecipesController do
       get :publish, params: { id: recipe.id }
       expect(assigns(:recipe).published_at).to be_present
     end
+  end
 
-    context "email marketing" do
-      it "sends an email" do
-        expect(BulkRecipeEmailer).to receive(:deliver_email_update)
-        get :publish, params: { id: recipe.id }
-      end
+  describe "#bulk_send_emails" do
+    it "sends an email" do
+      expect(BulkRecipeEmailer).to receive(:deliver_email_update)
+      get :bulk_send_emails, params: { id: recipe.id }
     end
   end
 end
