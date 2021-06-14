@@ -1,5 +1,5 @@
 class RecipeMailer < ApplicationMailer
-  TEST_EMAILS = ["thomcorley@gmail.com", "gemma.kinnaird@gmail.com"]
+  TEST_EMAILS = ["thomcorley@gmail.com"]
 
   default from: "grubdaily <grubdaily@mail.grubdaily.com>"
 
