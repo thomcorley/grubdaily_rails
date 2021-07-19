@@ -13,15 +13,32 @@
         </header>
         <div class="page-content block">
           <p>
-            Fresh sourdough bread is available for delivery, from Tuesday to Friday, in the Edinburgh EH6 neighbourhood only. I only have a small oven,
-            so supply is limited!
-          </p>
-
-          <p>
-            I'm currently developing some new and interesting products to sell in addition to sourdough, so watch this space.
+            The prime mushroom season is underway, with the beautiful yellow chanterelles making their appearance in woodlands across the country. In addition to fresh wild mushrooms, we are also developing some unique and interesting products to sell, so watch this space.
           </p>
 
           <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <%= image_tag(asset_path("scottish-chanterelles"), title: "Scottish Chanterelles", alt: "Scottish Chanterelles Photo") %>
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-4">Scottish Chanterelles (cleaned)</p>
+              <p class="title is-5">£12 / 250g</p>
+
+              <div class="content">
+                <p>
+                  The golden bounty of Scotland's forests – wild chanterelles sourced from the Scottish Borders and Perthshire. The season runs from July to October but we will have a limited supply.
+                </p>
+
+                <p>
+                  Depending on availability, we can sell by the kilogram at wholesale price. Get in touch via the contact form below to discuss further.
+                </p>
+              </div>
+            </div>
+          </div>
+
+<!--           <div class="card">
             <div class="card-image">
               <figure class="image is-4by3">
                 <%= image_tag(asset_path("sourdough"), title: "Sourdough Loaf", alt: "Sourdough Loaf Photo") %>
@@ -32,18 +49,15 @@
               <p class="title is-5">£3.80</p>
 
               <div class="content">
-                Wholemeal rye starter is mixed with unbleached white flour, water and sea salt for this medium-crusty loaf. The slow cold fermentation process gives it a wonderful depth of flavour and a delectable texture.
+                <p>
+                  Wholemeal rye starter is mixed with unbleached white flour, water and sea salt for this medium-crusty loaf. The slow cold fermentation process gives it a wonderful depth of flavour and a delectable texture.
+                </p>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <p>
-            If you're interested, fill out the contact form below and I'll get back to you as soon as I can.
-          </p>
-
-          <p>
-            Please include your address in the message field, and your phone number if you prefer text message to email.
-          </p>
+          <br>
+          <br>
 
           <% flash.each do |type, msg| %>
             <div id="form-errors" class="block" style="color: red;">
@@ -91,7 +105,7 @@
               <div class="control">
                 <label class="checkbox">
                   <%= form.check_box :subscribe %>
-                  Yes! I want to receive grubdaily blog updates via email.
+                  I would like to receive grubdaily blog updates
                 </label>
               </div>
             </div>
